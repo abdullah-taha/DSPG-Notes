@@ -213,7 +213,8 @@ R'da bölme işareti '%' ile gösterilmez, '/' sembölü ile gösterilir.
  > 1  2  3  4  5  6  7  8  9 10
  ```
  seq() fonksiyonu da kullanabiliriz. 
- ** NOT: fonksiyonun adından önce '?' işareti koyup ( ?seq() şeklinde ) çalıştırırsak sağdaki pencerede fonksiyonun tanımı, aldığı parametreler, ve diğer kullanım bilgileri bulabiliriz. En ağağıya gelirsek örnekleri de bulabiliriz  **
+ ** NOT: fonksiyonun adından önce '?' işareti koyup ( ?seq() şeklinde ) çalıştırırsak, sağdaki pencerede fonksiyonun tanımı, aldığı parametreler, ve diğer kullanım bilgileri bulabiliriz. En ağağıya gelirsek örnekleri de bulabiliriz. 
+ bu işlem help() fonksiyonu kullanarak ( help(seq) şelinde) da gerçekleştirilebilir**
 
 ```R
 aralıklı <- seq(from=1, to=10, by=2)
@@ -222,7 +223,7 @@ aralıklı
 > 1 3 5 7 9
 ````
   
-**Egzersiz: Kiloları 65, 70, 80, 90, ve 100 olan, boyları ise 1.65, 1.75, 1.85, 1.9, ve 2.0 olan öğrencilerin kilo ve boy isimli vektörlerini oluşturalım. Ayrı ayrı hem kilo hem boy ortalamalarını bulalım.
+> **Egzersiz: Kiloları 65, 70, 80, 90, ve 100 olan, boyları ise 1.65, 1.75, 1.85, 1.9, ve 2.0 olan öğrencilerin kilo ve boy isimli vektörlerini oluşturalım. Ayrı ayrı hem kilo hem boy ortalamalarını bulalım.
 İpucu: Vektörler oluşturulduktan sonra mean() fonksiyonun içine oluşturduğumuz vektör isimlerini yazarak ortalamaları bulabiliriz.**
 
 ```R
@@ -235,3 +236,24 @@ mean(boy)
 > 81
 > 1.83
 ```
+
+## Matrisler :
+Çok boyutlu veri depolamanın yöntemlerinden biridir. Matris fonksiyonuyla oluşturulurlar argüman olarak satır ve sütun sayısıyla birlikte yuvalara yerleşecek olan verileri alırlar.
+Matrix oluşturma fonksiyonuna bakalım,
+```R
+?matrix()
+``` 
+<img src="/Matrix_doc.JPG" width="400">
+
+ilk parametre data parametresi, vektör gibi bir şey alıdığını görebiliyoruz. ikinci ve üçüncü parametre ise matrisin satır ve kolon sayısı ifade ediyor. Matirisimizi oluşturalım.
+
+```R
+matrix(1:16, nrow=4, ncol=5)
+
+>      [,1] [,2] [,3] [,4] [,5]
+[1,]    1    5    9   13    1
+[2,]    2    6   10   14    2
+[3,]    3    7   11   15    3
+[4,]    4    8   12   16    4
+```
+
