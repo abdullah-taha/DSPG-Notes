@@ -4,7 +4,6 @@
 * Sosyal Fayda için Veri Bilimi nedir ?
 * Programın gidişi ve program sonundaki projeler 
 * Neden R ?
-* R ve R studio Yüklenmesi
 * Giriş 
 * Veri tipleri
 * R objeleri oluşturma
@@ -16,7 +15,13 @@
 * R notasyonları
 * R'da Listeler
 
-# Giriş:
+## Sosyal Fayda için Veri Bilimi nedir ?
+yazılacak
+## Programın gidişi ve program sonundaki projeler 
+yazılacak
+## Neden R ?
+yazılacak
+## Giriş:
 R, S programlama dili üzerine yazılan ve istatistiksel analizlerin R içindeki kütüphaneler yardımıyla 
 kolay bir şekilde yapılmasını sağlayan bir platformdur. 
 R studio, R dilini Compile etmek için kullanacağımız araçtır. 
@@ -255,5 +260,43 @@ matrix(1:16, nrow=4, ncol=5)
 [2,]    2    6   10   14    2
 [3,]    3    7   11   15    3
 [4,]    4    8   12   16    4
+```
+
+cbind() ve rbind() fonksiyonları: vektöre ya da matrise satır ya da kolon ekleme işlemi için kullanılır.
+```R
+v <- 1:5
+x <- 6:10
+cbind(v, x)
+
+>      v  x
+  [1,] 1  6
+  [2,] 2  7
+  [3,] 3  8
+  [4,] 4  9
+  [5,] 5 10
+  
+  
+rbind(v,x)
+
+>   [,1] [,2] [,3] [,4] [,5]
+v    1    2    3    4    5
+x    6    7    8    9   10
+```
+
+> **Egzersiz: Önceden oluşturduğumuz "kilo" ve "boy" değişkenlerini hem matrix() fonksiyonu hem cbind() kullanarak matrislerimizi oluşturalım.**
+```R
+matrix(data=c(kilo, boy), ncol=2)
+```
+Eğer matris değişkenlerine isim vermek istersek:
+```R
+m <- matrix(data=c(kilo, boy), ncol=2, dimnames = list(c("P1", "P2", "P3", "P4", "P5"),c("kilo", "boy")))
+m
+
+>    kilo  boy
+P1   65 1.65
+P2   70 1.75
+P3   80 1.85
+P4   90 1.90
+P5  100 2.00
 ```
 
