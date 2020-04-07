@@ -299,4 +299,7 @@ P3   80 1.85
 P4   90 1.90
 P5  100 2.00
 ```
+## Faktörler (Factors)
+Faktörler, R’da kategorik bilgilerin tutulduğu yerlerdir. Kısacası etiketli vektörlerdir. 
+Çoğu zaman kategorik verileri gerek görselleştirme yaparken gerek istatistiksel analizler yaparken veri tipini factor olarak değiştiriyoruz.
 
