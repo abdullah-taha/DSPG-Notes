@@ -28,8 +28,9 @@ R studio içinde dört tane kısımdan oluştuğunu görüyoruz,
 * onun altında Help kısmı, R studio da bir şeyi aratmak istediğimizde kullanırız
 
 
-R'ı başlangıçta bir hesap makinesi olarak düşünebiliriz, burada her türlü hesaplar yapabiliriz. Toplama, Çıkarma ve Çarpma işlemleri görelim.
+R'ı başlangıçta bir hesap makinesi olarak düşünebiliriz, burada her türlü hesaplar yapabiliriz. Toplama, Çıkarma ve Çarpma işlemleri görelim. 
 
+**NOT: yazdıklarımızı çalıştırmak için ya üzerine işaretleyip yukarıdaki *run* tuşuna tıklayıp ya da kısaca CTRL+ENTER basabiliriz**
 ```R
 #Toplama
 3452 + 3452
@@ -53,7 +54,7 @@ Bölme işlemi bildiğimiz bölme sembölü (%) ile de deneyelim,
 Bir hata aldık! hatayı okuyalım, "Error: unexpected input in "5%2"" diyor, yani beklenmedik bir sembolü okuduğunu söylüyor 
 R'da bölme işareti '%' ile gösterilmez, '/' sembölü ile gösterilir.
 
-> İnan Hoca: Hataları okumayı öğrenmemiz lazım, sürekli hatalarla karşılaşacağız ve onları okuyup hatayı gidermeye çalışacağız.
+> *İnan Hoca: Hataları okumayı öğrenmemiz lazım, sürekli hatalarla karşılaşacağız ve onları okuyup hatayı gidermeye çalışacağız.*
 
   ## Veri tipleri
   R'da bir sürü veri tipleri vardır, bunlara bakalım:
@@ -107,7 +108,7 @@ R'da bölme işareti '%' ile gösterilmez, '/' sembölü ile gösterilir.
   FALSE == 0
   > TRUE
   ```
-  **Not: Bir karşılaştırma yapmak istersek "==" ifadesini kullanıyoruz. "=" atama ve fonksiyon argümanlarında kullanılan bir semboldür.**
+  **NOT: Bir karşılaştırma yapmak istersek "==" ifadesini kullanıyoruz. "=" atama ve fonksiyon argümanlarında kullanılan bir semboldür.**
   
   * Complex: kompleks ifadeleri çok kullanacak olmasak bile, varlığından bilmekte fayda var.
   ```R
@@ -164,6 +165,8 @@ R'da bölme işareti '%' ile gösterilmez, '/' sembölü ile gösterilir.
   > 11
   ```
   
+  **NOT: dikkat edelim ki R studionun environment kısmında compile ettiğimiz değişkenlerin bilgileri yer almaktadır.**
+  
   > **Egzersiz:  numerik1 ve numerik2 objelerine (değişkenlerine) 4 ve 2 rakamlarını atayıp bu iki objei toplayalım. Bu toplamı "numeriklerim" isimli değişkene atayıp verinin tipini inceleyelim.**
   
   > **Egzersiz: a'nın 10 b'nin 2 olduğu iki numerik değişken oluşturalım. Bu iki değişkeni çarptıktan sonra c isimli değişkene atayalım. Sonrasında ise c'nin b üstünü (^) sembolü kullanarak alalım.**
@@ -174,3 +177,61 @@ R'da bölme işareti '%' ile gösterilmez, '/' sembölü ile gösterilir.
   İleride işlenecek olan değişken ve Data Frame konularında değişkenleri oluşturmada kullanılır. 
   Bir vektör "c()" fonksiyonu ile oluşturulur.
   
+  ```R
+  vektörüm <- c("Hello","World")
+  vektörüm
+  
+  >"Hello"  "World"
+  
+  class(vektörüm)
+  > "character"
+  ```
+  
+ > **Egzersiz: vektorum1 isimli ve elemanları "DSPG", "CADS", "TEDU" olan bir vektör oluşturalım. sonrasında isi genelvektor isimli   vektörümüzü vektorum ve vektorum1 vektörlerini kullanarak oluşturalım.**
+ 
+ Numerik Vektör oluşturalım:
+ 
+ ```R
+ numerik_vek1 <- c(1,2,3,4,5)
+ numerik_vek2 <- c(6,7,8,9,10)
+ class(numerik_vek1)
+ > "numeric"
+ 
+ toplam_vek <- numerik_vek1 + numerik_vek2
+ toplm_vek 
+ > 7  9 11 13 15 
+ 
+ toplam_vek <- toplam_vek + 1
+ toplam_vek
+ > 8 10 12 14 16
+ ```
+ 
+ Belli bir aralıkla bir sayı vektörü oluşturmak istersek:
+ ```R
+ benim_vektorum <- 1:10
+ benim_vektorum
+ > 1  2  3  4  5  6  7  8  9 10
+ ```
+ seq() fonksiyonu da kullanabiliriz. 
+ ** NOT: fonksiyonun adından önce '?' işareti koyup ( ?seq() şeklinde ) çalıştırırsak sağdaki pencerede fonksiyonun tanımı, aldığı parametreler, ve diğer kullanım bilgileri bulabiliriz. En ağağıya gelirsek örnekleri de bulabiliriz  **
+
+```R
+aralıklı <- seq(from=1, to=10, by=2)
+aralıklı
+
+> 1 3 5 7 9
+````
+  
+**Egzersiz: Kiloları 65, 70, 80, 90, ve 100 olan, boyları ise 1.65, 1.75, 1.85, 1.9, ve 2.0 olan öğrencilerin kilo ve boy isimli vektörlerini oluşturalım. Ayrı ayrı hem kilo hem boy ortalamalarını bulalım.
+İpucu: Vektörler oluşturulduktan sonra mean() fonksiyonun içine oluşturduğumuz vektör isimlerini yazarak ortalamaları bulabiliriz.**
+
+```R
+kilo <- c(65, 70, 80, 90, 100)
+boy <- c(1.65, 1.75, 1.85, 1.9, 2)
+
+mean(kilo)
+mean(boy)
+
+> 81
+> 1.83
+```
