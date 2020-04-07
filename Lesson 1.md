@@ -74,8 +74,8 @@ R'da bölme işareti '%' ile gösterilmez, '/' sembölü ile gösterilir.
   > 5
   ```
   
-  *Logical: Boolean ifadelerine logical denir. iki değer alır, ya TRUE ya da FALSE.
-  T ya da F şeklinde de ifade edilebilir
+  * Logical (Mantıksal): Mantıksal operatörler R’da TRUE ve FALSE ile ifade edilmektedir. Bir ifadenin doğruluğunu veya yanlışlığını       belirlemek amaçlı kullanılır. Aynı zamanda, TRUE 1 rakamına eşit olup FALSE ise 0 rakamına eşittir.
+  R’da Mantıksal operatörler veriyi manipüle etmede (filtreleme, veriden kesit alma, döngüler) oldukça önemli ve kullanışlıdır.
   ```R
   TRUE
   > TRUE
@@ -100,12 +100,77 @@ R'da bölme işareti '%' ile gösterilmez, '/' sembölü ile gösterilir.
   
   TRUE + FALSE 
   > 1
+  
+  TRUE == 1
+  > TRUE
+  
+  FALSE == 0
+  > TRUE
   ```
+  **Not: Bir karşılaştırma yapmak istersek "==" ifadesini kullanıyoruz. "=" atama ve fonksiyon argümanlarında kullanılan bir semboldür.**
   
   * Complex: kompleks ifadeleri çok kullanacak olmasak bile, varlığından bilmekte fayda var.
   ```R
   1+2i
   ```
   
+  Farklı tiplerden veri toplarsak ne olur ?
+  ```R
+  16 + TRUE
+  > 17
   
+  12 + "12"
+  > Error in 12 + "12" : non-numeric argument to binary operator
+  ```
+  12 + TRUE ifadesini toplayabildi çünkü daha önce gördüğümüz gibi TRUE ifadesi 1 olarak algılanır. Yalnızca 12+"12" ifadesi bir hata verdi çünkü tırnak içinde yazdığımız herhangi bir şey character olarak algılanır, sayı olarak değil. 
+  
+  Bir şeyin veri tipini incelemek istersek **class()** fonksiyonu kullanabiliriz,
+  ```R
+  class(12)
+  > numeric
+  
+  class("12")
+  > character
+  
+  class(TRUE)
+  > logical
+  
+  class("TRUE")
+  > character
+  ```
+  
+  ## R objeleri oluşturma
+  R'da bazı fonksiyonlar objelerle çalışır. Dolayısıyla bir fonksiyonun çalışması için obje oluşturma (değişken atama)
+  yapmamız gerekir. Bunu "<-" veya "=" sembolleriyle yapabiliriz. Fakat "=" başka işlemlerle de kullanıldığı için
+  genelde "<-" sembolü kullanarak atama yapmayı tercih edebiliriz.
+  
+  Bir character değişkeni oluşturalım:
+  ```R
+  x <- "Data Science For The Public Good"
+  ```
+  "Data Science For The Public Good" ifadesini tanımlayıp x adlı değişkenine atadık. R studio'nun Environment kısmına bakarsak x' in yer    aldığını görürüz. Şimdi x değişkenini ne zaman istersek çağırarak değerini elde edebiliriz.
+  ```R
+  x
+  > "Data Science For The Public Good"
+  ```
+  
+  Bir numeric değişken oluşturalım,
+  ```R
+  a <- 5
+  b <- 6
+  c <- a+b
+  c
+  
+  > 11
+  ```
+  
+  > **Egzersiz:  numerik1 ve numerik2 objelerine (değişkenlerine) 4 ve 2 rakamlarını atayıp bu iki objei toplayalım. Bu toplamı "numeriklerim" isimli değişkene atayıp verinin tipini inceleyelim.**
+  
+  > **Egzersiz: a'nın 10 b'nin 2 olduğu iki numerik değişken oluşturalım. Bu iki değişkeni çarptıktan sonra c isimli değişkene atayalım. Sonrasında ise c'nin b üstünü (^) sembolü kullanarak alalım.**
+
+  
+  ## Vektörler: 
+  R vektörleri aynı tip elemanlardan (veriden) oluşan bir koleyksiyondur. Bir vektör sadece aynı tip elemanlara sahip olabilir. 
+  İleride işlenecek olan değişken ve Data Frame konularında değişkenleri oluşturmada kullanılır. 
+  Bir vektör "c()" fonksiyonu ile oluşturulur.
   
