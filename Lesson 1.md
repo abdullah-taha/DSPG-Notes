@@ -302,4 +302,71 @@ P5  100 2.00
 ## Faktörler (Factors)
 Faktörler, R’da kategorik bilgilerin tutulduğu yerlerdir. Kısacası etiketli vektörlerdir. 
 Çoğu zaman kategorik verileri gerek görselleştirme yaparken gerek istatistiksel analizler yaparken veri tipini factor olarak değiştiriyoruz.
+kategorik bilgiler belli sayıda değer alan bilgilerdir. Örneğin, cinsiyet bilgisi çoğu zaman "erkek" ya da "kadın" olarak belirlenebilir.
+Bir vektör oluşturalım, 
+```R
+f <- c("Hello", "World", "Hello", "Annie", "Hello", "World")
+f
+> "Hello" "World" "Hello" "Annie" "Hello" "World"
+
+class(f)
+> "character"
+```
+Şimdi bir faktöre dönüştürelim,
+```R
+f <- factor(f)
+class(f)
+> "factor"
+
+f
+> Hello World Hello Annie Hello World
+Levels: Annie Hello World
+```
+Burada gördüğümüz gibi 3 tane unique değer vardır.
+f vektörümüz artık faktör olduğu için table() fonksiyonu kullanarak f vektöründeki verilerin sıklığını elde edebiliriz.
+(summary() fonksiyonu da kullanabiliriz)
+```R
+table(f)
+> Annie Hello World 
+    1     3     2
+```
+/#yazilacak: faktorlerin ordered ve levels argümalnarı
+
+> **Egzersiz: Şampiyonlar ligini 7 kere kazanan Milan, 5 kere kazanan Liverpool ve 5 kere kazanan Barcelona’nın champions isimli vektörünü oluşturalım. Oluşturulan vektörü faktör veri tipi olarak değiştirelim. 
+Sonrasında ise hem table() hem de summary() fonksiyonunu kullanarak toplam kazandıkları kupaları görelim.
+İpucu: Herhangi bir veriyi tekrarlı girmek için rep() fonksiyonunu kullanabiliriz.**
+```R
+Milan <- c("Milan", "Milan", "Milan", "Milan", "Milan", "Milan", "Milan")
+Liverpool <- c("Liverpool","Liverpool","Liverpool","Liverpool","Liverpool")
+Barcelona <- c("Barcelona","Barcelona","Barcelona","Barcelona","Barcelona")
+
+champions <- c(Milan, Liverpool, Barcelona)
+champions <- factor(champions)
+
+table(champions)
+> Barcelona Liverpool     Milan 
+        5         5         7 
+        
+summary(champions)
+> Barcelona Liverpool     Milan 
+        5         5         7 
+```
+ rep() kullanarak, 
+ ```R
+champions <- factor(c(rep("Milan", 7),rep("Liverpool", 5), rep("Barcelona",5)))
+table(champions)
+>  Barcelona Liverpool     Milan 
+        5         5         7 
+ ```
+ 
+ 
+ Soru : Benim kodum çıktı vermiyor ve console kısmında '>' işareti yerine '+' işareti görünüyor. 
+ cevap : 
+ 
+ ## Data Frames
+ Data Frame değişkenlerden ve gözlemlerden oluşan yapılandırılmış bir tablodur. Bir Data Frame’in karakteristikleri aşağıdaki gibidir:
+1. Kolon isimleri (değişken isimleri) boş olmamalıdır
+1. Satır isimleri özgün olmalıdır
+1. Data frame’de depolanan veri tipi numerik, faktör ya da karakter olmalıdır
+1. Her kolon (değişken) ise eşit sayıda veri içermelidir
 
