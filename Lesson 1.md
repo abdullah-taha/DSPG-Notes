@@ -361,7 +361,7 @@ table(champions)
  
  
  Soru : Benim kodum çıktı vermiyor ve console kısmında '>' işareti yerine '+' işareti görünüyor. 
- cevap : 
+ cevap : R studio kodun eksik olduğunu söylüyor ve kodu tamamlamanı bekliyor. Esc'e basarak yorum modundan çıkılabilirve kodu tekrar çalıştırabilirsiniz.
  
  ## Data Frames
  Data Frame değişkenlerden ve gözlemlerden oluşan yapılandırılmış bir tablodur. Bir Data Frame’in karakteristikleri aşağıdaki gibidir:
