@@ -4,14 +4,14 @@
 * Sosyal Fayda için Veri Bilimi nedir ?
 * Programın gidişi ve program sonundaki projeler 
 * Neden R ?
-* Giriş 
-* [Veri tipleri](veri-tipleri)
-* [R objeleri oluşturma](r-objeleri-oluşturma)
-* [Vektörler](vektorler)
-* [Matrisler](Matrisler)
-* [Faktörler](Faktörler-(factors))
-* [Dataframeler](Dataframeler)
-* [R notasyonları](r-notasyonları)
+* [Giriş](#giriş) 
+* [Veri tipleri](#veri-tipleri)
+* [R objeleri oluşturma](#r-objeleri-oluşturma)
+* [Vektörler](#vektörler)
+* [Matrisler](#matrisler)
+* [Faktörler](#faktörler-factors)
+* [Dataframeler](#data-frames)
+* [R notasyonları](#r-notasyonları)
 * R'da Listeler
 
 ## Sosyal Fayda için Veri Bilimi nedir ?
