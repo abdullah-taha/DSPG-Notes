@@ -360,8 +360,8 @@ table(champions)
  ```
  
  
- Soru : Benim kodum çıktı vermiyor ve console kısmında '>' işareti yerine '+' işareti görünüyor. 
- cevap : R studio kodun eksik olduğunu söylüyor ve kodu tamamlamanı bekliyor. Esc'e basarak yorum modundan çıkılabilirve kodu tekrar çalıştırabilirsiniz.
+ Soru : Benim kodum çıktı vermiyor ve console kısmında '>' işareti yerine '+' işareti görünüyor.  
+ Cevap : R studio kodun eksik olduğunu söylüyor ve kodu tamamlamanı bekliyor. Esc'e basarak yorum modundan çıkılabilirve kodu tekrar çalıştırabilirsiniz.
  
  ## Data Frames
  Data Frame değişkenlerden ve gözlemlerden oluşan yapılandırılmış bir tablodur. Bir Data Frame’in karakteristikleri aşağıdaki gibidir:
@@ -369,4 +369,125 @@ table(champions)
 1. Satır isimleri özgün olmalıdır
 1. Data frame’de depolanan veri tipi numerik, faktör ya da karakter olmalıdır
 1. Her kolon (değişken) ise eşit sayıda veri içermelidir
+
+Bir dataframe oluşturalım, bunu yapmak için data.frame() fonksiyonunu kullanırız. Argümanları için (kolonun adı = kolonun değeri) şeklinde yazılarak dataframe'in yapısı ve değerleri belirlenir. 
+```R
+myframe <- data.frame(
+  ogreni_id = c(1:5),
+  ogreni_ad = c("Ayşe", "Fatma", "Ali", "Mehmet", "Zeynep"),
+  kilo = c(48, 56, 75, 89, 53),
+  boy = c(160, 165, 177, 196, 169),
+  stringsAsFactors = T
+)
+myframe
+
+>   ogreni_id ogreni_ad kilo boy
+1         1      Ayse   48 160
+2         2     Fatma   56 165
+3         3       Ali   75 177
+4         4    Mehmet   89 196
+5         5    Zeynep   53 169
+```
+Gördüğümüz gibi bir argüman daha yazdık, stringAsFactors argümanı. data.frame() tanımına bakarsak bunu görürüz:
+
+*stringsAsFactors 
+logical: should character vectors be converted to factors? The ‘factory-fresh’ default is TRUE, but this can be changed by setting *
+
+Yani bu argümanı TRUE olarak yazarsak, mydataframe içindeki girdiğimiz character tipinden değerler faktör olarak tutulmasını söylüyoruz, bu da işimize yarayabilir. Yalnızca argümanın default değeri TRUE olduğu için bu durumda yazmasak ta bir şey değişmezdi.
+
+Bir dataframe'in yapısını incelemek için str() fonksiyonu kullanırız.
+```R
+str(myframe)
+> 'data.frame':	5 obs. of  4 variables:
+ $ ogreni_id: int  1 2 3 4 5
+ $ ogreni_ad: Factor w/ 5 levels "Ali","Ayse","Fatma",..: 2 3 1 4 5
+ $ kilo     : num  48 56 75 89 53
+ $ boy      : num  160 165 177 196 169
+```
+dataframe'in özet istatistiklerine bakmak istiyorsak summary() fonksiyonu kullanabiliriz
+
+```R
+summary(myframe)
+>    ogreni_id  ogreni_ad      kilo           boy       
+ Min.   :1   Ali   :1   Min.   :48.0   Min.   :160.0  
+ 1st Qu.:2   Ayse  :1   1st Qu.:53.0   1st Qu.:165.0  
+ Median :3   Fatma :1   Median :56.0   Median :169.0  
+ Mean   :3   Mehmet:1   Mean   :64.2   Mean   :173.4  
+ 3rd Qu.:4   Zeynep:1   3rd Qu.:75.0   3rd Qu.:177.0  
+ Max.   :5              Max.   :89.0   Max.   :196.0  
+```
+
+> *İnan hoca: Normalde veribiliminde kullandığımız dataframeler çok büyük olur ve bir dataframe'i yüklediğimiz zaman yaptığımız ilk şey, str() ve summary()'ne bakmaktır.*
+
+Kullanacağımız dataframeler binlerce gözlemden oluşur olacak. O yüzden bütün gözlemler çağırmak yerine head() ve tail() fonksiyonlarını kullanarak ilk ve son birkaç tanesini çağırabiliriz.
+```R
+#head() fonksiyonu ilk 6 gözlemi getirir
+head(myframe) 
+>   ogreni_id ogreni_ad kilo boy
+1         1      Ayse   48 160
+2         2     Fatma   56 165
+3         3       Ali   75 177
+4         4    Mehmet   89 196
+5         5    Zeynep   53 169
+
+# n parametresini belirlersek ilk n satırı getirir
+# örneğin: myframe'in ilk 3 gözlemini elde etmek istersek
+head(myframe, n=3)
+>   ogreni_id ogreni_ad kilo boy
+1         1      Ayse   48 160
+2         2     Fatma   56 165
+3         3       Ali   75 177
+
+
+#tail() fonksiyonu son 6 saırı getirir, 
+tail(myframe)
+>   ogreni_id ogreni_ad kilo boy
+1         1      Ayse   48 160
+2         2     Fatma   56 165
+3         3       Ali   75 177
+4         4    Mehmet   89 196
+5         5    Zeynep   53 169
+
+# n parametresini belirlersek son n saırı getirir
+# örneğin: myframe'in son 2 gözlemini elde etmek istersek
+tail(myframe, n=2)
+>   ogreni_id ogreni_ad kilo boy
+4         4    Mehmet   89 196
+5         5    Zeynep   53 169
+
+```
+
+Dataframe'in kolonlarına '$' işareti ile de erişebiliriz.
+```R
+myframe$ogreni_id
+> 1 2 3 4 5 
+```
+Dataframe'e yeni bir kolon eklemek istersek yine '$' işareti yardımıyla gerçekleştirebiliriz
+```R
+myframe$dersnotu <- c("A","B","C","A","A")
+myframe
+
+>   ogreni_id ogreni_ad kilo boy ders_notu
+1         1      Ayse   48 160         A
+2         2     Fatma   56 165         B
+3         3       Ali   75 177         C
+4         4    Mehmet   89 196         A
+5         5    Zeynep   53 169         A
+```
+
+Bir kolonu silmek istersek yine '$' işareti kullanarak işlemi gerçekleştirebiliriz
+```R
+myframe$ders_notu <- NULL
+myframe
+
+>   ogreni_id ogreni_ad kilo boy
+1         1      Ayse   48 160
+2         2     Fatma   56 165
+3         3       Ali   75 177
+4         4    Mehmet   89 196
+5         5    Zeynep   53 169
+```
+
+## R Notasyonları
+R programlama dilinde endeksleme 1’den başlar. Dolayısıyla bir vektörde veya data framede bir veya birden fazla kesit seçeceğimiz zaman bunu dikkate alarak seçim yapmalıyız.
 
