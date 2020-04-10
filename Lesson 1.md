@@ -488,6 +488,126 @@ myframe
 5         5    Zeynep   53 169
 ```
 
+> **Egzersiz: Öğrencilerin matematik harf notlarını, "harf_notu" değişken ismiyle oluşturduğumuz data frame’e ekleyelim. 
+Harf notunu faktör veri tipine çevirip. Data frame’in özetine bakalım **
+```R
+myframe$harf_notu <- c("A", "B", "C", "A", "A")
+myframe$harf_notu <- factor(myframe$harf_notu)
+str(myframe)
+> 'data.frame':	5 obs. of  5 variables:
+ $ ogreni_id: int  1 2 3 4 5
+ $ ogreni_ad: Factor w/ 5 levels "Ali","Ayse","Fatma",..: 2 3 1 4 5
+ $ kilo     : num  48 56 75 89 53
+ $ boy      : num  160 165 177 196 169
+ $ harf_notu: Factor w/ 3 levels "A","B","C": 1 2 3 1 1
+ 
+ summary(myframe)
+ >    ogreni_id  ogreni_ad      kilo           boy        harf_notu
+ Min.   :1   Ali   :1   Min.   :48.0   Min.   :160.0   A:3      
+ 1st Qu.:2   Ayse  :1   1st Qu.:53.0   1st Qu.:165.0   B:1      
+ Median :3   Fatma :1   Median :56.0   Median :169.0   C:1      
+ Mean   :3   Mehmet:1   Mean   :64.2   Mean   :173.4            
+ 3rd Qu.:4   Zeynep:1   3rd Qu.:75.0   3rd Qu.:177.0            
+ Max.   :5              Max.   :89.0   Max.   :196.0            
+```
+
 ## R Notasyonları
 R programlama dilinde endeksleme 1’den başlar. Dolayısıyla bir vektörde veya data framede bir veya birden fazla kesit seçeceğimiz zaman bunu dikkate alarak seçim yapmalıyız.
+
+Bir vektörden eleman nasıl seçilir ?
+```R
+myvec <- 1:5
+myvec[2]
+> 2
+
+Bir vektördeki bir elemanı nasıl değiştirilir ?
+```R
+myvec[2] <- 9
+myvec
+> 1 7 3 4 5
+```
+
+Data Frame'den nasıl kesit alınır ?
+Köşeli parantezin soluna satırdan bir kesit, köşeli parantezin sağına kolonlardan kesit almak için kullanılır
+```R
+myframe
+>   ogreni_id ogreni_ad kilo boy
+1         1      Ayse   48 160
+2         2     Fatma   56 165
+3         3       Ali   75 177
+4         4    Mehmet   89 196
+5         5    Zeynep   53 169
+
+# Data Frame'den 1. satırı seçme
+myframe[1, ]
+>   ogreni_id ogreni_ad kilo boy
+1         1      Ayse   48 160
+
+# Data Frame'den 2. kolonu seçme
+myframe[, 2]
+> Ayse   Fatma  Ali    Mehmet Zeynep
+Levels: Ali Ayse Fatma Mehmet Zeynep
+
+# Data Frame'den 2. satır 3. sütunu seçme
+myframe[2,3]
+> 56
+
+# Direkt olarak kolon ismi ile de istediğimiz kolonu seçebiliyoruz.
+myframe[,"kilo"]
+>   48 56 75 89 53
+
+# Kilo ve boy kolonlarını endeksleyerek elde etme
+# 1.yol
+myframe[,c(3,4)]
+>   kilo boy
+1   48 160
+2   56 165
+3   75 177
+4   89 196
+5   53 169
+
+# 2.yol
+myframe[,c("kilo","boy")]
+
+# 3.yol
+myframe[1:3,3:5]
+```
+
+> **Egzersiz: myframe veri setimizdeki 1. kişinin kilosunu 65 olarak değiştirelim**
+
+Başka bir R notasyon ise negatif indekslemedir. '-' simgesiyle belirttiğimiz kolon ya da satır hariç diğer şeyleri seçmemizi sağlar
+```R
+# 1. satır hariç tüm satırları getir
+myframe[-1,]
+>   ogreni_id ogreni_ad kilo boy
+2         2     Fatma   56 165
+3         3       Ali   75 177
+4         4    Mehmet   89 196
+5         5    Zeynep   53 169
+
+# 2. kolon hariç tüm kolonları ve satırları getir
+myframe[,-2]
+>   ogreni_id kilo boy
+1         1   48 160
+2         2   56 165
+3         3   75 177
+4         4   89 196
+5         5   53 169
+
+# ilk 3 satırı getirme
+myframe[-1:-3,]
+>   ogreni_id ogreni_ad kilo boy
+4         4    Mehmet   89 196
+5         5    Zeynep   53 169
+
+ #ilk kolon hariç 1'den 4'e kadar olan satırları getir, kesit alınmış veri setimizden Ayşe'nin harf notunu elde edelim.
+ # 1.yol
+ myframe[1:4,-1]$harf_notu[1]
+ > A
+Levels: A B C
+
+ # 2.yol
+ myframe[1:4,-1][1,"harf_notu"]
+
+```
 
