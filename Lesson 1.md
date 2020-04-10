@@ -5,14 +5,13 @@
 * Programın gidişi ve program sonundaki projeler 
 * Neden R ?
 * Giriş 
-* Veri tipleri
-* R objeleri oluşturma
-* Mantıklsal Öpretarörleri
-* Vektörler
-* Matrisler
-* Faktörler
-* Dataframeler
-* R notasyonları
+* [Veri tipleri](veri-tipleri)
+* [R objeleri oluşturma](r-objeleri-oluşturma)
+* [Vektörler](vektorler)
+* [Matrisler](Matrisler)
+* [Faktörler](Faktörler-(factors))
+* [Dataframeler](Dataframeler)
+* [R notasyonları](r-notasyonları)
 * R'da Listeler
 
 ## Sosyal Fayda için Veri Bilimi nedir ?
@@ -177,7 +176,7 @@ R'da bölme işareti '%' ile gösterilmez, '/' sembölü ile gösterilir.
   > **Egzersiz: a'nın 10 b'nin 2 olduğu iki numerik değişken oluşturalım. Bu iki değişkeni çarptıktan sonra c isimli değişkene atayalım. Sonrasında ise c'nin b üstünü (^) sembolü kullanarak alalım.**
 
   
-  ## Vektörler: 
+  ## Vektörler
   R vektörleri aynı tip elemanlardan (veriden) oluşan bir koleyksiyondur. Bir vektör sadece aynı tip elemanlara sahip olabilir. 
   İleride işlenecek olan değişken ve Data Frame konularında değişkenleri oluşturmada kullanılır. 
   Bir vektör "c()" fonksiyonu ile oluşturulur.
@@ -242,7 +241,7 @@ mean(boy)
 > 1.83
 ```
 
-## Matrisler :
+## Matrisler
 Çok boyutlu veri depolamanın yöntemlerinden biridir. Matris fonksiyonuyla oluşturulurlar argüman olarak satır ve sütun sayısıyla birlikte yuvalara yerleşecek olan verileri alırlar.
 Matrix oluşturma fonksiyonuna bakalım,
 ```R
