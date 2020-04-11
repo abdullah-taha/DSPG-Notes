@@ -27,14 +27,14 @@ R studio, R dilini Compile etmek için kullanacağımız araçtır.
 
 R studio içinde dört tane kısımdan oluştuğunu görüyoruz,
 * Sol üst kısım, kod yazacağımız kısımdır
-* onun altında Console yer almaktadır, yazdığımız kodun çıktısı burada görebiliriz
-* Sağ üst kısım Environment kısmı, compile edilen değişkenler burada görünyor
+* onun altında Console yer almaktadır, yazdığımız kodun çıktısını burada görebiliriz
+* Sağ üst kısım Environment kısmı, compile edilen değişkenler burada görünüyor
 * onun altında Help kısmı, R studio da bir şeyi aratmak istediğimizde kullanırız
 
 
-R'ı başlangıçta bir hesap makinesi olarak düşünebiliriz, burada her türlü hesaplar yapabiliriz. Toplama, Çıkarma ve Çarpma işlemleri görelim. 
+R'ı başlangıçta bir hesap makinesi olarak düşünebiliriz, burada her türlü hesap yapılabilir. Toplama, Çıkarma ve Çarpma işlemlerini görelim. 
 
-**NOT: yazdıklarımızı çalıştırmak için ya üzerine işaretleyip yukarıdaki *run* tuşuna tıklayıp ya da kısaca CTRL+ENTER basabiliriz**
+**NOT: yazdıklarımızı çalıştırmak için ya çalıştırmak istediğimiz kod parçasını seçip yukarıdaki *run* tuşuna tıklayabiliriz ya da kısaca CTRL+ENTER'a basabiliriz**
 ```R
 #Toplama
 3452 + 3452
@@ -61,7 +61,7 @@ R'da bölme işareti '%' ile gösterilmez, '/' sembölü ile gösterilir.
 > *İnan Hoca: Hataları okumayı öğrenmemiz lazım, sürekli hatalarla karşılaşacağız ve onları okuyup hatayı gidermeye çalışacağız.*
 
   ## Veri tipleri
-  R'da bir sürü veri tipleri vardır, bunlara bakalım:
+  R'da birçok veri tipi vardır, bunlara bakalım:
   * Character : Text ifadeleri character tipinden olur
   ```R
   "CADS DPSG"
@@ -72,7 +72,7 @@ R'da bölme işareti '%' ile gösterilmez, '/' sembölü ile gösterilir.
   12.5
   20
   ```
-  * Integers: Doğal sayılara İnteger diyoruz, integer sayılar numeric sayılır.
+  * Integers: Doğal sayılara Integer diyoruz, integer sayılar numeric sayılır.
   Integer sayıları ayırt etmek için ardından L harfi ekleyebiliriz
   ```R
   5L
@@ -112,7 +112,7 @@ R'da bölme işareti '%' ile gösterilmez, '/' sembölü ile gösterilir.
   FALSE == 0
   > TRUE
   ```
-  **NOT: Bir karşılaştırma yapmak istersek "==" ifadesini kullanıyoruz. "=" atama ve fonksiyon argümanlarında kullanılan bir semboldür.**
+  **NOT: İki objenin eşit olup olmadığını test etmek istersek "==" mantıksal operatörünü kullanıyoruz. "=" operatörü atama yapmak için kullanılan bir operatördür.**
   
   * Complex: kompleks ifadeleri çok kullanacak olmasak bile, varlığından bilmekte fayda var.
   ```R
@@ -129,7 +129,7 @@ R'da bölme işareti '%' ile gösterilmez, '/' sembölü ile gösterilir.
   ```
   12 + TRUE ifadesini toplayabildi çünkü daha önce gördüğümüz gibi TRUE ifadesi 1 olarak algılanır. Yalnızca 12+"12" ifadesi bir hata verdi çünkü tırnak içinde yazdığımız herhangi bir şey character olarak algılanır, sayı olarak değil. 
   
-  Bir şeyin veri tipini incelemek istersek **class()** fonksiyonu kullanabiliriz,
+  Bir şeyin veri tipini incelemek istersek **class()** fonksiyonunu kullanabiliriz,
   ```R
   class(12)
   > numeric
@@ -146,14 +146,14 @@ R'da bölme işareti '%' ile gösterilmez, '/' sembölü ile gösterilir.
   
   ## R objeleri oluşturma
   R'da bazı fonksiyonlar objelerle çalışır. Dolayısıyla bir fonksiyonun çalışması için obje oluşturma (değişken atama)
-  yapmamız gerekir. Bunu "<-" veya "=" sembolleriyle yapabiliriz. Fakat "=" başka işlemlerle de kullanıldığı için
-  genelde "<-" sembolü kullanarak atama yapmayı tercih edebiliriz.
+  yapmamız gerekir. Bunu "<-" veya "=" sembolleriyle yapabiliriz. Fakat "=" operatörü ve "==" operatörünü karıştırmamak
+  için genelde "<-" operatörünü kullanmanızı tavsiye ediyorum.
   
   Bir character değişkeni oluşturalım:
   ```R
   x <- "Data Science For The Public Good"
   ```
-  "Data Science For The Public Good" ifadesini tanımlayıp x adlı değişkenine atadık. R studio'nun Environment kısmına bakarsak x' in yer    aldığını görürüz. Şimdi x değişkenini ne zaman istersek çağırarak değerini elde edebiliriz.
+  "Data Science For The Public Good" ifadesini tanımlayıp x adlı değişkenine atadık. Bu kod parçasını çalıştırdıktan sonra R studio'nun Environment kısmında(sağ üst kısım) x değişkeni ve değerinin belirdiğini göreceksiniz. Şimdi x değişkenini ne zaman istersek kullanabilir ve değerini elde edebiliriz.
   ```R
   x
   > "Data Science For The Public Good"
@@ -171,7 +171,7 @@ R'da bölme işareti '%' ile gösterilmez, '/' sembölü ile gösterilir.
   
   **NOT: dikkat edelim ki R studionun environment kısmında compile ettiğimiz değişkenlerin bilgileri yer almaktadır.**
   
-  > **Egzersiz:  numerik1 ve numerik2 objelerine (değişkenlerine) 4 ve 2 rakamlarını atayıp bu iki objei toplayalım. Bu toplamı "numeriklerim" isimli değişkene atayıp verinin tipini inceleyelim.**
+  > **Egzersiz:  numerik1 ve numerik2 objelerine (değişkenlerine) 4 ve 2 rakamlarını atayıp bu iki objeyi toplayalım. Bu toplamı "numeriklerim" isimli değişkene atayıp verinin tipini inceleyelim.**
   
   > **Egzersiz: a'nın 10 b'nin 2 olduğu iki numerik değişken oluşturalım. Bu iki değişkeni çarptıktan sonra c isimli değişkene atayalım. Sonrasında ise c'nin b üstünü (^) sembolü kullanarak alalım.**
 
