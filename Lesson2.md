@@ -1,6 +1,7 @@
 # Lesson 2
 
 _todo(Herkes için): İkinci haftanın alt başlıklarını işlediğimiz sırayla yazmak._
+
 ### Başlıklar: 
 * Veri Modifikasyonu
 * "Data Frame" Modifikasyonu
@@ -12,4 +13,5 @@ _todo(Herkes için): İkinci haftanın alt başlıklarını işlediğimiz sıray
 * "while" döngüsü
 * Fonksiyonlar
 * "Apply" Fonksiyonları
+
 _todo(Herkes için): Başlıklar bölüşülecek._
