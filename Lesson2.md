@@ -32,6 +32,11 @@ komutunu çalıştırmak.
 Yukarıdaki iki komutu RStudioda çalıştırırsanız, her elemanı sıfır olan dört elemanlı vektörümüzün ilk elemanının artık 1000 olduğunu göreceksiniz.
 
 Şimdi birden fazla elemanı modifiye etmeye bakalım.
+Vektörlerde nasıl kesit aldığımızı hatırlıyorsunuz değil mi? Kesit almak aslında o vektörün belirli bir parçasını elde etmek demektir. Örneğin vektörüm vektörünün ilk iki elemanını elde etmek istersek kesit almamız gerekir, bunu şu şekilde yapıyorduk:
+* vec[1:2]
+
+ veya
+* vec[c(1:2)]
 
 ## Data Frame Modifikasyonu
 ## Mantıksal Testler
