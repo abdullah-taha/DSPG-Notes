@@ -104,34 +104,34 @@ R dilinde sıklıkla kullanılan mantıksal testler şunlardır.
 
 
 ```R
-a <- 5; b <-3;  #a ve b değişkenlerimize sırasıyla 5 ve 3 atadık.
+a <- 5; b <-3; #a ve b değişkenlerimize sırasıyla 5 ve 3 atadık.
 
 a < b
-[1] FALSE  #5 küçük 3 karşılaştırması yanlış olduğu için FALSE döndü.
+[1] FALSE #5 küçüktür 3 karşılaştırması yanlış olduğu için FALSE döndü.
 
 
 a > b
-[1] TRUE  #5 büyük 3 karşılaştırması yanlış olduğu için TRUE döndü.
+[1] TRUE #5 büyüktür 3 karşılaştırması doğru olduğu için TRUE döndü.
 
 a == b
-[1] FALSE  #5 eşittir 3  karşılaştırması yanlış olduğu için FALSE döndü.
+[1] FALSE #5 eşittir 3 karşılaştırması yanlış olduğu için FALSE döndü.
 
 a != b  #5 eşit değildir 3 olduğu için sonuç TRUE döndü.
 [1] TRUE
 ```
 
-Aynı şekilde character yapısında değişkenler de mantıksal testlere tabi tutulabilir.
+Aynı şekilde karakter yapısında değişkenler de mantıksal testlere tabi tutulabilir.
 
-'''R
+```R
 "TEDU" == "TEDu"  #R "case sensitive" bir dildir. Bu yüzden FALSE döndü. 
 [1]FALSE
 "Kodluyoruz" == "Kodluyoruz"  #Her iki ifade birbirine eşit olduğu için TRUE döndü.
 [1]TRUE
-'''
+```
 
 Bir vektör de mantıksal testlere tabi tutulabilir.
 
-'''R
+```R
 vektorum <- c(3, 7, 12, 17, 20, 35)
 12 > vektorum
 [1]  TRUE  TRUE FALSE FALSE FALSE FALSE  #Her vektör elemanı için sonuç döndürülür.
@@ -141,7 +141,7 @@ vektorum[4] == 20
 
 6 == length(vektorum)  #Vektörümüz 6 eleman içerdiği için sonuç TRUE döndü.
 [1] TRUE
-'''
+```
 
 Yukarıda örneğimizde vektörümüzün içinde bulunan herbir elemanın istediğimiz koşulu sağlayıp sağlamadığını nasıl test
 edebileceğimizi gördük. Peki bu mantıksal ifadenin ardından dönen TRUE ve FALSE çıktılarını kullanarak vektörümüzde
@@ -149,16 +149,16 @@ bulunan elemanlara nasıl erişebiliriz?
 
 
 
-'''R
+```R
 vektorum <- c(3, 7, 12, 17, 20, 35)
 15 < vektorum
 vektorum[15 < vektorum]  #Aradığımız mantıksal ifade ile vektörümüzü çağırırsak TRUE olan değişkenleri çıktı olarak verecektir.
 [1] 17 20 35
-'''
+```
 
 İki vektör de aynı şekilde mantıksal testlere tabi tutulabilir.
 
-'''R
+```R
 c(4, 5, 8) == c(1, 5, 8)  #Karşılıklı denk gelen herbir eleman için istenilen karşılaştırma yapılır.
 [1] FALSE  TRUE  TRUE
 
@@ -171,11 +171,11 @@ vek2 <- c(2, 12, 16, 22)
 
 vek1[3] == vek2[4]  #18 eşit değildir 22 olduğu için FALSE döndü.
 [1]FALSE
-'''
+```
 
-%in% oparatörü ile aradığımız bir değerin bir vektörün içinde olup olmadığını kontrol edebiliriz.
+%in% operatörü ile aradığımız bir değerin bir vektörün içinde olup olmadığını kontrol edebiliriz.
 
-'''R
+```R
 vek1 <- c(12, 5, 18, 22, 47)
 
 12 %in% vek1  #12 sayısı aradığımız vektörüm içinde bulunuyor bu yüzden TRUE döndü.
@@ -183,8 +183,7 @@ vek1 <- c(12, 5, 18, 22, 47)
 
 c(1,2) %in% c(3,4,5)  #1. vektörde bulunan elemanları 2. vektörün içinde arar.
 [1] FALSE FALSE
-
-'''
+```
 
 
 ## for döngüsü
