@@ -87,9 +87,9 @@ vektörüm[c(1,4)] <- c(3,8)
 ## Data Frameden Mantıksal Operatörlerle Kesit Alma
 ## Kontrol İfadeleri
 
-Mantıksal testler iki girdi arasında karşılaştırma yapmak için kullanılır ve çıktı olarak Boolean (TRUE or FALSE) döndürür.
+Mantıksal testler iki girdi arasında karşılaştırma yapmak için kullanılır ve çıktı olarak Boolean (TRUE veya FALSE) döndürür.
 
-R dilinde sıklıkla kullanılan mantıksal testler şunlardır.
+R dilinde sıkça kullanılan mantıksal testler şunlardır.
 
 
 | __Operatör__ | __Açıklama__ | __Kullanımı__ |
@@ -166,7 +166,6 @@ c(12, 17, 18) == c(2, 12, 16, 22)  #Uzunlukları farklı olan vektörleri doğru
 #Her vektörden bir elemanı karşılaştırdığımız için hata almayacağız.
 vek1 <- c(12, 17, 18)
 vek2 <- c(2, 12, 16, 22) 
-
 vek1[3] == vek2[4]  #18 eşit değildir 22 olduğu için FALSE döndü.
 [1]FALSE
 ```
@@ -181,6 +180,9 @@ vek1 <- c(12, 5, 18, 22, 47)
 
 c(1,2) %in% c(3,4,5)  #1. vektörde bulunan elemanları 2. vektörün içinde arar.
 [1] FALSE FALSE
+
+c(3,4,5) %in% c(1,3,9)
+[1]TRUE FALSE FALSE
 ```
 
 
