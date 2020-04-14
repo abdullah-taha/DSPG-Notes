@@ -36,7 +36,11 @@ Vektörlerde nasıl kesit aldığımızı hatırlıyorsunuz değil mi? Kesit alm
 * vec[1:2]
 
  veya
-* vec[c(1:2)]
+* vec[c(1,2)]
+
+Yukarıdaki iki komut da aynı işlevi görüyordu ve bize vektörüm vektörünün ilk iki elemanından oluşan vektörü veriyordu.
+Demek ki vektörümüzün istediğimiz sayıdaki elemanına da bu yolla ulaşıyorduk.
+O zaman yukarıdaki bahsettiğimiz mantığı bir daha çalıştıralım ve sadece elimizdeki kesite yeni bir değer(eğer hepsinin değeri aynı olsun istiyorsak) veya değerler atayalım.
 
 ## Data Frame Modifikasyonu
 ## Mantıksal Testler
