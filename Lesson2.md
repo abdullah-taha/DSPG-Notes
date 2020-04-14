@@ -3,7 +3,7 @@
 _todo(Herkes için): İkinci haftanın alt başlıklarını işlediğimiz sırayla yazmak._
 
 ### Başlıklar: 
-* [Veri Modifikasyonu]
+* [Veri Modifikasyonu](#verimodifikasyonu)
 * "Data Frame" Modifikasyonu
 * Mantıksal Testler
 * "Data Frame"den Mantıksal Operatörlerle Kesit Alma
