@@ -119,7 +119,7 @@ R dilinde sıkça kullanılan mantıksal testler şunlardır.
 Aynı şekilde karakter yapısında değişkenler de mantıksal testlere tabi tutulabilir.
 
 ```R
-"TEDU" == "TEDu"  #R küçük harf ve büyük harfe duyurlı(case sensitive)bir dildir. Bu yüzden FALSE döndü. 
+"TEDU" == "TEDu"  #R küçük harf ve büyük harfe duyarlı(case sensitive)bir dildir. Bu yüzden FALSE döndü. 
 [1]FALSE
 "Kodluyoruz" == "Kodluyoruz"  #Her iki ifade birbirine eşit olduğu için TRUE döndü.
 [1]TRUE
