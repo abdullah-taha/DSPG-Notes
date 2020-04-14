@@ -1,7 +1,7 @@
 # Lesson 2
 
 ### Başlıklar: 
-* [Vektör Modifikasyonu](#veri-modifikasyonu)
+* [Vektör Modifikasyonu](#vektör-modifikasyonu)
 * [Data Frame Modifikasyonu](#dataframe-modifikasyonu)
 * [Mantıksal Testler](#mantıksal-testler)
 * [Data Frameden Mantıksal Operatörlerle Kesit Alma](#kesit-alma)
@@ -12,7 +12,7 @@
 * [Fonksiyonlar](#fonksiyonlar)
 * [Apply Fonksiyonları](#apply-fonksiyonları)
 
-## Veri Modifikasyonu
+## Vektör Modifikasyonu
 Elimizde bir vektörümüz varken bu vektörden kesitler almayı ve endeksleme yöntemiyle vektörün istediğimiz elemanına ulaşmayı nasıl yapacağımızı görmüştük. Fakat bazen de elimizdeki vektörün istediğimiz bir veya birkaç elemanını değiştirmek isteyebiliriz, bunu nasıl yapacağımıza bakalım.
 
 Dört elemanlı ve her elemanı 0 olan bir vektör oluşturalım ismi de vektörüm olsun:
