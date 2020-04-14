@@ -86,8 +86,109 @@ vektörüm[c(1,4)] <- c(3,8)
 ## Mantıksal Testler
 ## Data Frameden Mantıksal Operatörlerle Kesit Alma
 ## Kontrol İfadeleri
+
+Mantıksal testler iki girdi arasında karşılaştırma yapmak için kullanılır ve çıktı olarak Boolean (TRUE veya FALSE) döndürür.
+
+R dilinde sıkça kullanılan mantıksal testler şunlardır.
+
+
+| __Operatör__ | __Açıklama__ | __Kullanımı__ |
+|-------------|------------|------------|
+|<| 1. girdi __küçüktür__ 2. girdi | a < b |
+|>| 1. girdi __büyüktür__ 2. girdi | a > b |
+|<=| 1. girdi __küçük eşittir__ 2. girdi | a <= b |
+|>=| 1. girdi __büyük eşittir__ 2. girdi| a >= b  |
+|==| 1. girdi __eşittir__ 2. girdi | a == b |
+|!=| 1. girdi __eşit değildir__ 2.girdi | a != b |
+|%in%| 1. girdi __içindedir__ 2.girdinin | a %in% b |
+
+
+```R
+5 < 3
+[1] FALSE #5 küçüktür 3 karşılaştırması yanlış olduğu için FALSE döndü.
+
+
+5 > 3
+[1] TRUE #5 büyüktür 3 karşılaştırması doğru olduğu için TRUE döndü.
+
+5 == 3
+[1] FALSE #5 eşittir 3 karşılaştırması yanlış olduğu için FALSE döndü.
+
+5 != 3  #5 eşit değildir 3 olduğu için sonuç TRUE döndü.
+[1] TRUE
+```
+
+Aynı şekilde karakter yapısında değişkenler de mantıksal testlere tabi tutulabilir.
+
+```R
+"TEDU" == "TEDu"  #R küçük harf ve büyük harfe duyurlı(case sensitive)bir dildir. Bu yüzden FALSE döndü. 
+[1]FALSE
+"Kodluyoruz" == "Kodluyoruz"  #Her iki ifade birbirine eşit olduğu için TRUE döndü.
+[1]TRUE
+```
+
+Bir vektör de mantıksal testlere tabi tutulabilir.
+
+```R
+vektorum <- c(3, 7, 12, 17, 20, 35)
+12 > vektorum
+[1]TRUE  TRUE FALSE FALSE FALSE FALSE  #Her vektör elemanı için sonuç döndürülür.
+
+vektorum[4] == 20 #Vektörümüzde 4. eleman 20 olduğu için TRUE döndü.
+[1]TRUE
+
+6 == length(vektorum)  #Vektörümüz 6 eleman içerdiği için sonuç TRUE döndü.
+[1]TRUE
+```
+
+Yukarıda örneğimizde vektörümüzün içinde bulunan her bir elemanın istediğimiz koşulu sağlayıp sağlamadığını nasıl test
+edebileceğimizi gördük. Peki bu mantıksal ifadenin ardından dönen TRUE ve FALSE çıktılarını kullanarak vektörümüzde
+bulunan elemanlara nasıl erişebiliriz?
+
+
+
+```R
+vektorum <- c(3, 7, 12, 17, 20, 35)
+vektorum[15 < vektorum]  #Aradığımız mantıksal ifade ile vektörümüzü çağırırsak TRUE dönen değişkenleri çıktı olarak verecektir.
+[1] 17 20 35
+```
+
+İki vektör de aynı şekilde mantıksal testlere tabi tutulabilir.
+
+```R
+c(4, 5, 8) == c(1, 5, 8)  #Karşılıklı denk gelen her bir eleman için istenilen karşılaştırma yapılır.
+[1] FALSE  TRUE  TRUE
+
+c(12, 17, 18) == c(2, 12, 16, 22)  #Uzunlukları farklı olan vektörleri doğrudan karşılaştıramayız.
+[1]Warning message:
+
+#Ancak aşağıdaki gibi bir karşılaştırma yapılabilir. 
+#Her vektörden bir elemanı karşılaştırdığımız için hata almayacağız.
+vek1 <- c(12, 17, 18)
+vek2 <- c(2, 12, 16, 22) 
+vek1[3] == vek2[4]  #18 eşit değildir 22 olduğu için FALSE döndü.
+[1]FALSE
+```
+
+%in% operatörü ile aradığımız bir değerin bir vektörün/matrisin içinde olup olmadığını kontrol edebiliriz.
+
+```R
+vek1 <- c(12, 5, 18, 22, 47)
+
+12 %in% vek1  #12 sayısı aradığımız vektörün içinde bulunuyor bu yüzden TRUE döndü.
+[1] TRUE
+
+c(1,2) %in% c(3,4,5)  #1. vektörde bulunan elemanları 2. vektörün içinde arar.
+[1] FALSE FALSE
+
+c(3,4,5) %in% c(1,3,9)
+[1]TRUE FALSE FALSE
+```
+
+
 ## for döngüsü
 ## paste() fonksiyonu
 ## while döngüsü
 ## Fonksiyonlar
 ## Apply Fonksiyonları
+
