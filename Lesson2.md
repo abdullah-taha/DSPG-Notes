@@ -1,4 +1,4 @@
-# Lesson 2
+﻿# Lesson 2
 
 ### Başlıklar: 
 * [Vektör Modifikasyonu](#vektör-modifikasyonu)
@@ -86,8 +86,26 @@ vektörüm[c(1,4)] <- c(3,8)
 ## Mantıksal Testler
 ## Data Frameden Mantıksal Operatörlerle Kesit Alma
 ## Kontrol İfadeleri
+
+Mantıksal testler iki girdi arasında karşılaştırma yapmak için kullanılır ve çıktı olarak Boolean (TRUE or FALSE) döndürür.
+
+R dilinde sıklıkla kullanılan mantıksal testler şunlardır.
+
+<1. girdi küçüktür 2. girdia < b>1. girdi büyüktür 2. girdia > b<=1. girdi küçük eşittir 2. girdia <= b>=1. girdi büyük eşittir 2. girdia >= b==1. girdi eşittir 2. girdia == b!=1. girdi eşit değildir 2.girdia != b
+
+```R
+a <- 5; b <-3 # a ve b değişkenlerimize sırasıyla 5 ve 3 atadık.
+
+a < b
+[1] FALSE
+
+```
+
+
+
 ## for döngüsü
 ## paste() fonksiyonu
 ## while döngüsü
 ## Fonksiyonlar
 ## Apply Fonksiyonları
+
