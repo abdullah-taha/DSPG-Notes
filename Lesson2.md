@@ -52,6 +52,7 @@ Vektörümüzden ilgili kesiti alalım, kesit almak için kullandığımız ilk 
 vektörüm[1:2]
 
 Ve şimdi bu kesite 5 sayısını atayalım.
+
 vektörüm[1:2] <- 5
 ```
 Yukarıdaki komutu çalıştıracak olursanız, ilk iki elemanın 5 olduğunu göreceksiniz. İkisine de aynı değeri atamış olduk. 
@@ -76,6 +77,7 @@ Bu kesitteki elemanların ikisine de önce 0 değeri atayalım, sonra ilkine 3 i
 vektörüm[c(1,4)] <- 5
 
 ve
+
 vektörüm[c(1,4)] <- c(3,8)
 ```
 
