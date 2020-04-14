@@ -91,13 +91,31 @@ Mantıksal testler iki girdi arasında karşılaştırma yapmak için kullanıl�
 
 R dilinde sıklıkla kullanılan mantıksal testler şunlardır.
 
-<1. girdi küçüktür 2. girdia < b>1. girdi büyüktür 2. girdia > b<=1. girdi küçük eşittir 2. girdia <= b>=1. girdi büyük eşittir 2. girdia >= b==1. girdi eşittir 2. girdia == b!=1. girdi eşit değildir 2.girdia != b
+
+/***
+| __Operatör__ | __Açıklama__ | __Kullanımı__ |
+|-------------|------------|------------|
+| <           | 1. girdi küçüktür 2. girdi | a < b     |
+| >           | 1. girdi büyüktür 2. girdi | a > b     |
+| <=           | 1. girdi küçük eşittir 2. girdi | a <= b |
+| >=           | 1. girdi büyük eşittir 2. girdi| a >= b  |
+| ==           | 1. girdi eşittir 2. girdi | a == b     |
+| !=           | 1. girdi eşit değildir 2.girdi | a != b  |
+***/
+
 
 ```R
 a <- 5; b <-3 # a ve b değişkenlerimize sırasıyla 5 ve 3 atadık.
 
 a < b
-[1] FALSE
+[1] FALSE # 5 küçük 3 karşılaştırması yanlış olduğu için FALSE döndü.
+
+
+a > b
+[1] TRUE  # 5 büyük 3 karşılaştırması yanlış olduğu için TRUE döndü.
+
+a == b
+[1] FALSE # 5 eşittir 3  karşılaştırması yanlış olduğu için FALSE döndü.
 
 ```
 
