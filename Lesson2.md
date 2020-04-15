@@ -261,7 +261,7 @@ ogrenci_df <- ogrenci_df[-4,] #satır silmek istiyorsak tekrar atama ile seçile
 #### subset Fonksiyonu
 
 subset fonksiyonu kullanarakta data frame içinden kesitler alınabilir.
-subset fonksiyonunu kullanabilmek için mutlaka logical ( TRUE ve ya FALSE ) bir girdi girmek gerekir.
+subset fonksiyonunu kullanabilmek için mutlaka logical (TRUE ve ya FALSE) bir girdi girmek gerekir.
 
  ```R
  
