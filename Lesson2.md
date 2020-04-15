@@ -4,7 +4,7 @@
 * [Vektör Modifikasyonu](#vektör-modifikasyonu)
 * [Data Frame Modifikasyonu](#dataframe-modifikasyonu)
 * [Mantıksal Testler](#mantıksal-testler)
-* [Data Frameden Mantıksal Operatörlerle Kesit Alma](#data-framaden-mantıksal-operatörlerle-kesit-alma)
+* [Data Frameden Mantıksal Operatörlerle Kesit Alma](#kesit-alma)
 * [Kontrol İfadeleri](#kontrol-ifadeleri)
 * [for döngüsü](#for-döngüsü)
 * [paste() fonksiyonu](#paste-fonksiyonu)
@@ -204,7 +204,7 @@ ogrenci_df
 
 
 | öğrenci_no | bölüm | fakülte | not |
-|-------------|------------|------------|
+|-------------|------------|------------|------------|
 | 215 | İktisat| iibf | 3.15 |
 | 421 | Bilgisayar Müh. | Mühendislik | 2.80 |
 | 729 | İstatistik | Fen | 3.50 |
