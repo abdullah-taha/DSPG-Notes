@@ -4,7 +4,7 @@
 * [Vektör Modifikasyonu](#vektör-modifikasyonu)
 * [Data Frame Modifikasyonu](#dataframe-modifikasyonu)
 * [Mantıksal Testler](#mantıksal-testler)
-* [Data Frameden Mantıksal Operatörlerle Kesit Alma](#kesit-alma)
+* [Data Frameden Mantıksal Operatörlerle Kesit Alma](#data-framaden-mantıksal-operatörlerle-kesit-alma)
 * [Kontrol İfadeleri](#kontrol-ifadeleri)
 * [for döngüsü](#for-döngüsü)
 * [paste() fonksiyonu](#paste-fonksiyonu)
