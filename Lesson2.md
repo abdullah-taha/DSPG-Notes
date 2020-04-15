@@ -217,14 +217,7 @@ Yukarıdaki data frame için aşağıdaki soruları cevaplayalım.
 
 #2. öğrencinin bilgilerine bakalım.
 ogrenci_df[2,] #Öğrenci data frame içine bak. 2. öğrencinin tüm değerlerini getir.
-```
 
-| öğrenci_no | bölüm | fakülte | not |
-|-------------|------------|------------|
-|215| Bilgisayar müh.| Mühendislik | 2.8 |
-
-
-```R
 #Kaç farklı fakülteden öğrenci vardır?
 
 unique(ogrenci_df[3]) #Data framein 3. kolonuna bak ve birbirinden farklı olanları döndür.(unique fonksiyonu)
