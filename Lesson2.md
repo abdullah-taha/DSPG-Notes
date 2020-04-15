@@ -288,7 +288,8 @@ __Not__: Kontrol ifadelerinin içine mantıksal testler yazdığımıza dikkat e
 akışında devam eder.
 
 
-__Soru:__Adım adım verilen sayının pozitif mi yoksa negatif mi olduğunu gösteren bir program yazalım.
+__Soru:__
+Adım adım verilen sayının pozitif mi yoksa negatif mi olduğunu gösteren bir program yazalım.
 
  ```R
 #Adım 1: Sayımızın negatif olma durumunu kontrol edelim.
@@ -335,7 +336,6 @@ if(sayi < 0) { #Eğer sayı 0'dan küçükse if kod bloğundaki kodları çalı�
 }else {
   print("Girilen sayı 0'dır.") #Girilen sayı ne negatif ne de pozitiftir. Sayı 0'dır.
 } 
-
 ```
 
 __Soru:__
@@ -364,7 +364,6 @@ if(araba_hiz >= 0) {
 } else { # arabanın hızı >= 0 değilse yani negatif ise
   print("Arabanın hızı negatif olamaz.")
 }
-
 ```
 
 __Soru:__
@@ -374,7 +373,7 @@ Bir havayolu şirketinin indirimli uçak biletlerini tuttuğu vektör size veril
 
 
 ```R
-sehirler <- c("Paris", "Amsterdam", "Munich", "Prague", "Berlin")
+sehirler <- c("Paris", "Amsterdam", "Munich", "Prague", "Berlin", "Athens")
 
 #1. çözüm bir değişkene gitmek istediğimiz şehri atayarak kontrolü sağlayabiliriz.
 gitmek_istediğim <- "California"
