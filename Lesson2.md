@@ -288,7 +288,7 @@ __Not__: Kontrol ifadelerinin içine mantıksal testler yazdığımıza dikkat e
 akışında devam eder.
 
 
-Adım adım verilen sayının pozitif mi yoksa negatiff mi olduğunu gösteren bir program yazalım.
+Adım adım verilen sayının pozitif mi yoksa negatif mi olduğunu gösteren bir program yazalım.
 
  ```R
  
@@ -341,7 +341,7 @@ if(sayi < 0) { #Eğer sayı 0'dan küçükse if kod bloğundaki kodları çalı�
 
 ```
 
-__Örnek Soru__
+__Soru:__
 Bir arabanın hızına göre sürücüye aşağadaki koşullar doğrultusunda çıktı veren bir program yazalım.
 
 Araba hızımızın negatif olup olmadığı kontrolünü yapalım.
@@ -370,7 +370,7 @@ if(araba_hiz >= 0) {
 
 ```
 
-__Örnek Soru__
+__Soru:__
 Bir havayolu şirketinin indirimli uçak biletlerini tuttuğu vektör size verilmiştir. Gitmek istediğiniz
 şehrin bu vektörün içinde olup olmadığına bakınız. Eğer indirimli bilet satın alabiliyorsanız ekrana
 "Yaşasın ucuza bilet buldum!" bulamıyorsanız "Şansız günümdeyim" yazdırınız.
@@ -398,7 +398,7 @@ if("Munich" %in% sehirler) {
 [1]Yaşasın ucuza bilet buldum!
 ```
 
-__Not__:Birden çok iç içe if else blokları yazılabilir. Okunabilirliği arttırmak için program yazarken bırakılan boşluklara ve
+__Not__: Birden çok iç içe if else blokları yazılabilir. Okunabilirliği arttırmak için program yazarken bırakılan boşluklara ve
 süslü parantezlerin hizalarına dikkat etmek önemlidir.
 
 
