@@ -185,7 +185,113 @@ c(3,4,5) %in% c(1,3,9)
 [1]TRUE FALSE FALSE
 ```
 
+<<<<<<< Updated upstream
 
+=======
+## Data Frameden Mantıksal Operatörlerle Kesit Alma
+
+İstediğimiz analizleri doğru bir şekilde yapabilmek için veri setimizden mantıksal operatörleri kullanarak kesit alabiliriz.
+Aldığımız kesitleri yeni bir değişkene atayabilir ve üzerinde çalışabiliriz.
+
+Örnek bir data frame oluşturarak başlayalım ve sonrasında üzerinde çalışalım.
+
+```R
+
+ogrenci_df <- data.frame(
+					  "öğrenci_no" = c(215,421,729,487,389,390), 
+                      "bölüm" = c("İktisat", "Bilgisayar Müh.", "İstatistik", "Biyoloji","Elektrik Elektronik Müh.", "İstatistik"), 
+                      "fakülte" = c("iibf", "Mühendislik", "Fen", "Fen","Mühendislik","Fen"),
+                      "not" = c(3.15, 2.8, 3.5, 3.8,3.2,2.3))
+ogrenci_df
+
+
+
+| öğrenci_no |  | bölüm | | fakülte || not |
+|-------------|------------|------------|
+|215| İktisat| iibf | | 3.15 |
+|421| Bilgisayar Müh. | Mühendislik || 2.80 |
+|729| İstatistik | Fen || 3.50 |
+|487| Biyoloji| Fen  || 3.80 |
+|389| Elekrik Elektronik Müh. | Mühendislik  || 3.20 |
+
+Yukarıdaki data frame için aşağıdaki soruları cevaplayalım.
+'''R
+
+#2. öğrencinin bilgilerine bakalım.
+ogrenci_df[2,] #Öğrenci data frame içine bak. 2. öğrencinin tüm değerlerini getir.
+
+| öğrenci_no |  | bölüm | | fakülte || not |
+|-------------|------------|------------|
+|215| Bilgisayar müh.| Mühendislik | | 2.8 |
+
+#Kaç farklı fakülteden öğrenci vardır?
+
+unique(ogrenci_df[3]) #Data framein 3. kolonuna bak ve birbirinden farklı olanları döndür.(unique fonksiyonu)
+
+#2. ve 3. öğrencinin bölümüne ve notuna nasıl bakabiliriz?
+
+ogrenci_df[2:3,c(2,4)]
+
+#Öğrencilerin not ortalamasını nasıl hesaplayabiliriz?
+
+mean(ogrenci_df[,4]) #Data frame içinde 4. sütunun tüm değerlerini seçer.
+[1]3.125
+
+#Fen fakültesinde okuyan öğrencilerin hepsini nasıl görüntüleyebiliriz?
+
+ogrenci_df[ogrenci_df$fakülte == "Fen",]
+
+#Eğer data frame içinde sütunlarımıza bir isim ataması yapıldıysa aşağıdaki gibi de verilere ulaşılabilir.
+
+ogrenci_df$ogrenci_no
+[1]215 421 729 487 389 390
+
+#3. öğrencinin okul numarasını 387 olarak nasıl değiştirebiliriz?
+
+ogrenci_df[3,"öğrenci_no"] = 387
+
+#Not ortalaması 3 ve üzeri olan öğrencilere nasıl ulaşabiliriz?
+
+ogrenci_df[ogrenci_df$not > 3,]
+
+
+# Data frame üzerinden öğrencilerin notlarını nasıl silebiliriz?
+
+ogrenci_df$not <- NULL #sütun silmek istiyorsak kolan seçilir ve NULL atanır.
+
+#4. öğrenciyi data frame üzerinden nasıl silebiliriz?
+
+ogrenci_df <- ogrenci_df[-4,] #satır silmek istiyorsak tekrar atama ile seçilen satır silinebilir
+
+ 
+```
+
+subset fonksiyonu kullanarakta data frame içinden kesitler alınabilir.
+
+subset fonksiyonunu kullanabilmek için mutlaka logical ( TRUE ve ya FALSE ) bir girdi girmek gerekir.
+
+ ```R
+ 
+ #Notu 2.75 altında bulunan öğrencilere nasıl ulaşabiliriz?
+ 
+subset(ogrenci_df, ogrenci_df$not < 2.75)
+
+
+#Mühendislik fakültesinde okuyan öğrencilerin bölümlerine nasıl ulaşabiliriz?
+
+subset(ogrenci_df[2], ogrenci_df$fakülte == "Mühendislik")
+ 
+ 
+ ```
+
+
+
+
+
+
+
+## Kontrol İfadeleri
+>>>>>>> Stashed changes
 ## for döngüsü
 ## paste() fonksiyonu
 ## while döngüsü
