@@ -206,10 +206,11 @@ ogrenci_df
 | öğrenci_no | bölüm | fakülte | not |
 |-------------|------------|------------|------------|
 | 215 | İktisat| iibf | 3.15 |
-| 421 | Bilgisayar Müh. | Mühendislik | 2.80 |
-| 729 | İstatistik | Fen | 3.50 |
-| 487 | Biyoloji| Fen | 3.80 |
-| 389 | Elekrik Elektronik Müh. | Mühendislik | 3.20 |
+| 421 | Bilgisayar Müh. | Mühendislik | 2.8 |
+| 729 | İstatistik | Fen | 3.5 |
+| 487 | Biyoloji| Fen | 3.8 |
+| 389 | Elekrik Elektronik Müh. | Mühendislik | 3.2 |
+| 390 | İstatistik | Fen | 2.3 |
 
 Yukarıdaki data frame için aşağıdaki soruları cevaplayalım.
 
