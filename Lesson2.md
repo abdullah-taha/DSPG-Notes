@@ -281,9 +281,9 @@ subset(ogrenci_df[2], ogrenci_df$fakülte == "Mühendislik")
 Kontrol ifadeleri programın akışını belirlemekte kullanılır. İstenilen koşulun sağlanıp
 sağlanmadığına göre bir sonraki kod bloğu çalışır. Bu kontrolleri yapabilmek için 3 ifadeden faydalanıyoruz.
 
-_Not_: Kontrol ifadelerinin içine mantıksal testler yazdığımıza dikkat edelim.
+__Not__: Kontrol ifadelerinin içine mantıksal testler yazdığımıza dikkat edelim.
 
-#### if İfadesi
+#### if kontrolü
 İstenilen koşul gerçekleştiğinde kod bloğu içinde bulunan kod çalıştırılır. Koşul sağlanmadıysa program normal
 akışında devam eder.
 
@@ -306,7 +306,7 @@ print("Kontrol ifadelerini öğreniyorum")
 [1]"Kontrol ifadelerini öğreniyorum"
 ```
 
-#### else if ifadesi
+#### else if kontrolü
 if koşulunun gerçekleşmediği durumda kontrol edilecek bir sonraki koşulu belirtmemizi sağlayan ifadedir.
 
 _Not_: Birden fazla else if koşulu alt alta tanımlanabilir.
@@ -323,7 +323,7 @@ if(sayi < 0) { #Eğer sayı 0'dan küçükse if kod bloğundaki kodları çalı�
 
 ```
 
-#### else ifadesi
+#### else kontrolü
 if koşulunun sağlanmadığı durumlarda çalıştırılacak kod bloğudur.
 if koşulu ya da else if koşullarından bir tanesi istenileni sağlayıp çalışırsa else komutu çalışmaz.
 
@@ -341,7 +341,7 @@ if(sayi < 0) { #Eğer sayı 0'dan küçükse if kod bloğundaki kodları çalı�
 
 ```
 
-_Örnek Soru_
+__Örnek Soru__
 Bir arabanın hızına göre sürücüye aşağadaki koşullar doğrultusunda çıktı veren bir program yazalım.
 
 Araba hızımızın negatif olup olmadığı kontrolünü yapalım.
@@ -370,7 +370,7 @@ if(araba_hiz >= 0) {
 
 ```
 
-_Örnek Soru_
+__Örnek Soru__
 Bir havayolu şirketinin indirimli uçak biletlerini tuttuğu vektör size verilmiştir. Gitmek istediğiniz
 şehrin bu vektörün içinde olup olmadığına bakınız. Eğer indirimli bilet satın alabiliyorsanız ekrana
 "Yaşasın ucuza bilet buldum!" bulamıyorsanız "Şansız günümdeyim" yazdırınız.
@@ -398,7 +398,7 @@ if("Munich" %in% sehirler) {
 [1]Yaşasın ucuza bilet buldum!
 ```
 
-_Not_:Birden çok iç içe if else blokları yazılabilir. Okunabilirliği arttırmak için program yazarken bırakılan boşluklara ve
+__Not__:Birden çok iç içe if else blokları yazılabilir. Okunabilirliği arttırmak için program yazarken bırakılan boşluklara ve
 süslü parantezlerin hizalarına dikkat etmek önemlidir.
 
 
