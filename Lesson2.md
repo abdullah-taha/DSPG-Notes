@@ -339,14 +339,14 @@ if(sayi < 0) { #Eğer sayı 0'dan küçükse if kod bloğundaki kodları çalı�
 ```
 
 __Soru:__
-Bir arabanın hızına göre sürücüye aşağadaki koşullar doğrultusunda çıktı veren bir program yazalım.\
+Bir arabanın hızına göre sürücüye aşağıdaki koşullar doğrultusunda çıktı veren bir program yazalım.
 
 Araba hızımızın negatif olup olmadığı kontrolünü yapalım.\
 Arabamızın hızı 85 olsun.\
 Eğer arabanın hızı 0-30 arasındaysa ekrana "hızınız çok yavaş"\
 Eğer arabanın hızı 30-50 arasındaysa ekrana "hızınız yavaş"\
 Eğer arabanın hızı 70-100 arasındaysa ekrana "hızınız normal"\
-Eğer arabanın hızı 100'den fazlaysa ekrana "hızınız yüksek, lütfen yavaşlayın!" yazsın.\
+Eğer arabanın hızı 100'den fazlaysa ekrana "hızınız yüksek, lütfen yavaşlayın!" yazsın.
 
 ```R
 araba_hiz <- 85
@@ -367,7 +367,7 @@ if(araba_hiz >= 0) {
 ```
 
 __Soru:__
-Bir havayolu şirketinin indirimli uçak biletlerini tuttuğu vektör size verilmiştir. Gitmek istediğiniz
+Bir hava yolu şirketinin indirimli uçak biletlerini tuttuğu vektör size verilmiştir. Gitmek istediğiniz
 şehrin bu vektörün içinde olup olmadığına bakınız. Eğer indirimli bilet satın alabiliyorsanız ekrana
 "Yaşasın ucuza bilet buldum!" bulamıyorsanız "Şansız günümdeyim" yazdırınız.
 
@@ -394,7 +394,7 @@ if("Munich" %in% sehirler) {
 [1]Yaşasın ucuza bilet buldum!
 ```
 
-__Not__: Birden çok iç içe if else blokları yazılabilir. Okunabilirliği arttırmak için program yazarken bırakılan boşluklara ve
+__Not__: Birden çok iç içe if else blokları yazılabilir. Okunabilirliği artırmak için program yazarken bırakılan boşluklara ve
 süslü parantezlerin hizalarına dikkat etmek önemlidir.
 
 
