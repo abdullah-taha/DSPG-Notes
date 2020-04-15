@@ -185,26 +185,24 @@ c(3,4,5) %in% c(1,3,9)
 [1]TRUE FALSE FALSE
 ```
 
-<<<<<<< Updated upstream
-
-=======
 ## Data Frameden Mantıksal Operatörlerle Kesit Alma
 
 İstediğimiz analizleri doğru bir şekilde yapabilmek için veri setimizden mantıksal operatörleri kullanarak kesit alabiliriz.
 Aldığımız kesitleri yeni bir değişkene atayabilir ve üzerinde çalışabiliriz.
 
-Örnek bir data frame oluşturarak başlayalım ve sonrasında üzerinde çalışalım.
+Bir data frame oluşturarak başlayalım ve sonrasında üzerinde çalışalım.
 
 ```R
 
 ogrenci_df <- data.frame(
-					  "öğrenci_no" = c(215,421,729,487,389,390), 
-                      "bölüm" = c("İktisat", "Bilgisayar Müh.", "İstatistik", "Biyoloji","Elektrik Elektronik Müh.", "İstatistik"), 
-                      "fakülte" = c("iibf", "Mühendislik", "Fen", "Fen","Mühendislik","Fen"),
-                      "not" = c(3.15, 2.8, 3.5, 3.8,3.2,2.3))
+ "öğrenci_no" = c(215,421,729,487,389,390), 
+ "bölüm" = c("İktisat", "Bilgisayar Müh.", "İstatistik", "Biyoloji","Elektrik Elektronik Müh.", "İstatistik"), 
+ "fakülte" = c("iibf", "Mühendislik", "Fen", "Fen","Mühendislik","Fen"),
+ "not" = c(3.15, 2.8, 3.5, 3.8,3.2,2.3))
 ogrenci_df
 
 
+```
 
 | öğrenci_no |  | bölüm | | fakülte || not |
 |-------------|------------|------------|
@@ -215,15 +213,19 @@ ogrenci_df
 |389| Elekrik Elektronik Müh. | Mühendislik  || 3.20 |
 
 Yukarıdaki data frame için aşağıdaki soruları cevaplayalım.
-'''R
+
+```R
 
 #2. öğrencinin bilgilerine bakalım.
 ogrenci_df[2,] #Öğrenci data frame içine bak. 2. öğrencinin tüm değerlerini getir.
+```
 
 | öğrenci_no |  | bölüm | | fakülte || not |
 |-------------|------------|------------|
 |215| Bilgisayar müh.| Mühendislik | | 2.8 |
 
+
+```R
 #Kaç farklı fakülteden öğrenci vardır?
 
 unique(ogrenci_df[3]) #Data framein 3. kolonuna bak ve birbirinden farklı olanları döndür.(unique fonksiyonu)
@@ -262,10 +264,8 @@ ogrenci_df$not <- NULL #sütun silmek istiyorsak kolan seçilir ve NULL atanır.
 #4. öğrenciyi data frame üzerinden nasıl silebiliriz?
 
 ogrenci_df <- ogrenci_df[-4,] #satır silmek istiyorsak tekrar atama ile seçilen satır silinebilir
-
- 
 ```
-
+ 
 subset fonksiyonu kullanarakta data frame içinden kesitler alınabilir.
 
 subset fonksiyonunu kullanabilmek için mutlaka logical ( TRUE ve ya FALSE ) bir girdi girmek gerekir.
@@ -281,17 +281,9 @@ subset(ogrenci_df, ogrenci_df$not < 2.75)
 
 subset(ogrenci_df[2], ogrenci_df$fakülte == "Mühendislik")
  
- 
- ```
-
-
-
-
-
-
+```
 
 ## Kontrol İfadeleri
->>>>>>> Stashed changes
 ## for döngüsü
 ## paste() fonksiyonu
 ## while döngüsü
