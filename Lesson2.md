@@ -339,14 +339,14 @@ if(sayi < 0) { #Eğer sayı 0'dan küçükse if kod bloğundaki kodları çalı�
 ```
 
 __Soru:__
-Bir arabanın hızına göre sürücüye aşağadaki koşullar doğrultusunda çıktı veren bir program yazalım.
+Bir arabanın hızına göre sürücüye aşağadaki koşullar doğrultusunda çıktı veren bir program yazalım.\
 
-Araba hızımızın negatif olup olmadığı kontrolünü yapalım.
-Arabamızın hızı 85 olsun.
-Eğer arabanın hızı 0-30 arasındaysa ekrana "hızınız çok yavaş"
-Eğer arabanın hızı 30-50 arasındaysa ekrana "hızınız yavaş"
-Eğer arabanın hızı 70-100 arasındaysa ekrana "hızınız normal"
-Eğer arabanın hızı 100'den fazlaysa ekrana "hızınız yüksek, lütfen yavaşlayın!" yazsın.
+Araba hızımızın negatif olup olmadığı kontrolünü yapalım.\
+Arabamızın hızı 85 olsun.\
+Eğer arabanın hızı 0-30 arasındaysa ekrana "hızınız çok yavaş"\
+Eğer arabanın hızı 30-50 arasındaysa ekrana "hızınız yavaş"\
+Eğer arabanın hızı 70-100 arasındaysa ekrana "hızınız normal"\
+Eğer arabanın hızı 100'den fazlaysa ekrana "hızınız yüksek, lütfen yavaşlayın!" yazsın.\
 
 ```R
 araba_hiz <- 85
