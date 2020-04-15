@@ -202,13 +202,14 @@ ogrenci_df
 
 ```
 
-| öğrenci_no |  | bölüm | | fakülte || not |
+
+| öğrenci_no | bölüm | fakülte | not |
 |-------------|------------|------------|
-|215| İktisat| iibf | | 3.15 |
-|421| Bilgisayar Müh. | Mühendislik || 2.80 |
-|729| İstatistik | Fen || 3.50 |
-|487| Biyoloji| Fen  || 3.80 |
-|389| Elekrik Elektronik Müh. | Mühendislik  || 3.20 |
+| 215 | İktisat| iibf | 3.15 |
+| 421 | Bilgisayar Müh. | Mühendislik | 2.80 |
+| 729 | İstatistik | Fen | 3.50 |
+| 487 | Biyoloji| Fen | 3.80 |
+| 389 | Elekrik Elektronik Müh. | Mühendislik | 3.20 |
 
 Yukarıdaki data frame için aşağıdaki soruları cevaplayalım.
 
@@ -218,9 +219,9 @@ Yukarıdaki data frame için aşağıdaki soruları cevaplayalım.
 ogrenci_df[2,] #Öğrenci data frame içine bak. 2. öğrencinin tüm değerlerini getir.
 ```
 
-| öğrenci_no |  | bölüm | | fakülte || not |
+| öğrenci_no | bölüm | fakülte | not |
 |-------------|------------|------------|
-|215| Bilgisayar müh.| Mühendislik | | 2.8 |
+|215| Bilgisayar müh.| Mühendislik | 2.8 |
 
 
 ```R
