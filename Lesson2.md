@@ -288,10 +288,9 @@ __Not__: Kontrol ifadelerinin içine mantıksal testler yazdığımıza dikkat e
 akışında devam eder.
 
 
-Adım adım verilen sayının pozitif mi yoksa negatif mi olduğunu gösteren bir program yazalım.
+__Soru:__Adım adım verilen sayının pozitif mi yoksa negatif mi olduğunu gösteren bir program yazalım.
 
  ```R
- 
 #Adım 1: Sayımızın negatif olma durumunu kontrol edelim.
  
 sayi <- 5
@@ -312,7 +311,6 @@ if koşulunun gerçekleşmediği durumda kontrol edilecek bir sonraki koşulu be
 _Not_: Birden fazla else if koşulu alt alta tanımlanabilir.
 
 ```R
- 
 #Adım 2: Sayının pozitif olma kontrolünü ekleyelim. 
  
 if(sayi < 0) { #Eğer sayı 0'dan küçükse if kod bloğundaki kodları çalıştır.
@@ -328,7 +326,6 @@ if koşulunun sağlanmadığı durumlarda çalıştırılacak kod bloğudur.
 if koşulu ya da else if koşullarından bir tanesi istenileni sağlayıp çalışırsa else komutu çalışmaz.
 
 ```R
- 
 #Adım 3: Sayımızın 0 olma durumunu kontrol edelim.
 
 if(sayi < 0) { #Eğer sayı 0'dan küçükse if kod bloğundaki kodları çalıştır.
