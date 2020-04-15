@@ -84,8 +84,6 @@ vektörüm[c(1,4)] <- c(3,8)
 
 ## Data Frame Modifikasyonu
 ## Mantıksal Testler
-## Data Frameden Mantıksal Operatörlerle Kesit Alma
-## Kontrol İfadeleri
 
 Mantıksal testler iki girdi arasında karşılaştırma yapmak için kullanılır ve çıktı olarak Boolean (TRUE veya FALSE) döndürür.
 
