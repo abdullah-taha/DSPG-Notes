@@ -1,14 +1,14 @@
 # Lesson 3
 
 ## Başlıklar:
-* Giriş
-* Bir veriseti nasıl yüklenir?
-* dyplr paketi
-* select()
-* filter()
-* Pipe %>% operatörü
+* [Giriş](#giriş)
+* [Bir veriseti nasıl yüklenir?](#veri-manipülasiyonu)
+* [dyplr paketi](#dyplr-fonksiyonları)
+* [select()](#select-fonskyionu)
+* [filter()](#filter-fonskiyonu)
+* [Pipe %>% operatörü](#pipe--fonksiyonu-operatörü)
 * mutate()
-* arrange()
+* [arrange()](#arrange-fonksiyonu)
 * transmute()
 * summarise()
 * group_by()
@@ -57,6 +57,7 @@ mutate() ---> Veri setimize yeni bir değişken eklememizi sağlar
 arrange() ----> Veriyi bir değişkene göre sıralamamızı sağlar
 summarise() ---> Veri setinden özet istatistikler çıkarmamızı sağlar
 
+## Bir veriseti nasıl yüklenir ?
 Bu bölümü anlatırken msleep (Mammals Sleep) veri setini kullanacağız. Bu veri setini 3 farklı yoldan içeri aktaracağız:
 
 1. CADS@TEDU GitHub [Hesabından](https:\\raw.githubusercontent.com\cads-tedu\DSPG\master\Veri%20Manip%C3%BClasyonu\msleep.csv):
