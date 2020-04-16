@@ -551,7 +551,7 @@ ile character tipinden verileri birleştirebilir.
 İçine birden fazla argüman gönderilirse paste() fonksiyonu gönderilen argümanları birleştirir ve character
 tipinde bir çıktı üretir. 
 
-Argümanların arasına sep = "" parametresi ile ayraç konabilir.\
+Argümanların arasına sep = "" parametresi ile ayraç konabilir.
 
 Herhangi bir ayraç belirtilmemesi durumunda varsayılan ayraç "" şeklindedir.
 ```R
