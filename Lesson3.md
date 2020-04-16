@@ -6,6 +6,7 @@
 * dyplr paketi
 * select()
 * filter()
+* Pipe %>% operatörü
 * mutate()
 * arrange()
 * transmute()
@@ -409,4 +410,89 @@ head(filter(msleep,vore=="omni"))
 ```
 <img src=".images/msleep5.JPG">
 
-> **Egzersiz:** Vücut ağırlığı en büyük olan hayvan hangisidir?
+> **Egzersiz:** Vücut ağırlığı en büyük olan hayvan hangisidir? 
+
+```R
+max(msleep$bodywt)
+> 6654
+```
+6654 kilogrammış, acaa bir fil olabilir mi ? hemen bakalım,
+```R
+filter(msleep, bodywt == max(bodywt))
+```
+<img src=".images/msleep6.JPG">
+Tahmin ettiğimiz gibi bir filmiş.
+
+### Pipe %>% Fonksiyonu (operatörü)
+Türkçe karşılığı olarak zincir fonksiyonu olarak da isimlendirilir. 
+Bu fonksiyon soldakinin çıktısını, sağdakine girdi olarak veriyor.
+
+Bu şekilde birden fazla işlem dizinini ifade edebilirsiniz. 
+Kodunuzu basitlesteştirmenizi ve işlemlerinizi daha açık bir şekilde görebilmenizi sağlar.  
+
+Pipe fonksiyonu çokça kullanacağız, kodun okunabilirliği açısından da oldukça faydalı bir operatördür.
+
+Nasıl yazıldığına bir bakalım
+```R
+msleep %>%
+    select(name, sleep_total)
+```
+Böylece "name" ve "sleep_total" değişkenleri seçmiş olduk. Bu elde ettiğimiz dataframe'in ilk altı satırına bakmak istersek arkasına head() fonksiyonu yapıştırırız.
+```R
+msleep %>%
+    select(name, sleep_total) %>%
+    head()
+
+>                        name sleep_total
+1                    Cheetah        12.1
+2                 Owl monkey        17.0
+3            Mountain beaver        14.4
+4 Greater short-tailed shrew        14.9
+5                        Cow         4.0
+6           Three-toed sloth        14.4
+```
+
+*Eren Hoca: Pipe kullanarak 6-7 satırlık işlemler yazacağız. Size tavsiyem, elde etmek istediğiniz yere kadar satırları işaretleyip çalıştırmanızdır. Böylece kafanız karışmaz*
+
+**Egzersiz:** İsim (name), toplam uyku süresi (sleep_total) ve korunma durumlarını (conservation) seçelim ve korunma durumu “domesticated” olanları filtreleyelim. İlk altı satırına bakalım!
+
+```R
+msleep %>%
+  select(name, sleep_total, conservation) %>%
+  filter(conservation == "domesticated") %>%
+  head()
+
+>        name sleep_total conservation
+1        Cow         4.0 domesticated
+2        Dog        10.1 domesticated
+3 Guinea pig         9.4 domesticated
+4 Chinchilla        12.5 domesticated
+5      Horse         2.9 domesticated
+6     Donkey         3.1 domesticated
+```
+
+## arrange() fonksiyonu
+arrange() fonksiyonu satırları/gözlemleri içeriklerine göre sıralamak için kullanılır. 
+Böylece veri setini istenilen kriterde sıralayabilirsiniz.
+
+Örneğin: msleep dataframe'inden vücüt ağırlıklarını küçükten büyüğe sıralayalım
+```R
+msleep %>%
+  arrange(bodywt)
+```
+<img src=".images/msleep7.JPG">
+
+Gördüğümüz gibi gözlemleri "bodywt" kolonuna göre küçükten büyüğe sıralamış olduk.
+ Eğer sıralamayı büyükten küçüğe yapmak istersek arrange() fonksiyonun içine desc() fonksiyonu yerleştirerek elde edebiliriz.
+ ```R
+msleep %>%
+  arrange(desc(bodywt))
+ ```
+<img src=".images/msleep8.JPG">
+
+name kolonunu 'a' dan 'z' ye sıralamak istersek,
+```R
+msleep %>%
+  arrange(name)
+```
+
