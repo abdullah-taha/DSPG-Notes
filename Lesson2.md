@@ -405,4 +405,122 @@ süslü parantezlerin hizalarına dikkat etmek önemlidir.
 ## while döngüsü
 ## Fonksiyonlar
 ## Apply Fonksiyonları
+R dilinde for, while gibi döngüler kullanılsada veri analizi gibi alanlarda daha çok apply fonksiyonları kullanılır. Apply fonksiyonları bir vektörün her bir elemanı için belirlenen fonksiyonu uygular.Bunlardan en çok kullanılanları:
+* apply
+* lapply
+* sapply'dir.
 
+#### apply Fonksiyonu 
+Bir fonksiyonu veri setinin satırlarına, sütunlarına veya her ikisine de uygulanmasını sağlar. Girdisi data frame veya matris, çıktısı vektör, liste veya array'dir.
+apply fonksiyonunun argümanları:
+```
+apply(x, MARGIN, FUN)
+```
+* x: Veri seti
+* MARGIN: MARGIN argümanı 1 değerini aldığında satır bazında, 2 değerini aldığında ise sütun  bazında ilgili fonksiyonu çalıştırır.
+* FUN: Uygulanacak fonksiyon
+
+Örneğin elemanları 1'den 20'ye kadar olan, 5 satırlı bir matrisin satırları toplamını bulalım.Öncelikle my_matrix isimli matrisimizi tanımlayalım.
+```
+my_matrix = matrix(1:20, nrow = 5)
+```
+Şimdi bu matrisin satırlarına apply fonksiyonunu uygulayalım. Satırlara uygulayacağımız için MARGIN = 1 olarak ayarlayalım. Satır toplamını bulacağımız için sum fonksiyonunu kullanalım.
+```
+apply(my_matrix, MARGIN = 1, FUN = sum)
+```
+Bu işlemleri R Studio'da uyguladığınızda satırların toplamını görebilirsiniz.
+Sütunların toplamını görebilmek için MARGIN'ı 2 yapmamız yeterlidir.
+```
+apply(my_matrix, MARGIN = 2, FUN = sum)
+```
+Herbir elemanın karekökünü bulmak  istersek sum fonksiyonu yerine sqrt fonksiyonunu kullanmamız gerekiyor.
+```
+apply(my_matrix, MARGIN = 2, FUN = sqrt)
+```
+Kendimizin oluşturduğu bir fonksiyonu da apply fonksiyonunda kullanabiliriz.
+Örnek olarak bütün elemanların karesini alan ve elemanın kendisini karesinden çıkartan bir fonksiyon yazıp, my_matrix matrisimizdeki elemanlara ugulayalım.
+```
+apply(my_matrix, c(1,2), function(x) x^2-x)
+```
+Dikkat ederseniz burada işlemi tüm elemanlara uygulayacağımız için satır ve sütunları c(1,2) şeklinde bir vektör ile ifade ettik.
+
+Kolon bazında öğrencilerin boy ve kilo ortalamalarını hesaplayan kodu yazalım.
+Bunun için ogrenciler adındaki aşağıdaki data frame'i oluşturalım.
+```
+ogrenciler <- data.frame(Kilo=c(60, 70, 80,90,100), Boy=c(160, 175, 180, 190, 195))
+```
+apply fonksiyonunu uygulayalım.Kolon bazında olduğu için MARGIN argümanını 2 olarak ayarlayalım. Ortalama için mean() fonksiyonunu kullanalım.
+```
+apply(ogrenciler, MARGIN=2, FUN=mean)
+```
+#### lapply Fonksiyonu
+Bir girdinin tüm elementlerine bir fonksiyonun uygulanmasını sağlar. Girdisi liste, vektör veya data frame, çıktısı listedir.
+
+lapply fonksiyonunun argümanları:
+```
+lapply(x, FUN)
+```
+* x: Veri seti
+* FUN: Uygulanacak fonksiyon
+
+Şimdi karakter, numerik ve mantıksal şekilde eleman içeren 3 farklı vektörden bir liste oluşturalım.
+```
+a = c("t","e","s","t")
+b = c(1,2,3,4,5)
+c = c(F,T,F)
+myList = list(a,b,c)
+```
+class() metoduyla a,b,c vektörlerinin sınıflarına bakabilirsiniz.
+Listedeki her bir fonksiyonun uzunluğunu bulalım.
+```
+lapply(myList, length)
+```
+Her bir vektörün sınıfını öğrenmek için ise
+```
+lapply(myList, class)
+```
+fonksiyonunu uygulayabiliriz.
+
+Aşağıda büyük harflerle yazılan süper kahraman isimlerinden oluşan vektördeki tüm süper kahraman isimlerini küçük harfle yazdıralım. Bunun için tolower fonksiyonunu kullanabiliriz.
+```
+kahramanlar <- c("SPIDERMAN", "BATMAN", "SUPERMAN", "IRONMAN", "ANTMAN")
+
+kucukHarfli <- lapply(kahramanlar, tolower)
+```
+R Studio'da kucukHarfli değişkenine bakarsak vektördeki tüm elemanların küçük harfleriyle yazıldığını görebiliriz.
+
+str_sub() fonksiyonu ve lapply() fonksiyonu yardımıyla her bir süperkahramanın ilk harfini elde edelim. str_sub() da dahil herhangi bir fonksiyonun argümanlarını kullanacağımız zaman bunu str_sub() fonksiyonunun yerine lapply() fonksiyonunun içine argüman olarak yazıyoruz.
+
+Örnek: lapply(x, fun, argüman1, argüman2…)
+
+Öncelikle eğer bilgisayarımıza indirmediysek install.packages() fonksiyonu ile stringr paketini indirelim. Ve library fonksiyonu ile paketi çağıralım.
+```
+install.packages("stringr")
+library(stringr)
+str_sub(kahramanlar, start=1, end = 1)
+lapply(kahramanlar, str_sub, start=1, end=1)
+```
+Gördüğümüz gibi str_sub ve laaply fonksiyonunu kullanarak her bir süperkahramanın ilk harfini elde etmiş olduk.
+
+#### sapply Fonksiyonu
+lapply fonksiyonu gibi bir girdinin tüm elementlerine bir fonksiyonun uygulanmasını sağlar.lapply fonksiyonundan farkı çıktısıdır. Girdisi liste, vektör veya data frame, çıktısı vektör veya matristir.
+
+sapply fonksiyonunun argümanları:
+```
+sapply(x, FUN)
+```
+* x: Veri seti
+* FUN: Uygulanacak fonksiyon
+
+Daha önce oluşturduğumuz ogrenciler data frame’ini kullanarak maksimum kilo ve boyu sapply fonksiyonunu () kullanarak bulalım.
+```
+sapply(ogrenciler, FUN=max)
+```
+Oluşturduğumuz ogrenciler veri setindeki tüm değişkenleri karakter veri tipine çevirelim.
+```
+ogrenciler[,c("Kilo","Boy")] <- sapply(ogrenciler[,c("Kilo", "Boy")], as.character)
+```
+str() fonksiyonu ile veri setindeki kolonlardaki değişkenlerin karakter veri tipine çevrildiğini görebiliriz.
+```
+str(ogrenciler)
+```
