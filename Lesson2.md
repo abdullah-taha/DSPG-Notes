@@ -295,14 +295,14 @@ apply fonksiyonunun argümanları:
 apply(x, MARGIN, FUN)
 ```
 * x: Veri seti
-* MARGIN: MARGIN argÜmanı 1 değerini aldığında satır bazında, 2 değerini aldığında ise sütun  bazında ilgili fonksiyonu çalıştırır.
+* MARGIN: MARGIN argümanı 1 değerini aldığında satır bazında, 2 değerini aldığında ise sütun  bazında ilgili fonksiyonu çalıştırır.
 * FUN: Uygulanacak fonksiyon
 
 Örneğin elemanları 1'den 20'ye kadar olan, 5 satırlı bir matrisin satırları toplamını bulalım.Öncelikle my_matrix isimli matrisimizi tanımlayalım.
 ```
 my_matrix = matrix(1:20, nrow = 5)
 ```
-Şimdi bu matrisin satırlarına apply fonksiyonunu uuygulayalım. Satırlara uygulayacağımız için MARGIN = 1 olarak ayarlayalım. Satır toplamını bulacağımız için sum fonksiyonunu kullanalım.
+Şimdi bu matrisin satırlarına apply fonksiyonunu uygulayalım. Satırlara uygulayacağımız için MARGIN = 1 olarak ayarlayalım. Satır toplamını bulacağımız için sum fonksiyonunu kullanalım.
 ```
 apply(my_matrix, MARGIN = 1, FUN = sum)
 ```
@@ -378,10 +378,10 @@ library(stringr)
 str_sub(kahramanlar, start=1, end = 1)
 lapply(kahramanlar, str_sub, start=1, end=1)
 ```
-Gördüğümüz gibi str_sub fonksiyonunu kullanarak her bir süperkahramanın ilk harfini elde etmiş olduk.
+Gördüğümüz gibi str_sub ve laaply fonksiyonunu kullanarak her bir süperkahramanın ilk harfini elde etmiş olduk.
 
 #### sapply Fonksiyonu
-lapply foksiyonu gibi bir girdinin tüm elementlerine bir fonksiyonun uygulanmasını sağlar.lapply fonksiyonundan farkı çıktısıdır. Girdisi liste, vektör veya data frame, çıktısı vektör veya matristir.
+lapply fonksiyonu gibi bir girdinin tüm elementlerine bir fonksiyonun uygulanmasını sağlar.lapply fonksiyonundan farkı çıktısıdır. Girdisi liste, vektör veya data frame, çıktısı vektör veya matristir.
 
 sapply fonksiyonunun argümanları:
 ```
