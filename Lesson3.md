@@ -169,7 +169,7 @@ summary()
 
 **NOT:** Dataframe'i daha düzgün bir şekilde görmek istiyorsak R studio'nun Environment kısmındaki değişkene tıklayarak düzgün halini görebiliriz.
 
-<img src=".images/msleep.JPG">
+<img src=".images/msleep.JPG" width="630">
 
 **soru:** istatistiklere neden bakıyoruz ?
 
@@ -298,11 +298,115 @@ select(msleep, starts_with(("sleep")))
 
 >**Egzersiz:** "sleep" ile başlayan değişkenleri seçtikten sonra diğer değişkenleri bu değişkenlerden sonra ekleyelim. ve "sleep" adlı bir değişkene atalım.
 
-bunu nasıl yapabiliriz ? everything() fonksiyonu kullanarak bu işlemi gerçekleştirebiliriz.
+bunu nasıl yapabiliriz ? everything() fonksiyonunu kullanarak bu işlemi gerçekleştirebiliriz.
 Birden fazla select işlemi yapmak istiyorsak virgülle ayırarak yapabiliriz.
 
 ```R
 sleep <- select(msleep, starts_with(("sleep")) , everything())
 sleep
 ```
-<img src=".images/sleep.JPG">
+<img src=".images/sleep.JPG" width=630>
+
+
+Belli bir aralıktaki değişkenleri seçmek istersek, örneğin: "genus"tan "conservation" a kadar olan değişkenleri seçmek istersek şu şekilde gerçekleştirebiliriz
+
+```R
+select(msleep, genus:conservation)
+
+>           genus    vore           order conservation
+1       Acinonyx   carni       Carnivora           lc
+2          Aotus    omni        Primates         <NA>
+3     Aplodontia   herbi        Rodentia           nt
+4        Blarina    omni    Soricomorpha           lc
+5            Bos   herbi    Artiodactyla domesticated
+                    .
+                    .
+81       Genetta   carni       Carnivora         <NA>
+82        Vulpes   carni       Carnivora         <NA>
+83        Vulpes   carni       Carnivora         <NA>
+
+# 2. yol indeksleme kullanarak : 
+#select(msleep, 2:5) 
+```
+
+> **Egzersiz:** Sonu "wt" karakteriyle biten değişkenleri getirip bu değişkenlerin ilk 10 satırına bakalım.
+```R
+wt <- select(msleep, ends_with("wt"))
+head(wt,10)
+
+>    brainwt  bodywt
+1       NA  50.000
+2  0.01550   0.480
+3       NA   1.350
+4  0.00029   0.019
+5  0.42300 600.000
+6       NA   3.850
+7       NA  20.490
+8       NA   0.045
+9  0.07000  14.000
+10 0.09820  14.800
+```
+
+### filter() fonskiyonu
+filter() fonksiyonu veri setindeki satırları/gözlemleri istenilen şekilde filtrelemek için kullanılır. 
+Ayrıca, sütunlar/değişkenleri ayıklamak için kullanılan select() fonksiyonunun
+satırlar/gözlemler için kullanılan halidir diyebiliriz. 
+
+filter() ile sadece seçtiğimiz gözlemlerden oluşan yeni bir data frame oluşturmuş oluruz.
+
+filter() fonksiyonu veri setindeki değişken ismi ile beraber bizden bir mantıksal test ifadesi ister. 
+
+filter() fonksiyonundan tam anlamıyla yararlanmak için eşit “==”, eşit değil “!=”, büyük “>”, küçük “<”, büyük eşit “>=” vb. mantıksal operatörlerin iyi bilinmesi gerekir. Daha detaylı bakmak için ?Comparison yapabiliriz yazıp mantıksal operatörleri hatırlayabiliriz!
+```R
+?Comparison
+```
+<img src=".images/Comparison.JPG" width=500>
+
+Örnek: Günlük uyku süresi 16 saatten fazla olan hayvanları hangileridir?
+
+```R
+filter(msleep, sleep_total > 16)
+```
+<img src=".images/msleep1.JPG">
+
+Gördüğümüz gibi, uyku süresi 16 saatten fazla olan 8 tane hayvan varmış.
+
+Birden fazle filter yapmak istersek yine virgül koyarak filtrelerimizi yapabiliriz.
+
+> **Egzersiz:** Uyanık kalma süreleri ortalama uyanık kalma süresinden büyük eşit olan hayvanlar hangileridir?
+```R
+filter(msleep, awake >= mean(awake))
+```
+<img src=".images/msleep2.JPG">
+
+> **Egzersiz:** Hem toplam uyku süresi 16 saati geçen hem de vücut ağırlığı 1 kilogramin üzerinde olan memelileri filtreleyip çıktıyı inceleyelim
+```R
+filter(msleep, sleep_total > 16, bodywt>1)
+
+#2.yol : filter(msleep, sleep_total > 16 & bodywt>1)
+```
+
+<img src=".images/msleep3.JPG">
+
+>**Egzersiz:** "Perissodactyla" ve "Cingulata" taksonomik sırasına göre memelileri filreleyelim
+Burada "Perissodactyla" **ve** "Cingulata" dediği için **&** operatörünü kullanıp böyle bir hataya düşebiliriz
+```R
+filter(msleep, order == "Perissodactyla" & order=="Cingulata")
+```
+
+Yalnızca bu hayvan aynı zamanda hem "Perissodactyla" hem de "Cingulata" olamlı anlamına geliyor. Dolayısıyla **veya** operatörü kullanmamız lazım.
+
+```R
+filter(msleep, order == "Perissodactyla" | order=="Cingulata")
+
+#2.yol: filter(msleep, order %in% c("Perissodactyla" , "Cingulata")) 
+```
+<img src=".images/msleep4.JPG">
+
+> **Egzersiz:** Beslenme şekli omnivor("omni") olanları seçip ilk altı satırına bakalım.
+```R
+head(filter(msleep,vore=="omni"))
+```
+<img src=".images/msleep5.JPG">
+
+> **Egzersiz:** Vücut ağırlığı en büyük olan hayvan hangisidir?
