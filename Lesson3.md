@@ -169,7 +169,7 @@ summary()
 
 **NOT:** Dataframe'i daha düzgün bir şekilde görmek istiyorsak R studio'nun Environment kısmındaki değişkene tıklayarak düzgün halini görebiliriz.
 
-<img src="msleep.JPG" width="630">
+<img src=".images/msleep.JPG" width="630">
 
 **soru:** istatistiklere neden bakıyoruz ?
 
