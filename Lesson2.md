@@ -284,9 +284,9 @@ subset(ogrenci_df[2], ogrenci_df$fakülte == "Mühendislik")
 ## Fonksiyonlar
 ## Apply Fonksiyonları
 R dilinde for, while gibi döngüler kullanılsada veri analizi gibi alanlarda daha çok apply fonksiyonları kullanılır. Apply fonksiyonları bir vektörün her bir elemanı için belirlenen fonksiyonu uygular.Bunlardan en çok kullanılanları:
-  *apply
-  *lapply
-  *sapply'dir.
+* apply
+* lapply
+* sapply'dir.
 
 #### apply Fonksiyonu 
 Bir fonksiyonu veri setinin satırlarına, sütunlarına veya her ikisine de uygulanmasını sağlar. Girdisi data frame veya matris, çıktısı vektör, liste veya array'dir.
@@ -294,9 +294,9 @@ apply fonksiyonunun argümanları:
 ```
 apply(x, MARGIN, FUN)
 ```
-*x: Veri seti
-*MARGIN: MARGIN argÜmanı 1 değerini aldığında satır bazında, 2 değerini aldığında ise sütun  bazında ilgili fonksiyonu çalıştırır.
-*FUN: Uygulanacak fonksiyon
+* x: Veri seti
+* MARGIN: MARGIN argÜmanı 1 değerini aldığında satır bazında, 2 değerini aldığında ise sütun  bazında ilgili fonksiyonu çalıştırır.
+* FUN: Uygulanacak fonksiyon
 
 Örneğin elemanları 1'den 20'ye kadar olan, 5 satırlı bir matrisin satırları toplamını bulalım.Öncelikle my_matrix isimli matrisimizi tanımlayalım.
 ```
@@ -338,8 +338,8 @@ lapply fonksiyonunun argümanları:
 ```
 lapply(x, FUN)
 ```
-*x: Veri seti
-*FUN: Uygulanacak fonksiyon
+* x: Veri seti
+* FUN: Uygulanacak fonksiyon
 
 Şimdi karakter, numerik ve mantıksal şekilde eleman içeren 3 farklı vektörden bir liste oluşturalım.
 ```
@@ -387,8 +387,8 @@ sapply fonksiyonunun argümanları:
 ```
 sapply(x, FUN)
 ```
-*x: Veri seti
-*FUN: Uygulanacak fonksiyon
+* x: Veri seti
+* FUN: Uygulanacak fonksiyon
 
 Daha önce oluşturduğumuz ogrenciler data frame’ini kullanarak maksimum kilo ve boyu sapply fonksiyonunu () kullanarak bulalım.
 ```
