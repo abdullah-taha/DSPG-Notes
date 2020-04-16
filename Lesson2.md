@@ -403,7 +403,7 @@ lapply(myList, length)
 [[3]]
 [1] 3
 ```
-Her bir vektörün sınıfını öğrenmek için ise
+Her bir vektörün sınıfını öğrenmek için ise laaply fonksiyonunu uygulayabiliriz.
 ```R
 lapply(myList, class)
 [[1]]
@@ -415,7 +415,6 @@ lapply(myList, class)
 [[3]]
 [1] "logical"
 ```
-fonksiyonunu uygulayabiliriz.
 
 Aşağıda büyük harflerle yazılan süper kahraman isimlerinden oluşan vektördeki tüm süper kahraman isimlerini küçük harfle yazdıralım. Bunun için tolower fonksiyonunu kullanabiliriz.
 ```R
