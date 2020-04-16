@@ -401,8 +401,401 @@ süslü parantezlerin hizalarına dikkat etmek önemlidir.
 
 
 ## for döngüsü
+
+Kendini tekrar eden benzer kod satırlarını tekrar yazmak yerine döngüleri kullanmayı tercih ederiz. Döngüler yardımıyla
+zaman kazancı elde edebilir ve daha verimli kod yazılabilir. 
+
+
+__Soru:__
+Ekrana 5 kere "Merhaba Kodluyoruz" yazdıran programı yazınız.
+
+```R
+#Öncelikle sorumuzu döngüler kullanmadan çözelim.
+
+print("Merhaba Kodluyoruz")
+print("Merhaba Kodluyoruz")
+print("Merhaba Kodluyoruz")
+print("Merhaba Kodluyoruz")
+print("Merhaba Kodluyoruz")
+```
+
+Yukarıdaki çözümde gördüğünüz şekilde bize verilen sorunun cevabını elde edebildik. Peki soru bizden 5 değil de 20
+kere ekrana "Merhaba Kodluyoruz" yazdırmamızı isteseydi bu şekilde bir çözüm mantıklı olur muydu?
+
+Hayır, bu tarz kendini tekrar eden kod bloklarında döngüler ile çok daha pratik çözümler üretebiliriz.
+
+```R
+for(index in 1:20) {
+  print("Merhaba Kodluyoruz")
+}
+```
+
+__Not:__ Programlama dünyasında kendimizi tekrar etmekten kaçınmamızı hatırlatacak bir prensip vardır.
+Bu prensip "Don't Repat Yourself" yani "DRY" olarak literatüre geçmiştir. "Kendini Tekrar Etme" şeklinde
+Türkçe'leştirebileceğimiz bu prensibi hatırlayarak daha verimli çalışan kodlar yazabiliriz.
+
+__Soru:__
+Elimizde öğrencilere ait notların bulunduğu bir vektör kod dizini içerisinde verilmiştir. Öğrencilerin notlarını
+ekrana for döngüsü kullanarak yazdırınız.
+
+```R
+notlar <- c(85, 90, 25, 30, 59, 60, 28, 64, 75, 83, 92, 10, 50, 60, 52, 10, 88, 46, 12)
+
+#çözüm1
+
+for(not in notlar) {
+	print(not)
+}
+
+#çözüm2
+
+for(i in 1:length(notlar)) {
+	print(notlar[i])
+}
+
+```
+
+Çözüme baktığımız zaman problemin iki farklı for döngüsü ile çözüldüğünü görüyoruz. İki döngü de aynı
+sonucu vermesine rağmen probleme göre bir çözüm diğer çözüme göre avantaj sağlayabilir.
+
+__1. Çözüm İnceleme:__
+Kısa ve daha okunabilir bir çözüm olmasına rağmen indekslere doğrudan bir erişim
+sağlayamadığımız için indeks bazlı işlem yapmak zordur.
+
+
+__2. Çözüm İnceleme:__
+Okunabilirliği ve yazması daha zordur fakat indekslere doğrudan erişim sağlandığı için elemanlar
+üzerinde işlem yapmak daha kolaydır.
+
+
+__Soru:__
+Aşağıdaki x dizisinde bulunan sayılardan 2 ile bölünebilen sayıları nasıl yazdırabiliriz?
+```R
+x <- 1:10 #1'den 10'a kadar olan sayılar x'in içinde tutuluyor.
+
+for(sayi in x) {
+	if(sayi %% 2 == 0) { # mod operatörünü kullandık.
+		print(sayi)
+	}
+}
+```
+__Soru:__
+Aşağıdaki x dizisinde bulunan sayılardan 2 ile bölünebilen sayıların toplamı kaçtır?
+
+```R
+x <- 1:20 #1'den 20'ye kadar olan sayılar x'in içinde tutuluyor.
+toplam <- 0 #toplamı tutabilmek için bir toplam değişkeni oluşturduk ve 0'a atadık.
+for(sayi in x) {
+	if(sayi %% 2 == 0) { #2'ye bölünebilirlik kontrolü.
+		toplam <- toplam + sayi #Eğer sayı 2'ye bölünebiliyorsa toplam değişkenini sayı kadar arttır.
+	}
+}
+print(toplam)
+```
+
+Döngüler üzerindeki kontrolü arttıran bazı komutlar vardır.
+
+#### break komutu
+
+İstenilen koşul sağlandığında döngünün sonlandırılmasını sağlayan komuttur.
+
+__Soru:__ 
+Şehirler vektöründe 6 harfli olan ilk şehri for döngüsü ile nasıl yazdırabiliriz?
+
+```R
+sehirler <- c("İzmir", "Ankara", "İstanbul", "Antalya", "Kayseri", "Bursa","Amasya")
+
+for(sehir in sehirler) {
+  if(nchar(sehir) == 6) {
+    print(sehir)
+    break
+  }
+}
+[1] "Ankara"
+
+#nchar() fonksiyonu içine gönderilen argümanın kaç character'den oluştuğunu döndürür.
+```
+__Dikkat:__
+Yukarıdaki çözümümüzde "Ankara" çıktısını elde ettik. Eğer break komutu ile döngüyü kırmasaydık
+"Amasya" çıktısını da elde edecektik.
+
+
+#### next komutu
+İstenilen koşulun sağlanması durumunda döngüyü sıradaki eleman ile çağırır.
+
+__Soru:__
+1'den 10'a kadar olan sayılardan tek sayıları for döngüsü ve next komutu yardımıyla nasıl yazdırabiliriz?
+
+```R
+sayilar <- 1:10
+
+for(sayi in sayilar) {
+  if(sayi %% 2 == 0) {
+    next
+  }
+  print(sayi)
+}
+[1] 1
+[1] 3
+[1] 5
+[1] 7
+[1] 9
+```
+
+
 ## paste() fonksiyonu
+
+paste fonksiyonu içerisine gönderilen argümanları character tipine dönüştürür ve belirlenen bir ayraç
+ile character tipinden verileri birleştirebilir.
+
+İçine tek bir  argüman gönderilirse  paste() fonksiyonu as.character() fonksiyonu görevi görür.
+
+İçine birden fazla argüman gönderilirse paste() fonksiyonu gönderilen argümanları birleştirir ve character
+tipinde bir çıktı üretir. 
+
+Argümanların arasına sep = "" parametresi ile ayraç konabilir.
+
+Herhangi bir ayraç belirtilmemesi durumunda varsayılan ayraç "" şeklindedir.
+```R
+sayi <- 5
+class(sayi)
+[1]"numeric"
+
+class(as.character(sayi))
+[1]"character"
+
+class(paste(sayi))
+[1]"character"
+
+
+isim <- "Berke"
+kilo <- 65
+
+paste(isim, kilo,"kilogramdır.")
+[1]"Berke 65 kilogramdır."
+
+paste(isim, kilo,"kilogramdır.", sep= " *** ")
+[1] "Berke *** 65 *** kilogramdır."
+
+paste(c("x","y"), 1:10, sep=",")
+[1]"x,1"  "y,2"  "x,3"  "y,4"  "x,5"  "y,6"  "x,7"  "y,8"  "x,9"  "y,10"
+```
+
 ## while döngüsü
+
+
 ## Fonksiyonlar
 ## Apply Fonksiyonları
+R dilinde for, while gibi döngüler kullanılsada veri analizi gibi alanlarda daha çok apply fonksiyonları kullanılır. Apply fonksiyonları bir vektörün her bir elemanı için belirlenen fonksiyonu uygular.Bunlardan en çok kullanılanları:
+* apply
+* lapply
+* sapply'dir.
 
+#### apply Fonksiyonu 
+Bir fonksiyonu veri setinin satırlarına, sütunlarına veya her ikisine de uygulanmasını sağlar. Girdisi data frame veya matris, çıktısı vektör, liste veya array'dir.
+apply fonksiyonunun argümanları:
+```
+apply(x, MARGIN, FUN)
+```
+* x: Veri seti
+* MARGIN: MARGIN argümanı 1 değerini aldığında satır bazında, 2 değerini aldığında ise sütun  bazında ilgili fonksiyonu çalıştırır.
+* FUN: Uygulanacak fonksiyon
+
+Örneğin elemanları 1'den 20'ye kadar olan, 5 satırlı bir matrisin satırları toplamını bulalım.Öncelikle my_matrix isimli matrisimizi tanımlayalım.
+```R
+my_matrix = matrix(1:20, nrow = 5)
+my_matrix
+     [,1] [,2] [,3] [,4]
+[1,]    1    6   11   16
+[2,]    2    7   12   17
+[3,]    3    8   13   18
+[4,]    4    9   14   19
+[5,]    5   10   15   20
+```
+Şimdi bu matrisin satırlarına apply fonksiyonunu uygulayalım. Satırlara uygulayacağımız için MARGIN = 1 olarak ayarlayalım. Satır toplamını bulacağımız için sum fonksiyonunu kullanalım.
+```R
+apply(my_matrix, MARGIN = 1, FUN = sum)
+[1] 34 38 42 46 50
+```
+Sütunların toplamını görebilmek için MARGIN'ı 2 yapmamız yeterlidir.
+```R
+apply(my_matrix, MARGIN = 2, FUN = sum)
+[1] 15 40 65 90
+```
+Herbir elemanın karekökünü bulmak  istersek sum fonksiyonu yerine sqrt fonksiyonunu kullanmamız gerekiyor.
+```R
+apply(my_matrix, MARGIN = 2, FUN = sqrt)
+
+        [,1]     [,2]     [,3]     [,4]
+[1,] 1.000000 2.449490 3.316625 4.000000
+[2,] 1.414214 2.645751 3.464102 4.123106
+[3,] 1.732051 2.828427 3.605551 4.242641
+[4,] 2.000000 3.000000 3.741657 4.358899
+[5,] 2.236068 3.162278 3.872983 4.472136
+```
+Kendimizin oluşturduğu bir fonksiyonu da apply fonksiyonunda kullanabiliriz.
+Örnek olarak bütün elemanların karesini alan ve elemanın kendisini karesinden çıkartan bir fonksiyon yazıp, my_matrix matrisimizdeki elemanlara ugulayalım.
+```R
+apply(my_matrix, c(1,2), function(x) x^2-x)
+
+     [,1] [,2] [,3] [,4]
+[1,]    0   30  110  240
+[2,]    2   42  132  272
+[3,]    6   56  156  306
+[4,]   12   72  182  342
+[5,]   20   90  210  380
+```
+Dikkat ederseniz burada işlemi tüm elemanlara uygulayacağımız için satır ve sütunları c(1,2) şeklinde bir vektör ile ifade ettik.
+
+Kolon bazında öğrencilerin boy ve kilo ortalamalarını hesaplayan kodu yazalım.
+Bunun için ogrenciler adındaki aşağıdaki data frame'i oluşturalım.
+```R
+ogrenciler <- data.frame(Kilo=c(60, 70, 80,90,100), Boy=c(160, 175, 180, 190, 195))
+ogrenciler
+
+  Kilo Boy
+1   60 160
+2   70 175
+3   80 180
+4   90 190
+5  100 195
+```
+apply fonksiyonunu uygulayalım.Kolon bazında olduğu için MARGIN argümanını 2 olarak ayarlayalım. Ortalama için mean() fonksiyonunu kullanalım.
+```R
+apply(ogrenciler, MARGIN=2, FUN=mean)
+Kilo  Boy 
+  80  180 
+```
+#### lapply Fonksiyonu
+Bir girdinin tüm elementlerine bir fonksiyonun uygulanmasını sağlar. Girdisi liste, vektör veya data frame, çıktısı listedir.
+
+lapply fonksiyonunun argümanları:
+```
+lapply(x, FUN)
+```
+* x: Veri seti
+* FUN: Uygulanacak fonksiyon
+
+Şimdi karakter, numerik ve mantıksal şekilde eleman içeren 3 farklı vektörden bir liste oluşturalım.
+```R
+a = c("t","e","s","t")
+b = c(1,2,3,4,5)
+c = c(F,T,F)
+myList = list(a,b,c)
+
+[[1]]
+[1] "t" "e" "s" "t"
+
+[[2]]
+[1] 1 2 3 4 5
+
+[[3]]
+[1] FALSE  TRUE FALSE
+```
+class() metoduyla a,b,c vektörlerinin sınıflarına bakabilirsiniz.
+Listedeki her bir fonksiyonun uzunluğunu bulalım.
+```R
+lapply(myList, length)
+
+[[1]]
+[1] 4
+
+[[2]]
+[1] 5
+
+[[3]]
+[1] 3
+```
+Her bir vektörün sınıfını öğrenmek için ise laaply fonksiyonunu uygulayabiliriz.
+```R
+lapply(myList, class)
+[[1]]
+[1] "character"
+
+[[2]]
+[1] "numeric"
+
+[[3]]
+[1] "logical"
+```
+
+Aşağıda büyük harflerle yazılan süper kahraman isimlerinden oluşan vektördeki tüm süper kahraman isimlerini küçük harfle yazdıralım. Bunun için tolower fonksiyonunu kullanabiliriz.
+```R
+kahramanlar <- c("SPIDERMAN", "BATMAN", "SUPERMAN", "IRONMAN", "ANTMAN")
+kahramanlar
+[1] "SPIDERMAN" "BATMAN"    "SUPERMAN"  "IRONMAN"   "ANTMAN"  
+
+kucukHarfli <- lapply(kahramanlar, tolower)
+kucukHarfli
+[[1]]
+[1] "spiderman"
+
+[[2]]
+[1] "batman"
+
+[[3]]
+[1] "superman"
+
+[[4]]
+[1] "ironman"
+
+[[5]]
+[1] "antman"
+```
+ kucukHarfli değişkenine bakarsak vektördeki tüm elemanların küçük harfleriyle yazıldığını görebiliriz.
+
+str_sub() fonksiyonu ve lapply() fonksiyonu yardımıyla her bir süperkahramanın ilk harfini elde edelim. str_sub() da dahil herhangi bir fonksiyonun argümanlarını kullanacağımız zaman bunu str_sub() fonksiyonunun yerine lapply() fonksiyonunun içine argüman olarak yazıyoruz.
+
+Örnek: lapply(x, fun, argüman1, argüman2…)
+
+Öncelikle eğer bilgisayarımıza indirmediysek install.packages() fonksiyonu ile stringr paketini indirelim. Ve library fonksiyonu ile paketi çağıralım.
+```R
+install.packages("stringr")
+library(stringr)
+str_sub(kahramanlar, start=1, end = 1)
+[1] "S" "B" "S" "I" "A"
+lapply(kahramanlar, str_sub, start=1, end=1)
+[[1]]
+[1] "S"
+
+[[2]]
+[1] "B"
+
+[[3]]
+[1] "S"
+
+[[4]]
+[1] "I"
+
+[[5]]
+[1] "A"
+```
+Gördüğümüz gibi str_sub ve laaply fonksiyonunu kullanarak her bir süperkahramanın ilk harfini elde etmiş olduk.
+
+#### sapply Fonksiyonu
+lapply fonksiyonu gibi bir girdinin tüm elementlerine bir fonksiyonun uygulanmasını sağlar.lapply fonksiyonundan farkı çıktısıdır. Girdisi liste, vektör veya data frame, çıktısı vektör veya matristir.
+
+sapply fonksiyonunun argümanları:
+```
+sapply(x, FUN)
+```
+* x: Veri seti
+* FUN: Uygulanacak fonksiyon
+
+Daha önce oluşturduğumuz ogrenciler data frame’ini kullanarak maksimum kilo ve boyu sapply fonksiyonunu () kullanarak bulalım.
+```R
+sapply(ogrenciler, FUN=max)
+Kilo  Boy 
+ 100  195 
+```
+Oluşturduğumuz ogrenciler veri setindeki tüm değişkenleri karakter veri tipine çevirelim.
+```R
+ogrenciler[,c("Kilo","Boy")] <- sapply(ogrenciler[,c("Kilo", "Boy")], as.character)
+```
+str() fonksiyonu ile veri setindeki kolonlardaki değişkenlerin karakter veri tipine çevrildiğini görebiliriz.
+```R
+str(ogrenciler)
+'data.frame':	5 obs. of  2 variables:
+ $ Kilo: chr  "60" "70" "80" "90" ...
+ $ Boy : chr  "160" "175" "180" "190" ...
+```
