@@ -552,6 +552,7 @@ ile character tipinden verileri birleştirebilir.
 tipinde bir çıktı üretir. 
 
 Argümanların arasına sep = "" parametresi ile ayraç konabilir.\
+
 Herhangi bir ayraç belirtilmemesi durumunda varsayılan ayraç "" şeklindedir.
 ```R
 sayi <- 5
