@@ -496,3 +496,116 @@ msleep %>%
   arrange(name)
 ```
 
+> **Egzersiz:** Veri setimizden name, genus, vore ve brainwt değişkenleri seçip. Beyin ağırlığı 1'den büyük olanları filtreledikten sonra beyin ağırlığına göre büyükten küçüğe sıralatalım.
+```R
+msleep %>%
+  select(name,genus,vore,brainwt) %>%
+  filter(brainwt > 1) %>%
+  arrange(desc(brainwt))
+
+>              name     genus  vore brainwt
+1 African elephant Loxodonta herbi   5.712
+2   Asian elephant   Elephas herbi   4.603
+3            Human      Homo  omni   1.320
+```
+
+Maksimum beyin ağırlığına sahip canlıyı bulmak isteseydik nasıl yapardık?
+
+sadece bir pipe daha ekleyerek bunu elde edebiliriz,
+```R
+msleep %>%
+  select(name,genus,vore,brainwt) %>%
+  filter(brainwt > 1) %>%
+  arrange(desc(brainwt)) %>%
+  head(1)
+
+>              name     genus  vore brainwt
+1 African elephant Loxodonta herbi   5.712
+
+
+# 2.yol : 
+msleep %>%
+  select(name,genus,vore,brainwt) %>%
+  filter(brainwt > 1) %>%
+  arrange(desc(brainwt)) %>%
+  filter(brainwr == max(brainwt))
+```
+
+## mutate() fonksiyonu
+#Mutate fonksiyonu ile veri setimize yeni sütunlar/değişkenler ekleyebiliriz.
+
+Rem uykusunun toplam uyku miktarına oranını bulalım ve rem_proportion adlı yeni bir sütuna atayalım. 
+
+```R
+msleep <- msleep %>%
+  mutate(rem_proportion = sleep_rem / sleep_total)
+
+msleep
+```
+<img src=".images/msleep9.JPG">
+
+
+```R
+#2.yol: geçen hafta görmüştük
+msleep$rem_proportion <- msleep$sleep_rem / msleep$sleep_total
+```
+
+mutate() fonksiyonunun bir başka özelliği ise ihtiyaç duyulduğunda aynı anda aynı kodun içerisinde birden fazla yeni değişken üretebilmesidir.
+
+İlk örneğe ilaveten, gram cinsinde bodywt sütunu olacak şekilde bodywt_grams adli ikinci bir değer yaratalım.
+```R
+msleep %>%
+  mutate(rem_proportion = sleep_rem / sleep_total,
+         bodywt_gram = bodywt * 1000)
+```
+<img src=".images/msleep10.JPG">
+
+> **Egzersiz:** msleep veri setine brainwt_grams isimli brainwt değişkeninin 1000'le çarpılmış halini ekleyelim.
+Ayrıca, sleep_cycle_ratio isimli sleep_cycle'ı 100 ile çarparak yüzde oran belirtecek şekilde ekleyelim.
+Bu işlemlerden sonra msleep_yeni isimli veri setine atayalım.
+```R
+msleep_yeni <- msleep %>%
+  mutate(bodywt_gram = bodywt * 1000,
+         sleep_cycle_ratio = sleep_cycle * 100)
+msleep_yeni
+```
+<img src=".images/msleep11.JPG">
+
+mutate() kullanarak numerik değişkenleri kategorikleştirme işlemleri de gerçekleştirebiliriz. Bunun birkaç yöntemi var, onları görmeden size ifelse() fonksiyonundan bahsetmek istiyorum.
+
+ifelse() fonksiyonunun tanımına bir bakalım,
+```R
+?ifelse() 
+```
+<img src=".images/ifelse().JPG" width=500>
+
+Burada bir sınama yapıyoruz(ilk argüman), ve bu sınama doğru çıktıysa ikinci argümanı, yanlış çıktıysa üçüncü argümanı döndürecek bize. örneğin,
+```R
+ifelse(5 > 4, "doğru", "yanlış")
+
+> "doğru"
+```
+Peki numerik değişkenleri kategorik değerlere dönüştüme işlemine dönelim, bunun iki yöntemle yapabiliriz;
+
+1. ifelse() yöntemi:
+
+```R
+msleep$miskinlik <- ifelse(msleep$sleep_total < 16, "Miskin", "Miskin_Degil")
+msleep
+```
+<img src=".images/msleep12.JPG" >
+
+1. case_when() yöntemi: 
+açıklama yazılacak
+```R
+msleep %>%
+  mutate(miskinlik = case_when(sleep_total > 16 ~ "Miskin",
+                               sleep_total < 16 ~ "Miskin_Degil"))
+
+msleep %>%
+  mutate(uyanıklık = case_when(awake > 4 & awake < 10 ~ "Az_uyanik",
+                               awake > 10 & awake < 13 ~ "Ortalama_uyanik",
+                               awake > 13 & awake < 16 ~ "Daha_uyanik",
+                               awake > 16 ~ "Cok_uyank"))
+
+```
