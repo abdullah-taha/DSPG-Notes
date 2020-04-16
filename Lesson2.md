@@ -402,7 +402,7 @@ süslü parantezlerin hizalarına dikkat etmek önemlidir.
 ## for döngüsü
 
 Kendini tekrar eden benzer kod satırlarını tekrar yazmak yerine döngüleri kullanmayı tercih ederiz. Döngüler yardımıyla
-zaman kazancı elde edebilir ve daha verimli kod yazabiliriz. 
+zaman kazancı elde edebilir ve daha verimli kod yazılabilir. 
 
 
 __Soru:__
@@ -419,7 +419,7 @@ print("Merhaba Kodluyoruz")
 ```
 
 Yukarıdaki çözümde gördüğünüz şekilde bize verilen sorunun cevabını elde edebildik. Peki soru bizden 5 değil de 20
-kere ekrana "Merhaba Kodluyoruz" yazdırmamızı isteseydi bu şekilde bir çözüm mü üretecektik?
+kere ekrana "Merhaba Kodluyoruz" yazdırmamızı isteseydi bu şekilde bir çözüm mantıklı olur muydu?
 
 Hayır, bu tarz kendini tekrar eden kod bloklarında döngüler ile çok daha pratik çözümler üretebiliriz.
 
@@ -429,13 +429,11 @@ for(index in 1:20) {
 }
 ```
 
-__Not:__ Programlama dünyasında kendimizi tekrar etmekten kaçınmamızı hatırlatacak bir yaklaşım vardır.
-Bu yaklaşım "Don't Repat Yourself" yani "DRY" olarak literatüre geçmiştir. "Kendini Tekrar Etme" şeklinde
-Türkçeleştirebileceğimiz bu yaklaşımı sorgulayarak daha verimli çalışan kodlar yazabiliriz. Aynı kodları tekrar
-tekrar yazdığımı fark ettiğimiz noktada bir şeyleri yanlış yaptığımızı ön görebiliriz.
+__Not:__ Programlama dünyasında kendimizi tekrar etmekten kaçınmamızı hatırlatacak bir prensip vardır.
+Bu prensip "Don't Repat Yourself" yani "DRY" olarak literatüre geçmiştir. "Kendini Tekrar Etme" şeklinde
+Türkçe'leştirebileceğimiz bu prensibi hatırlayarak daha verimli çalışan kodlar yazabiliriz.
 
 __Soru:__
-
 Elimizde öğrencilere ait notların bulunduğu bir vektör kod dizini içerisinde verilmiştir. Öğrencilerin notlarını
 ekrana for döngüsü kullanarak yazdırınız.
 
@@ -457,7 +455,7 @@ for(i in 1:length(notlar)) {
 ```
 
 Çözüme baktığımız zaman problemin iki farklı for döngüsü ile çözüldüğünü görüyoruz. İki döngü de aynı
-sonucu vermesine rağmen proble göre bir çözüm diğer çözüme göre avantaj sağlayabilir.
+sonucu vermesine rağmen probleme göre bir çözüm diğer çözüme göre avantaj sağlayabilir.
 
 __1. Çözüm İnceleme:__
 Kısa ve daha okunabilir bir çözüm olmasına rağmen indekslere doğrudan bir erişim
@@ -465,14 +463,14 @@ sağlayamadığımız için indeks bazlı işlem yapmak zordur.
 
 
 __2. Çözüm İnceleme:__
-Okunabilirliği ve yazması daha zordur fakat indekslere doğrudan erişim sağlandığı için değişkenler
+Okunabilirliği ve yazması daha zordur fakat indekslere doğrudan erişim sağlandığı için elemanlar
 üzerinde işlem yapmak daha kolaydır.
 
 
 __Soru:__
 Aşağıdaki x dizisinde bulunan sayılardan 2 ile bölünebilen sayıları nasıl yazdırabiliriz?
 ```R
-x <- 1:10
+x <- 1:10 #1'den 10'a kadar olan sayılar x'in içinde tutuluyor.
 
 for(sayi in x) {
 	if(sayi %% 2 == 0) { # mod operatörünü kullandık.
@@ -501,7 +499,7 @@ Döngüler üzerindeki kontrolü arttıran bazı komutlar vardır.
 İstenilen koşul sağlandığında döngünün sonlandırılmasını sağlayan komuttur.
 
 __Soru:__ 
-Şehirler vektöründe 6 harfli olan ilk şehiri for döngüsü ile nasıl yazdırabiliriz?
+Şehirler vektöründe 6 harfli olan ilk şehri for döngüsü ile nasıl yazdırabiliriz?
 
 ```R
 sehirler <- c("İzmir", "Ankara", "İstanbul", "Antalya", "Kayseri", "Bursa","Amasya")
@@ -513,8 +511,10 @@ for(sehir in sehirler) {
   }
 }
 [1] "Ankara"
+
+#nchar() fonksiyonu içine gönderilen argümanın kaç character'den oluştuğunu döndürür.
 ```
-Yukarıdaki çözümümüzde "Ankara" çıktısını elde ettik. Eğer break komutu ile döngüyü kırmasaydık
+__Dikkat:__Yukarıdaki çözümümüzde "Ankara" çıktısını elde ettik. Eğer break komutu ile döngüyü kırmasaydık
 "Amasya" çıktısını da elde edecektik.
 
 
@@ -543,14 +543,17 @@ for(sayi in sayilar) {
 
 ## paste() fonksiyonu
 
-paste fonksiyonu içerisine gönderilen değişkenleri character tipine dönüştürür ve belirlenen bir ayraç
+paste fonksiyonu içerisine gönderilen argümanları character tipine dönüştürür ve belirlenen bir ayraç
 ile character tipinden verileri birleştirebilir.
 
+İçine tek bir  argüman gönderilirse  paste() fonksiyonu as.character() fonksiyonu görevi görür.
 
+İçine birden fazla argüman gönderilirse paste() fonksiyonu gönderilen argümanları birleştirir ve character
+tipinde bir çıktı üretir. 
+
+Argümanların arasına sep = "" parametresi ile ayırıcı konabilir.
+Herhangi bir ayırıcı belirtilmemesi durumunda varsayılan ayırıcı "" şeklindedir.
 ```R
-#İçine eğer tek bir  argüman gönderilirse  paste() fonksiyonu as.character() görevi görür.
-#as.character() fonksiyonu içerisine gönderilen değişkenleri character tipine dönüştürür.
-
 sayi <- 5
 class(sayi)
 [1]"numeric"
@@ -561,9 +564,6 @@ class(as.character(sayi))
 class(paste(sayi))
 [1]"character"
 
-#İçine birden fazla argüman gönderilmesi durumunda paste() fonksiyonu gönderilen argümanları birleştirir ve character
-tipinde bir çıktı üretir. İki veya daha fazla argüman birleştirilebilir. Argümanların birleştirilmesi için istenilen bir
-karakter sep ="" parametresine atanabilir. Herhangi bir atamama yapılmaması durumunda varsayılan ayraç "" şeklindedir.
 
 isim <- "Berke"
 kilo <- 65
@@ -575,6 +575,13 @@ paste(isim, kilo,"kilogramdır.", sep= " *** ")
 [1] "Berke *** 65 *** kilogramdır."
 
 ```
+
+```R
+paste(c("x","y"), 1:10, sep=",")
+[1]"x,1"  "y,2"  "x,3"  "y,4"  "x,5"  "y,6"  "x,7"  "y,8"  "x,9"  "y,10"
+```
+
+
 
 ## while döngüsü
 
