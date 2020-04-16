@@ -514,7 +514,8 @@ for(sehir in sehirler) {
 
 #nchar() fonksiyonu içine gönderilen argümanın kaç character'den oluştuğunu döndürür.
 ```
-__Dikkat:__Yukarıdaki çözümümüzde "Ankara" çıktısını elde ettik. Eğer break komutu ile döngüyü kırmasaydık
+__Dikkat:__
+Yukarıdaki çözümümüzde "Ankara" çıktısını elde ettik. Eğer break komutu ile döngüyü kırmasaydık
 "Amasya" çıktısını da elde edecektik.
 
 
