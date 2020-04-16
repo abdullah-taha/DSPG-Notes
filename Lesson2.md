@@ -278,6 +278,128 @@ subset(ogrenci_df[2], ogrenci_df$fakülte == "Mühendislik")
 ```
 
 ## Kontrol İfadeleri
+
+Kontrol ifadeleri programın akışını belirlemekte kullanılır. İstenilen koşulun sağlanıp
+sağlanmadığına göre bir sonraki kod bloğu çalışır. Bu kontrolleri yapabilmek için 3 ifadeden faydalanıyoruz.
+
+__Not__: Kontrol ifadelerinin içine mantıksal testler yazdığımıza dikkat edelim.
+
+#### if kontrolü
+İstenilen koşul gerçekleştiğinde kod bloğu içinde bulunan kod çalıştırılır. Koşul sağlanmadıysa program normal
+akışında devam eder.
+
+
+__Soru:__
+Adım adım verilen sayının pozitif mi yoksa negatif mi olduğunu gösteren bir program yazalım.
+
+ ```R
+#Adım 1: Sayımızın negatif olma durumunu kontrol edelim.
+ 
+sayi <- 5
+ 
+if(sayi < 0) { #Eğer sayı 0'dan küçükse if kod bloğundaki kodları çalıştır.
+	print("Sayı negatiftir.")
+}
+ 
+print("Kontrol ifadelerini öğreniyorum") 
+ 
+#if koşulu sağlanmadığı için bu kod bloğu çıktı olarak sadece aşağıdaki çıktıyı verecektir.
+[1]"Kontrol ifadelerini öğreniyorum"
+```
+
+#### else if kontrolü
+if koşulunun gerçekleşmediği durumda kontrol edilecek bir sonraki koşulu belirtmemizi sağlayan ifadedir.
+
+_Not_: Birden fazla else if koşulu alt alta tanımlanabilir.
+
+```R
+#Adım 2: Sayının pozitif olma kontrolünü ekleyelim. 
+ 
+if(sayi < 0) { #Eğer sayı 0'dan küçükse if kod bloğundaki kodları çalıştır.
+	print("Sayı negatiftir.")
+}else if(sayi > 0) { #Eğer sayı 0'dan büyükse else if kod bloğundaki kodları çalıştır.
+	print("Sayı pozitiftir.")
+}
+
+```
+
+#### else kontrolü
+if koşulunun sağlanmadığı durumlarda çalıştırılacak kod bloğudur.
+if koşulu ya da else if koşullarından bir tanesi istenileni sağlayıp çalışırsa else komutu çalışmaz.
+
+```R
+#Adım 3: Sayımızın 0 olma durumunu kontrol edelim.
+
+if(sayi < 0) { #Eğer sayı 0'dan küçükse if kod bloğundaki kodları çalıştır.
+  print("Sayı negatiftir.")
+}else if(sayi > 0) { #Eğer sayı 0'dan büyükse else if kod bloğundaki kodları çalıştır.
+  print("Sayı pozitiftir.")
+}else {
+  print("Girilen sayı 0'dır.") #Girilen sayı ne negatif ne de pozitiftir. Sayı 0'dır.
+} 
+```
+
+__Soru:__
+Bir arabanın hızına göre sürücüye aşağıdaki koşullar doğrultusunda çıktı veren bir program yazalım.
+
+Araba hızımızın negatif olup olmadığı kontrolünü yapalım.\
+Arabamızın hızı 85 olsun.\
+Eğer arabanın hızı 0-30 arasındaysa ekrana "hızınız çok yavaş"\
+Eğer arabanın hızı 30-50 arasındaysa ekrana "hızınız yavaş"\
+Eğer arabanın hızı 70-100 arasındaysa ekrana "hızınız normal"\
+Eğer arabanın hızı 100'den fazlaysa ekrana "hızınız yüksek, lütfen yavaşlayın!" yazsın.
+
+```R
+araba_hiz <- 85
+
+if(araba_hiz >= 0) {
+  if(araba_hiz <= 30) { # hız 0 ve 30 arasındaysa.
+    print("hızınız çok yavaş.")
+  } else if(araba_hiz <= 50) { # hız 30 - 50 arasındaysa
+    print("hızınız yavaş.")
+  } else if(araba_hiz <=100) { # hız 50 - 100 arasındaysa
+    print("hızınız normal.")
+  } else { #hız 100'den fazlasysa
+    print("hızınız yüksek, lütfen yavaşlayın!")
+  }
+} else { # arabanın hızı >= 0 değilse yani negatif ise
+  print("Arabanın hızı negatif olamaz.")
+}
+```
+
+__Soru:__
+Bir hava yolu şirketinin indirimli uçak biletlerini tuttuğu vektör size verilmiştir. Gitmek istediğiniz
+şehrin bu vektörün içinde olup olmadığına bakınız. Eğer indirimli bilet satın alabiliyorsanız ekrana
+"Yaşasın ucuza bilet buldum!" bulamıyorsanız "Şansız günümdeyim" yazdırınız.
+
+
+```R
+sehirler <- c("Paris", "Amsterdam", "Munich", "Prague", "Berlin", "Athens")
+
+#1. çözüm bir değişkene gitmek istediğimiz şehri atayarak kontrolü sağlayabiliriz.
+gitmek_istediğim <- "California"
+
+if(gitmek_istediğim %in% sehirler) {
+	print("Yaşasın ucuza bilet buldum!")
+}else {
+	print("Şanssız günümdeyim.")
+}
+[1]Şanssız günümdeyim.
+
+#2. çözüm doğrudan gitmek istediğimiz şehir ile kontrolü sağlayabiliriz.
+if("Munich" %in% sehirler) {
+	print("Yaşasın ucuza bilet buldum!")
+}else {
+	print("Şanssız günümdeyim.")
+}
+[1]Yaşasın ucuza bilet buldum!
+```
+
+__Not__: Birden çok iç içe if else blokları yazılabilir. Okunabilirliği artırmak için program yazarken bırakılan boşluklara ve
+süslü parantezlerin hizalarına dikkat etmek önemlidir.
+
+
+
 ## for döngüsü
 ## paste() fonksiyonu
 ## while döngüsü
