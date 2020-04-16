@@ -359,7 +359,7 @@ if(araba_hiz >= 0) {
     print("hızınız yavaş.")
   } else if(araba_hiz <=100) { # hız 50 - 100 arasındaysa
     print("hızınız normal.")
-  } else { #hız 100'den fazlasysa
+  } else { #hız 100'den fazlaysa
     print("hızınız yüksek, lütfen yavaşlayın!")
   }
 } else { # arabanın hızı >= 0 değilse yani negatif ise
