@@ -400,8 +400,185 @@ süslü parantezlerin hizalarına dikkat etmek önemlidir.
 
 
 ## for döngüsü
+
+Kendini tekrar eden benzer kod satırlarını tekrar yazmak yerine döngüleri kullanmayı tercih ederiz. Döngüler yardımıyla
+zaman kazancı elde edebilir ve daha verimli kod yazabiliriz. 
+
+
+__Soru:__
+Ekrana 5 kere "Merhaba Kodluyoruz" yazdıran programı yazınız.
+
+```R
+#Öncelikle sorumuzu döngüler kullanmadan çözelim.
+
+print("Merhaba Kodluyoruz")
+print("Merhaba Kodluyoruz")
+print("Merhaba Kodluyoruz")
+print("Merhaba Kodluyoruz")
+print("Merhaba Kodluyoruz")
+```
+
+Yukarıdaki çözümde gördüğünüz şekilde bize verilen sorunun cevabını elde edebildik. Peki soru bizden 5 değil de 20
+kere ekrana "Merhaba Kodluyoruz" yazdırmamızı isteseydi bu şekilde bir çözüm mü üretecektik?
+
+Hayır, bu tarz kendini tekrar eden kod bloklarında döngüler ile çok daha pratik çözümler üretebiliriz.
+
+```R
+for(index in 1:20) {
+  print("Merhaba Kodluyoruz")
+}
+```
+
+__Not:__ Programlama dünyasında kendimizi tekrar etmekten kaçınmamızı hatırlatacak bir yaklaşım vardır.
+Bu yaklaşım "Don't Repat Yourself" yani "DRY" olarak literatüre geçmiştir. "Kendini Tekrar Etme" şeklinde
+Türkçeleştirebileceğimiz bu yaklaşımı sorgulayarak daha verimli çalışan kodlar yazabiliriz. Aynı kodları tekrar
+tekrar yazdığımı fark ettiğimiz noktada bir şeyleri yanlış yaptığımızı ön görebiliriz.
+
+__Soru:__
+
+Elimizde öğrencilere ait notların bulunduğu bir vektör kod dizini içerisinde verilmiştir. Öğrencilerin notlarını
+ekrana for döngüsü kullanarak yazdırınız.
+
+```R
+notlar <- c(85, 90, 25, 30, 59, 60, 28, 64, 75, 83, 92, 10, 50, 60, 52, 10, 88, 46, 12)
+
+#çözüm1
+
+for(not in notlar) {
+	print(not)
+}
+
+#çözüm2
+
+for(i in 1:length(notlar)) {
+	print(notlar[i])
+}
+
+```
+
+Çözüme baktığımız zaman problemin iki farklı for döngüsü ile çözüldüğünü görüyoruz. İki döngü de aynı
+sonucu vermesine rağmen proble göre bir çözüm diğer çözüme göre avantaj sağlayabilir.
+
+__1. Çözüm İnceleme:__
+Kısa ve daha okunabilir bir çözüm olmasına rağmen indekslere doğrudan bir erişim
+sağlayamadığımız için indeks bazlı işlem yapmak zordur.
+
+
+__2. Çözüm İnceleme:__
+Okunabilirliği ve yazması daha zordur fakat indekslere doğrudan erişim sağlandığı için değişkenler
+üzerinde işlem yapmak daha kolaydır.
+
+
+__Soru:__
+Aşağıdaki x dizisinde bulunan sayılardan 2 ile bölünebilen sayıları nasıl yazdırabiliriz?
+```R
+x <- 1:10
+
+for(sayi in x) {
+	if(sayi %% 2 == 0) { # mod operatörünü kullandık.
+		print(sayi)
+	}
+}
+```
+__Soru:__
+Aşağıdaki x dizisinde bulunan sayılardan 2 ile bölünebilen sayıların toplamı kaçtır?
+
+```R
+x <- 1:20 #1'den 20'ye kadar olan sayılar x'in içinde tutuluyor.
+toplam <- 0 #toplamı tutabilmek için bir toplam değişkeni oluşturduk ve 0'a atadık.
+for(sayi in x) {
+	if(sayi %% 2 == 0) { #2'ye bölünebilirlik kontrolü.
+		toplam <- toplam + sayi #Eğer sayı 2'ye bölünebiliyorsa toplam değişkenini sayı kadar arttır.
+	}
+}
+print(toplam)
+```
+
+Döngüler üzerindeki kontrolü arttıran bazı komutlar vardır.
+
+#### break komutu
+
+İstenilen koşul sağlandığında döngünün sonlandırılmasını sağlayan komuttur.
+
+__Soru:__ 
+Şehirler vektöründe 6 harfli olan ilk şehiri for döngüsü ile nasıl yazdırabiliriz?
+
+```R
+sehirler <- c("İzmir", "Ankara", "İstanbul", "Antalya", "Kayseri", "Bursa","Amasya")
+
+for(sehir in sehirler) {
+  if(nchar(sehir) == 6) {
+    print(sehir)
+    break
+  }
+}
+[1] "Ankara"
+```
+Yukarıdaki çözümümüzde "Ankara" çıktısını elde ettik. Eğer break komutu ile döngüyü kırmasaydık
+"Amasya" çıktısını da elde edecektik.
+
+
+#### next komutu
+İstenilen koşulun sağlanması durumunda döngüyü sıradaki eleman ile çağırır.
+
+__Soru:__
+1'den 10'a kadar olan sayılardan tek sayıları for döngüsü ve next komutu yardımıyla nasıl yazdırabiliriz?
+
+```R
+sayilar <- 1:10
+
+for(sayi in sayilar) {
+  if(sayi %% 2 == 0) {
+    next
+  }
+  print(sayi)
+}
+[1] 1
+[1] 3
+[1] 5
+[1] 7
+[1] 9
+```
+
+
 ## paste() fonksiyonu
+
+paste fonksiyonu içerisine gönderilen değişkenleri character tipine dönüştürür ve belirlenen bir ayraç
+ile character tipinden verileri birleştirebilir.
+
+
+```R
+#İçine eğer tek bir  argüman gönderilirse  paste() fonksiyonu as.character() görevi görür.
+#as.character() fonksiyonu içerisine gönderilen değişkenleri character tipine dönüştürür.
+
+sayi <- 5
+class(sayi)
+[1]"numeric"
+
+class(as.character(sayi))
+[1]"character"
+
+class(paste(sayi))
+[1]"character"
+
+#İçine birden fazla argüman gönderilmesi durumunda paste() fonksiyonu gönderilen argümanları birleştirir ve character
+tipinde bir çıktı üretir. İki veya daha fazla argüman birleştirilebilir. Argümanların birleştirilmesi için istenilen bir
+karakter sep ="" parametresine atanabilir. Herhangi bir atamama yapılmaması durumunda varsayılan ayraç "" şeklindedir.
+
+isim <- "Berke"
+kilo <- 65
+
+paste(isim, kilo,"kilogramdır.")
+[1]"Berke 65 kilogramdır."
+
+paste(isim, kilo,"kilogramdır.", sep= " *** ")
+[1] "Berke *** 65 *** kilogramdır."
+
+```
+
 ## while döngüsü
+
+
 ## Fonksiyonlar
 ## Apply Fonksiyonları
 
