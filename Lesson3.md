@@ -169,7 +169,7 @@ summary()
 
 **NOT:** Dataframe'i daha düzgün bir şekilde görmek istiyorsak R studio'nun Environment kısmındaki değişkene tıklayarak düzgün halini görebiliriz.
 
-<img src=".images/msleep.JPG" width="630">
+<img src=".images/msleep.JPG">
 
 **soru:** istatistiklere neden bakıyoruz ?
 
@@ -305,4 +305,4 @@ Birden fazla select işlemi yapmak istiyorsak virgülle ayırarak yapabiliriz.
 sleep <- select(msleep, starts_with(("sleep")) , everything())
 sleep
 ```
-<img src=".images/sleep.JPG" width=630>
+<img src=".images/sleep.JPG">
