@@ -1,7 +1,24 @@
 # Lesson 3
 
 ## Başlıklar:
-yazılacak
+* Giriş
+* Bir veriseti nasıl yüklenir?
+* dyplr paketi
+* select()
+* filter()
+* mutate()
+* arrange()
+* transmute()
+* summarise()
+* group_by()
+* count()
+* top_n()
+* genel egzersiz
+* gather()
+* spread()
+* unite()
+* dplyr ile join işlemleri
+
 
 ## Giriş
 Bugüne kadar R objelerini nasıl tanımlayabildiğimizi, fonksiyonların ne olduğunu ve nasıl kullanabildiğimizi öğrendik. Kendi slot makinemizi de yazabildik! kolay bir iş değildi elbette.
@@ -65,7 +82,6 @@ head(msleep)
 **soru:** CSV nedir ve neden böyle bir şeye ihtiyacımız var?
 
 **cevap:** CSV dosyası comma seperated values demek, excel ve diğer çok şey verileri bu şekilde tutuyor. En az yer kaplayan yöntemlerden bir tanesi. Çok büyük verietin varsa CSV şeklinde tutmayı tercih edersin. Herhangi bir csv dosyası excelde açabilirsin. 
-
 
 2. Bilgisayardan  
 
@@ -151,6 +167,10 @@ summary()
  Max.   :22.10   Max.   :5.71200   Max.   :6654.000  
 ```
 
+**NOT:** Dataframe'i daha düzgün bir şekilde görmek istiyorsak R studio'nun Environment kısmındaki değişkene tıklayarak düzgün halini görebiliriz.
+
+<img src="msleep.JPG" width="630">
+
 **soru:** istatistiklere neden bakıyoruz ?
 
 **cevap:** verisetiyi ilk yüklediğinde yaptığın ilk şey onu incelemektir. İçinde ne var ne yok bakıyorsun. Aklında bazı sorular oluşabilir bu aşamada. 
@@ -229,4 +249,60 @@ class(select(msleep, vore, brainwt))
 > "data.frame"
 ```
 
-select fonksiyonun içinde yardımıcı fonksiyonlar kullanabiliriz.
+select fonksiyonun içinde yardımıcı fonksiyonlar kullanabiliriz. Belli bir özelliklere sahip kolonları seçmek istediğimizde yardımcı olur. Bunlardan birkaç tanesi aşağıdaki gibidir:
+
+* starts_with(): belirlenen bir karakterle başlayan
+* ends_with(): belirli bir karakterle biten
+* contains(): içinde belli bir karakter geçen
+* matches(): regex karakterlerle eşleşen
+* num_range(): belli bir numerik aralıktataki değişkenleri çeken
+* one_of(): bir karakter vektöründeki karakterlerle eşleşen
+* everything(): tüm değişkenleri getirir
+* last_col(): son değişkeni getirir
+
+Örneğin: İçinde "or" karakterleri içeren değişkenleri getirelim.
+(contains() fonksiyonu yardımıyla yapabiliriz )
+```R
+select(msleep, contains("or"))
+
+>     vore           order
+1    carni       Carnivora
+2     omni        Primates
+3    herbi        Rodentia
+4     omni    Soricomorpha
+5    herbi    Artiodactyla
+        .
+        .
+
+81   carni       Carnivora
+82   carni       Carnivora
+83   carni       Carnivora
+```
+
+"sleep" ile başlayan değişkenleri seçelim, 
+```R
+select(msleep, starts_with(("sleep")))
+
+>   sleep_total sleep_rem sleep_cycle
+1         12.1        NA          NA
+2         17.0       1.8          NA
+3         14.4       2.4          NA
+4         14.9       2.3   0.1333333
+5          4.0       0.7   0.6666667
+            .
+            .
+81         6.3       1.3          NA
+82        12.5        NA          NA
+83         9.8       2.4   0.3500000
+```
+
+>**Egzersiz:** "sleep" ile başlayan değişkenleri seçtikten sonra diğer değişkenleri bu değişkenlerden sonra ekleyelim. ve "sleep" adlı bir değişkene atalım.
+
+bunu nasıl yapabiliriz ? everything() fonksiyonu kullanarak bu işlemi gerçekleştirebiliriz.
+Birden fazla select işlemi yapmak istiyorsak virgülle ayırarak yapabiliriz.
+
+```R
+sleep <- select(msleep, starts_with(("sleep")) , everything())
+sleep
+```
+<img src=".images/sleep.JPG" width=630>
