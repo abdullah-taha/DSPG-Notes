@@ -551,8 +551,8 @@ ile character tipinden verileri birleştirebilir.
 İçine birden fazla argüman gönderilirse paste() fonksiyonu gönderilen argümanları birleştirir ve character
 tipinde bir çıktı üretir. 
 
-Argümanların arasına sep = "" parametresi ile ayırıcı konabilir.
-Herhangi bir ayırıcı belirtilmemesi durumunda varsayılan ayırıcı "" şeklindedir.
+Argümanların arasına sep = "" parametresi ile ayraç konabilir.
+Herhangi bir ayraç belirtilmemesi durumunda varsayılan ayraç "" şeklindedir.
 ```R
 sayi <- 5
 class(sayi)
@@ -574,14 +574,9 @@ paste(isim, kilo,"kilogramdır.")
 paste(isim, kilo,"kilogramdır.", sep= " *** ")
 [1] "Berke *** 65 *** kilogramdır."
 
-```
-
-```R
 paste(c("x","y"), 1:10, sep=",")
 [1]"x,1"  "y,2"  "x,3"  "y,4"  "x,5"  "y,6"  "x,7"  "y,8"  "x,9"  "y,10"
 ```
-
-
 
 ## while döngüsü
 
