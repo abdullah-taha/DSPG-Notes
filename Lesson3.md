@@ -7,11 +7,11 @@
 * [select()](#select-fonskyionu)
 * [filter()](#filter-fonskiyonu)
 * [Pipe %>% operatörü](#pipe--fonksiyonu-operatörü)
-* mutate()
+* [mutate()](#mutate-fonksiyonu)
 * [arrange()](#arrange-fonksiyonu)
-* transmute()
-* summarise()
-* group_by()
+* [transmute()](#transmute-fonksiyonu)
+* [summarise()](#summarise-fonksiyonu)
+* [group_by()](#group_by-fonksiyonu)
 * count()
 * top_n()
 * genel egzersiz
@@ -619,7 +619,7 @@ msleep %>%
 
 <img src=".images/msleep13.JPG" >
 
-## summarise() fonksiyonu
+## transmute() fonksiyonu
 mutate() fonksiyonu ile dataframe'in sonuna yeni değişkenler ekleyebiliyorduk. Sadece yeni değişkenleri elde etmek istiyorsak transmute() fonksiyonunu kullanabiliriz.
 
 ```R
