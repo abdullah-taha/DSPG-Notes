@@ -595,9 +595,15 @@ msleep$miskinlik <- ifelse(msleep$sleep_total < 16, "Miskin", "Miskin_Degil")
 msleep
 ```
 <img src=".images/msleep12.JPG" >
+Yani yeni oluşturduğumuz "mikinlik" kolonuna uyku süresi 16 küçük ise "Miskin", değilse "Miskin_değil" değerleri atayacağız.
 
-1. case_when() yöntemi: 
-açıklama yazılacak
+
+2. case_when() yöntemi: 
+Diğer bir yöntem ise case_when() yöntemi, bu yöntemde birden fazla sınama yapabiliriz. kullanim şekli şu şekilde,
+
+case_when(ilk sınama ~ sonuç1, 
+         ikinci sınama ~ sonuç2,
+         üçüncü sınama ~ sonuç3 ) 
 ```R
 msleep %>%
   mutate(miskinlik = case_when(sleep_total > 16 ~ "Miskin",
@@ -610,3 +616,77 @@ msleep %>%
                                awake > 16 ~ "Cok_uyank"))
 
 ```
+
+<img src=".images/msleep13.JPG" >
+
+## summarise() fonksiyonu
+mutate() fonksiyonu ile dataframe'in sonuna yeni değişkenler ekleyebiliyorduk. Sadece yeni değişkenleri elde etmek istiyorsak transmute() fonksiyonunu kullanabiliriz.
+
+```R
+msleep %>% 
+  transmute(brainwt_grams = brainwt * 1000,
+            sleep_cycle_ratio = sleep_cycle * 1000)
+
+>   brainwt_grams sleep_cycle_ratio
+1             NA                NA
+2          15.50                NA
+3             NA                NA
+4           0.29          133.3333
+5         423.00          666.6667
+```
+
+Gördüğümüz gibi sadece yeni oluşturduğumuz değişkenleri içeren bir dataframe elde ettik.
+
+## summarise() fonksiyonu
+Bu fonksiyonla, istatistiksel bir özet olusturulur.
+
+Değişkenler için mod, maksimum, minumum, ortalama, standart sapma vb. hesaplar yapmamızı sağlar.
+
+Canlıların ortalama uyku sürelerini summarise fonksiyonu ile bulalım.
+```R
+msleep %>%
+  summarise(ortalama_uyku = mean(sleep_total))
+
+>   ortalama_uyku
+1      10.43373
+```
+Summarize fonksiyonu içerisinde kullanilabilecek diğer istatistiksel fonksiyonlar vardır. 
+
+Bunlar; sd(), min(), max(), median(), sum(), n(), first(), last() ve n_distinct() vb. fonksiyonlardır.
+
+> **Egzersiz:** Ortalama rem uyku süresini(avg,_rem), en düşük rem uyku süresini (min_rem) ve en yüksek rem uyku sürelerini (max_rem) 
+hesaplıyalım ve sırasıyla bu değerlere atayalım. 
+İlk altı satıra bakalım.
+
+İpucu: sleep_rem değişkeninde kayıp veriler (NA) olduğundan "mean(), min(), max()" fonksiyonu argümanlarından na.rm=TRUE yapmamız gerekiyor (na.rm gondermedigimiz zaman NA döndürür).
+
+```R
+msleep %>% 
+  summarise(avg_rem = mean(sleep_rem, na.rm=T), 
+            min_rem = min(sleep_rem, na.rm = T),
+            max_rem = max(sleep_rem, na.rm= T))
+
+>   avg_rem min_rem max_rem
+1 1.87541     0.1     6.6
+```
+
+> **Egzersiz:** Canlıların kaç farklı yemek türü yediğini n_distinct() fonksiyonu ile bulup değişkenin ismini çeşit koyalım.
+```R
+msleep %>%
+  summarise(çeşit = n_distinct(vore))
+
+>   çesit
+1     5
+```
+
+> **Egzersiz:** Canlıların rem uykusunda kalma sürelerinin oranını değişken olarak sleep_rem_ratio ismiyle ekledikten sonra rem uykusunda kalma sürelerinin oranlarının ortalamasını bulalım.
+```R
+msleep %>% 
+  mutate(sleep_rem_ratio = sleep_rem/ sleep_total) %>%
+    summarise(avg_ratio = mean(sleep_rem_ratio , na.rm=T))
+
+>   avg_ratio
+1 0.1740226
+```
+## group_by() fonksiyonu
+Bu fonksiyon ile istediginiz bir kolona göre gruplama işlemi yapabiliriz. Böylece o grup içerisindeki özet istatistikleri elde edebiliriz.
