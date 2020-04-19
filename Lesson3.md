@@ -12,8 +12,8 @@
 * [transmute()](#transmute-fonksiyonu)
 * [summarise()](#summarise-fonksiyonu)
 * [group_by()](#group_by-fonksiyonu)
-* count()
-* top_n()
+* [count()](#count-fonksiyonu)
+* [top_n()](#top_n-fonksiyonu)
 * genel egzersiz
 * gather()
 * spread()
@@ -690,3 +690,113 @@ msleep %>%
 ```
 ## group_by() fonksiyonu
 Bu fonksiyon ile istediginiz bir kolona göre gruplama işlemi yapabiliriz. Böylece o grup içerisindeki özet istatistikleri elde edebiliriz.
+
+Örnek üzerine yapalım daha anlaşılır olur. msleep veri setini taksonomik sırasına(order) göre gruplayalım ve yukarıda yaptığımız gibi taksonomik sırasına göre gruplanmış canlıların toplam uyku sürelerinin özet istatistiklerini elde edelim. (n,min, max, sd, mean)
+```R
+msleep %>%
+  group_by(order) %>%
+  summarise(toplam = n(),
+            ort_sleep = mean(sleep_total),
+            min_sleep = min(sleep_total),
+            max_sleep = max(sleep_total),
+            sd_sleep = sd(sleep_total))
+
+>    order           toplam ort_sleep min_sleep max_sleep sd_sleep
+   <fct>            <int>     <dbl>     <dbl>     <dbl>    <dbl>
+ 1 Afrosoricida         1     15.6       15.6      15.6  NaN    
+ 2 Artiodactyla         6      4.52       1.9       9.1    2.51 
+ 3 Carnivora           12     10.1        3.5      15.8    3.50 
+ 4 Cetacea              3      4.5        2.7       5.6    1.57 
+ 5 Chiroptera           2     19.8       19.7      19.9    0.141
+ 6 Cingulata            2     17.8       17.4      18.1    0.495
+ 7 Didelphimorphia      2     18.7       18        19.4    0.990
+ 8 Diprotodontia        2     12.4       11.1      13.7    1.84 
+ 9 Erinaceomorpha       2     10.2       10.1      10.3    0.141
+10 Hyracoidea           3      5.67       5.3       6.3    0.551
+11 Lagomorpha           1      8.4        8.4       8.4  NaN    
+12 Monotremata          1      8.6        8.6       8.6  NaN    
+13 Perissodactyla       3      3.47       2.9       4.4    0.814
+14 Pilosa               1     14.4       14.4      14.4  NaN    
+15 Primates            12     10.5        8        17      2.21 
+16 Proboscidea          2      3.6        3.3       3.9    0.424
+17 Rodentia            22     12.5        7        16.6    2.81 
+18 Scandentia           1      8.9        8.9       8.9  NaN    
+19 Soricomorpha         5     11.1        8.4      14.9    2.70 
+```
+
+Gördüğümüz gibi, 19 tane taksonomik sıralamamız var. toplam değişkenine atadığımız n() fonskiyonu gözlemlerin sayısını temsil ediyor. verisetimizde 1 tane "Afrosoricida" hayvanı var, onun ortalama uyku süresi 15.6, standart sapması tek bir gözlem olduğu için hesaplayamadık (NAN döndürdü). 
+
+> **Egzersiz:** Canlıları yemek şekillerine (vore) grupladıktan sonra beyin ağırlıklarının özet istatistiklerini çıkaralım. Sonrasında ise ortalama beyin ağırlıklarını büyükten küçüğe sıralayalım.
+
+```R
+msleep %>%
+  group_by(vore) %>%
+  summarise(toplam = n(),
+            ort_brainwt = mean(brainwt ,na.rm = T),
+            min_brainwt = min(brainwt,na.rm = T),
+            max_brainwt= max(brainwt,na.rm = T),
+            sd_brainwt = sd(brainwt,na.rm = T)) %>%
+  arrange(desc(ort_brainwt))
+
+>  vore    toplam ort_brainwt min_brainwt max_brainwt sd_brainwt
+  <fct>    <int>       <dbl>       <dbl>       <dbl>      <dbl>
+1 herbi       32     0.622      0.0004         5.71     1.57   
+2 omni        20     0.146      0.000140       1.32     0.325  
+3 carni       19     0.0793     0.0108         0.325    0.103  
+4 insecti      5     0.0216     0.00025        0.081    0.0349 
+5 NA           7     0.00763    0.00033        0.021    0.00859
+```
+## count() fonskiyonu
+Kategorik değişkenleri, group_by() ve n() fonksiyonlarını kullanmadan count() fonksiyonu ile sayabilmemizi sağlar. Yani adı üzerine, sayıyor!
+
+Hangi yemek tercihinden kaç tane var? (vore)
+```R
+msleep %>% 
+  count(vore)
+>  vore        n
+  <fct>   <int>
+1 carni      19
+2 herbi      32
+3 insecti     5
+4 omni       20
+5 NA          7
+
+#sıralamak istiyorsak sort argümanı TRUE yaparız
+msleep %>% 
+  count(vore, sort=T)
+>  vore        n
+  <fct>   <int>
+1 herbi      32
+2 omni       20
+3 carni      19
+4 NA          7
+5 insecti     5
+```
+
+bu neye denk? (neyle yapabiliyorduk)
+```R
+msleep %>% 
+  group_by(vore) %>%
+  summarise(n())
+```
+Peki ya hem yemek tercihlerine göre(vore) hem de korunma sayılarına(conservation) canlıların sayılarını görmek istiyorsak nasıl yapabiliriz? Virgül ile bu işlemi gerçekleştirebiliriz. Yani count(vore,conservation) yazdığımız zaman, bu iki değişkeninin her bir kombinasiyonu için bir satır getirecek.
+```R
+msleep %>% 
+  count(vore, conservation)
+>   vore  conservation     n
+   <fct> <fct>        <int>
+ 1 carni cd               1
+ 2 carni domesticated     2
+ 3 carni en               1
+ 4 carni lc               5
+ 5 carni nt               1
+ 6 carni vu               4
+ 7 carni NA               5
+ 8 herbi cd               1
+ 9 herbi domesticated     7
+10 herbi en               2
+# ... with 12 more rows
+```
+## top_n() fonskiyonu
+yazılacak
+=======
