@@ -612,7 +612,7 @@ Levels: A B C
 
 ## R'da Listeler
 Hatırlayacağınız gibi R'da vektörlerin elemanları aynı tipte değişkenlerden oluşuyordu. Listeler ise bunun tam tersi şeklinde olmakta. Listeler karakter, nümerik, data frame vb. değişkinlerden oluşabilir. Liste oluşturmak için ise **list()** fonksiyonunu kullanıyoruz. Hemen örneklere bakalım.
-'''R
+```R
 mylist<-list(sayılar=c(1:6),karakter=c("DSPG","CADS","TEDU"),mantık=c(T,F,T),myframe)
 mylist
 >$sayılar
@@ -631,10 +631,10 @@ Fatma           2      Fatma   56 165         B
 Ali             3        Ali   75 177         C
 Mehmet          4     Mehmet   89 196         A
 Zeynep          5     Zeynep   60 169         A
-'''
+```
 
 Gördüğünüz gibi listeye istediğimiz veri tipindeki elemanları eklyebiliyoruz. Ayrıca verdiğimiz istersek isim de verebiliyoruz. Listemizi çağırdığımızda isim verdiğimiz değişkenlerin isimlerini, vermediklerimizin ise endeksini görmekteyiz. Bahsedilen isimlendirme ve endeksleme ile listemizden parça alabiliriz.
-'''R
+```R
 #mylist listesinden sayıları değişkenini elde edelim.
 mylist$sayılar
 #ya da
@@ -649,10 +649,10 @@ Fatma           2      Fatma   56 165         B
 Ali             3        Ali   75 177         C
 Mehmet          4     Mehmet   89 196         A
 Zeynep          5     Zeynep   60 169         A
-'''
+```
 
 Gördüğünüz gibi isimlendirdiğimiz elemanı ismi ile çağırabiliyoruz. İsimsiz olanları ise endeksine göre çağırmalıyız. Şimdi ise çağırdığımız elemanlardan parçalar alalım.
-'''R
+```R
 #-Egzersiz-
 #Oluşturduğumuz mylist listemizden myframe veri setine erişip Mehmet'in boyuna ulaşalım.
 
@@ -661,10 +661,10 @@ mylist[[4]]["Mehmet", "boy"]
 #ya da
 mylist[[4]]$boy[4]
 >196
-'''
+```
 
 Myframe bir dataframe olduğu için listeden çağırdığımızda da dataframe bölümünde gördüğümüz kesit alma yöntemleri ile kesit alabiliyoruz. Şimdi ise bu kesit değerlerini nasıl değiştirebileceğimize bakalım.
-'''R
+```R
 #-Egzersiz-
 #Oluşturduğumuz mylist listemizden myframe veri setine erişip Zeynep'in kilosunu 60 olarak değiştirip
 #yeniset isimli data frame olarak atayalım.
@@ -679,6 +679,6 @@ Fatma           2      Fatma   56 165         B
 Ali             3        Ali   75 177         C
 Mehmet          4     Mehmet   89 196         A
 Zeynep          5     Zeynep   60 169         A
-'''
+```
 
 Kesitimize ulaştıktan sonra atama operatörü ile yeni değerini verebiliriz. Ayrıca yeni halinide endeksleme ile yeni bir değişkene atayabiliriz. Eğer listedeki elemanların isimleri olsaydı endeksleme yerine isimler ile de atama yapabilirdik.
