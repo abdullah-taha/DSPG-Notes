@@ -1068,3 +1068,57 @@ head(weather)
 ````
 Veriye baktığımızda ilk değişkenimizin gereksiz olduğunu anlayabiliyoruz. X ile başlayan değişkenlere baktığımızda ise bunların günler olduğunu anlayabiliyoruz. Ayrıca measure değişkenine bakarsak buradaki değerlerin değişken olması gerektiğini anlayabiliyoruz. Artık veri üzerinde yapmamız gereken işlemler belirginleşti. O zaman işe koyulalım. :computer: :computer:
 
+# gather()
+
+Karşımıza çıkan ilk problemi çözelim. X ile başlayan değerler göz sağlığı için çok faydalı durmamakta. Bu değerler aslında değişken olmalı. Bu değerler bir ayın günlerini temsil etmekte.
+Bu sütunları tek bir gün (day) değişkeni oluşturacak şekilde toplamamız gerekiyor. Bunu ise gather() fonksiyonu ile yapabiliriz.
+
+İlk önce bu fonksiyonun hangi argümanlar aldığına bakalım.
+```R
+?gather
+```
+**buraya resim gelecek**
+İlk argümanımız *data* yani üzerinde çalışacağımız veri setimiz.
+*key* ve *value* argümanlarına bakarsak *key* değişkenlerimizin yeni kaydedileceği sütunu *value* bu değişkenlere karşılık gelen değerlerin kaydedileceği sütunu göstermekte. Buraya isimleri string olarak girmeliyiz.
+Bu argümanlardan sonra değiştireceğimiz değişkenleri argüman olarak vermeliyiz. Örneğimizde daha rahat anlayacaksınız.
+
+```R
+weather <- gather(weather, key="day", value="value", X1:X31, na.rm = T)
+head(weather)
+
+>
+X year month           measure day value
+1 1 2014    12  Max.TemperatureF  X1    64
+2 2 2014    12 Mean.TemperatureF  X1    52
+3 3 2014    12  Min.TemperatureF  X1    39
+4 4 2014    12    Max.Dew.PointF  X1    46
+5 5 2014    12    MeanDew.PointF  X1    40
+6 6 2014    12     Min.DewpointF  X1    26
+```
+
+Artık sonsuza kadar giden X değerlerimizi day değişkeninde topladık. Şimdi ise gereksiz olan ilk değişken X'den kurtulalım. Veri setinde bir değişken silmemiz için o değişkene NULL atamamız yeterli olacaktır.
+
+```R
+weather$X <- NULL
+```
+
+Artık "day" isimli gün kolonumuzu elde ettik. Fakat her günün önünde "X" karakteri mevcut.Bu "X" karakterlerini stringr paketinden str_remove_all() fonksiyonu kullanarak silelim.
+
+```R
+install.packages("stringr")
+library(stringr)
+weather$day <- str_remove_all(weather$day, "X")
+
+head(weather)
+
+>
+   year month           measure day value
+1 2014    12  Max.TemperatureF   1    64
+2 2014    12 Mean.TemperatureF   1    52
+3 2014    12  Min.TemperatureF   1    39
+4 2014    12    Max.Dew.PointF   1    46
+5 2014    12    MeanDew.PointF   1    40
+6 2014    12     Min.DewpointF   1    26
+```
+
+Veri setimiz şekillenmeye başladı. Şimdi ise ara vermeden devam edelim. :star: :star:
