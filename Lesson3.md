@@ -14,7 +14,7 @@
 * [group_by()](#group_by-fonksiyonu)
 * [count()](#count-fonksiyonu)
 * [top_n()](#top_n-fonksiyonu)
-* genel egzersiz
+* [genel egzersiz](#genel-egzersiz)
 * gather()
 * spread()
 * unite()
@@ -798,5 +798,182 @@ msleep %>%
 # ... with 12 more rows
 ```
 ## top_n() fonskiyonu
-yazılacak
-=======
+**top_n()** fonksiyonu belli bir değişkene göre belirlenen bir sayıda en yüksek değerli verileri getirir. Hemen nasıl çalıştığını inceleyelim.
+
+Uyanık kalma süreleri en fazla olan ilk 10 canlıyı getirelim.
+```R
+msleep %>%
+  top_n(awake, n=10)
+>
+               name         genus  vore          order conservation sleep_total sleep_rem sleep_cycle awake brainwt   bodywt
+1               Cow           Bos herbi   Artiodactyla domesticated         4.0       0.7   0.6666667 20.00  0.4230  600.000
+2          Roe deer     Capreolus herbi   Artiodactyla           lc         3.0        NA          NA 21.00  0.0982   14.800
+3    Asian elephant       Elephas herbi    Proboscidea           en         3.9        NA          NA 20.10  4.6030 2547.000
+4             Horse         Equus herbi Perissodactyla domesticated         2.9       0.6   1.0000000 21.10  0.6550  521.000
+5            Donkey         Equus herbi Perissodactyla domesticated         3.1       0.4          NA 20.90  0.4190  187.000
+6           Giraffe       Giraffa herbi   Artiodactyla           cd         1.9       0.4          NA 22.10      NA  899.995
+7       Pilot whale Globicephalus carni        Cetacea           cd         2.7       0.1          NA 21.35      NA  800.000
+8  African elephant     Loxodonta herbi    Proboscidea           vu         3.3        NA          NA 20.70  5.7120 6654.000
+9             Sheep          Ovis herbi   Artiodactyla domesticated         3.8       0.6          NA 20.20  0.1750   55.500
+10     Caspian seal         Phoca carni      Carnivora           vu         3.5       0.4          NA 20.50      NA   86.000
+```
+
+Çıktımıza baktığımızda uyanık kalma süreleri en büyük olan ilk 10 canlının tüm özellikleri geldi. Şimdi ise bir egzersiz yapalım.
+
+>**Egzersiz** Beyin ağırlığı en fazla olan ilk 10 canlıyı vücut ağırlığına göre büyükten küçüğe sıralayalım.
+
+```R
+msleep %>%
+  top_n(brainwt, n=10) %>%
+  arrange(desc(bodywt))
+>
+               name        genus  vore          order conservation sleep_total sleep_rem sleep_cycle awake brainwt   bodywt
+1  African elephant    Loxodonta herbi    Proboscidea           vu         3.3        NA          NA  20.7   5.712 6654.000
+2    Asian elephant      Elephas herbi    Proboscidea           en         3.9        NA          NA  20.1   4.603 2547.000
+3               Cow          Bos herbi   Artiodactyla domesticated         4.0       0.7   0.6666667  20.0   0.423  600.000
+4             Horse        Equus herbi Perissodactyla domesticated         2.9       0.6   1.0000000  21.1   0.655  521.000
+5            Donkey        Equus herbi Perissodactyla domesticated         3.1       0.4          NA  20.9   0.419  187.000
+6               Pig          Sus  omni   Artiodactyla domesticated         9.1       2.4   0.5000000  14.9   0.180   86.250
+7         Gray seal Haliochoerus carni      Carnivora           lc         6.2       1.5          NA  17.8   0.325   85.000
+8             Human         Homo  omni       Primates         <NA>         8.0       1.9   1.5000000  16.0   1.320   62.000
+9        Chimpanzee          Pan  omni       Primates         <NA>         9.7       1.4   1.4166667  14.3   0.440   52.200
+10           Baboon        Papio  omni       Primates         <NA>         9.4       1.0   0.6666667  14.6   0.180   25.235
+```
+Bingo!! Tahmin edilebileceği gibi aramıza Afrika'dan katılan Afrika Filleri yarışmamızın 1.si oluyor. :tada: :tada:
+
+## Genel Egzersiz
+
+Aşağıdaki soruları çözmeye çalışalım.
+
+1. İnsan canlısının özellikleri nedir? ("name" kolonu "Human")
+
+2. Hangi canlı cinsi (genus) en fazla sayıda?
+
+3. Yeme şekillerine göre (vore), "herbi" ve "carni" olanlarla çalışmak istiyoruz. Hangi canlı türü ortalama daha fazla uyuyor? Hangi
+canlı türünün ortalama beyin ağırlığı daha fazla? "herbi" olarak beslenen canlılardan hangisi en fazla uyanık kalıyor (awake) ve uyanık
+kalma süresi nedir?
+**İpucu** Tüm soruyu tek bir pipe operatörü ile yapmak zorunda değiliz.
+
+4. BrBo_ratio isimli bir değişken oluşturalım. Bu değişken bir canlının beyin ağırlığının vücut ağırlığına oranını temsil etsin. Bu
+oranın ortalama orandan fazla olanlara "brbo_fazla", ortalama orandan az olanlara "brbo_az" olarak kategorikleştirip bu değişkenin
+ismini brbo_kategorik koyduktan sonra, canlılardan kaç tanesinin brbo_fazla kaç tanesi brbo_az olduğunu bulalım.
+
+5. Korunma durumlarına göre (conservation) canlıların vücut ağırlığı özet istatistiklerini çıkaralım.(min, max, mean, median, sd).
+Ortalama vücut ağırlıklarına göre büyükten küçüğe doğru sıralattığımızda hangi korunma durumundaki canlıların vücut ağırlığı ortalaması
+en yüksektir?
+
+**Çözümler**
+
+1. 
+```R
+# Burada insan canlısının özellikleri istendiği için filter ile özellikleri getirebiliriz.
+msleep %>%
+  filter(name == "Human")
+>
+   name genus vore    order conservation sleep_total sleep_rem sleep_cycle awake brainwt bodywt
+1 Human  Homo omni Primates         <NA>           8       1.9         1.5    16    1.32     62
+```
+
+2.
+```R
+# Bizden bir sayma işlemi isteniyor. Genus özelliğimizde kategorik. En kısa yoldan count() işimizi görecektir
+#count() fonksiyonunu hatırlarsak sort argümanı ile sıralamayı da büyükten küçüğe ayarlayabiliriz.
+
+msleep %>%
+  count(genus, sort=T)
+># A tibble: 77 x 2
+     genus            n
+   <fct>        <int>
+ 1 Panthera         3
+ 2 Spermophilus     3
+ 3 Equus            2
+ 4 Vulpes           2
+ 5 Acinonyx         1
+ 6 Aotus            1
+ 7 Aplodontia       1
+ 8 Blarina          1
+ 9 Bos              1
+10 Bradypus         1
+# ... with 67 more rows
+````
+
+3.
+```R
+#Sorumuzun ilk kısmı yani carni ve herbiyi beraber inceleyeceğimiz kısım.
+msleep %>%
+  filter(vore %in% c("herbi", "carni")) %>%
+  group_by(genus) %>%
+  summarise(ort_uyku = mean(sleep_total),
+            ort_beyin_agir= mean(brainwt, na.rm = T)) %>%
+  arrange(desc(ort_uyku))
+
+># A tibble: 45 x 3
+   genus        ort_uyku ort_beyin_agir
+   <fct>           <dbl>          <dbl>
+ 1 Lutreolina       19.4      NaN      
+ 2 Dasypus          17.4        0.0108 
+ 3 Tamias           15.8      NaN      
+ 4 Spermophilus     15.4        0.00485
+ 5 Eutamias         14.9      NaN      
+ 6 Neofiber         14.6      NaN      
+ 7 Onychomys        14.5      NaN      
+ 8 Aplodontia       14.4      NaN      
+ 9 Bradypus         14.4      NaN      
+10 Mesocricetus     14.3        0.001  
+# ... with 35 more rows
+
+#ikinci kısmımıza bakalım burada da sadece herbi ile ilgileneceğiz.
+msleep %>%
+  filter(vore == "herbi" & awake == max(awake))
+
+> 
+      name   genus  vore        order conservation sleep_total sleep_rem sleep_cycle awake brainwt  bodywt
+1 Giraffe Giraffa herbi Artiodactyla           cd         1.9       0.4          NA  22.1      NA 899.995
+```
+
+4.
+```R
+# Yeni bir değişken oluşturacağımız zaman hangi fonksiyonu kullandığımız hatırlayalım
+msleep %>%
+  mutate(BrBo_ratio = brainwt / bodywt,
+         brbo_kategorik = case_when(BrBo_ratio > mean(BrBo_ratio, na.rm=T)~"brbo_fazla",
+                                    BrBo_ratio < mean(BrBo_ratio, na.rm = T)~"brbo_az")) %>%
+  count(brbo_kategorik) %>%
+  filter(!is.na(brbo_kategorik)) %>%
+  mutate(oran = n/sum(n)*100)
+#filter işleminde is.na fonksiyonunu kullandık. Veri setimizde NA değerler olduğu için filterdan sonraki mutate işleminde is.na #kullanmasaydık değerlerin çoğu NA gelecekti. NA ile bir işlem yaptığımızda sonuç NA gelir bunu hatırlayalım
+
+># A tibble: 2 x 3
+  brbo_kategorik     n  oran
+  <chr>          <int> <dbl>
+1 brbo_az           37  66.1
+2 brbo_fazla        19  33.9
+```
+
+5.
+```R
+# Özet istatistiklere bakmak gerektiğinde summarise fonksiyonunu kullandığımızı hatırlayalım.
+msleep %>%
+  group_by(conservation) %>%
+  summarise(min_bodywt = min(bodywt, na.rm = T),
+            max_bodywt = max(bodywt, na.rm = T),
+            ort_bodywt = mean(bodywt, na.rm = T),
+            med_bodywt = median(bodywt, na.rm = T),
+            sd_bodywt = sd(bodywt, na.rm = T),
+            sıklık = n(),
+            uyanıklık_ort = mean(awake, na.rm = T)) %>% 
+  arrange(desc(ort_bodywt))
+
+># A tibble: 7 x 8
+  conservation min_bodywt max_bodywt ort_bodywt med_bodywt sd_bodywt sıklık uyanıklık_ort
+  <fct>             <dbl>      <dbl>      <dbl>      <dbl>     <dbl>  <int>         <dbl>
+1 vu                1.67       6654     1026.       86        2483.       7          17.1
+2 cd              800           900.     850.      850.         70.7      2          21.7
+3 en                0.12       2547      692.      111.       1238.       4          11.0
+4 domesticated      0.42        600      147.       34.8       226.      10          16.4
+5 nt                0.022       100       25.4       0.808      49.7      4          11.0
+6 NA                0.01        173.      11.9       0.9        34.5     29          12.8
+7 lc                0.005        85        8.05      0.77       19.1     27          12.6
+Warning message:
+Factor `conservation` contains implicit NA, consider using `forcats::fct_explicit_na` 
+```
