@@ -1068,7 +1068,7 @@ head(weather)
 ````
 Veriye baktığımızda ilk değişkenimizin gereksiz olduğunu anlayabiliyoruz. X ile başlayan değişkenlere baktığımızda ise bunların günler olduğunu anlayabiliyoruz. Ayrıca measure değişkenine bakarsak buradaki değerlerin değişken olması gerektiğini anlayabiliyoruz. Artık veri üzerinde yapmamız gereken işlemler belirginleşti. O zaman işe koyulalım. :computer: :computer:
 
-# gather()
+## gather()
 
 Karşımıza çıkan ilk problemi çözelim. X ile başlayan değerler göz sağlığı için çok faydalı durmamakta. Bu değerler aslında değişken olmalı. Bu değerler bir ayın günlerini temsil etmekte.
 Bu sütunları tek bir gün (day) değişkeni oluşturacak şekilde toplamamız gerekiyor. Bunu ise gather() fonksiyonu ile yapabiliriz.
@@ -1123,7 +1123,7 @@ head(weather)
 
 Veri setimiz şekillenmeye başladı. Şimdi ise ara vermeden devam edelim. :star: :star:
 
-# spread()
+## spread()
 
 Veri setimizdeki ikinci sorun ise measure değişkeni. Measure değişkeni "Max.TemperatureF", "Mean.TemperatureF" gibi aslında değişken ismi olması gereken gözlemler içeriyor.
 Bu değişkendeki farklı her bir gözlemi ayrı bir değişken haline getirmemiz gerekiyor. Bunu spread() fonksiyonu ile yapabiliriz. 
@@ -1178,7 +1178,7 @@ Gördüğümüz gibi measure değişkeni altındaki 22 farklı gözlem ayrı sü
 
 Veri setimiz neredeyse istediğimiz formata ulaştı, bir diğer fonksiyonumuzla düzenlemeye devam edelim.
 
-# unite()
+## unite()
 
 Veri setimizdeki diğer bir sorun ise tarihle alakalı değişkenlerin ayrı olması. Tarih bilgisinin year, month ve day olarak 3 ayrı değişkenle ifade edilmesi hem görsellik açısından yeterince anlaşılır durmuyor hem de ileride yapacağımız filtreleme gibi işlemlerin uzamasına sebep olabilir. 
 Bu 3 ayrı değişkeni birleştirerek tek bir değişken haline getirmek istiyoruz. Bunun için unite() fonksiyonunu kullanacağız.
