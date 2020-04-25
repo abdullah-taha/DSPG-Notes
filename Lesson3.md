@@ -17,8 +17,8 @@
 * [genel egzersiz](#genel-egzersiz)
 * [tidyr paketi](#tidyr-paketi)
 * [gather()](#gather())
-* spread()
-* unite()
+* [spread()](#spread())
+* [unite()](#unite())
 * dplyr ile join işlemleri
 
 
