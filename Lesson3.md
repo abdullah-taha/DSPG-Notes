@@ -1122,3 +1122,201 @@ head(weather)
 ```
 
 Veri setimiz şekillenmeye başladı. Şimdi ise ara vermeden devam edelim. :star: :star:
+
+# spread()
+
+Veri setimizdeki ikinci sorun ise measure değişkeni. Measure değişkeni "Max.TemperatureF", "Mean.TemperatureF" gibi aslında değişken ismi olması gereken gözlemler içeriyor.
+Bu değişkendeki farklı her bir gözlemi ayrı bir değişken haline getirmemiz gerekiyor. Bunu spread() fonksiyonu ile yapabiliriz. 
+
+Yine ilk olarak bu fonksiyonun argümanlarına bakalım.
+
+```R
+?spread
+```
+**Ekran görüntüsü gelecek**
+
+İlk argümanımız *data* yani veri setimiz.
+*key* argümanı yeni değişkenlere ayrılacak olan sütunu, *value* argümanı ise yeni oluşacak değişkenlere ait olan gözlemleri barındırdan sütunu ifade ediyor. İsimleri gather() fonksiyonunda olduğu gibi string olarak girmeliyiz.
+Biz veri setimizde measure değişkenini value değişkenindeki gözlemlerle çoklu sütunlar haline getirmek istiyoruz. spread() fonksiyonunu şu şekilde uyarlayabiliriz.
+
+```R
+weather <- spread(weather, measure, value)
+head(weather)
+
+>
+  year month day CloudCover    Events Max.Dew.PointF Max.Gust.SpeedMPH Max.Humidity Max.Sea.Level.PressureIn
+1 2014    12   1          6      Rain             46                29           74                    30.45
+2 2014    12  10          8      Rain             45                29          100                    29.58
+3 2014    12  11          8 Rain-Snow             37                28           92                    29.81
+4 2014    12  12          7      Snow             28                21           85                    29.88
+5 2014    12  13          5                       28                23           75                    29.86
+6 2014    12  14          4                       29                20           82                    29.91
+  Max.TemperatureF Max.VisibilityMiles Max.Wind.SpeedMPH Mean.Humidity Mean.Sea.Level.PressureIn Mean.TemperatureF
+1               64                  10                22            63                     30.13                52
+2               48                  10                23            95                      29.5                43
+3               39                  10                21            87                     29.61                36
+4               39                  10                16            75                     29.85                35
+5               42                  10                17            65                     29.82                37
+6               45                  10                15            68                     29.83                39
+  Mean.VisibilityMiles Mean.Wind.SpeedMPH MeanDew.PointF Min.DewpointF Min.Humidity Min.Sea.Level.PressureIn
+1                   10                 13             40            26           52                    30.01
+2                    3                 13             39            37           89                    29.43
+3                    7                 13             31            27           82                    29.44
+4                   10                 11             27            25           64                    29.81
+5                   10                 12             26            24           55                    29.78
+6                   10                 10             27            25           53                    29.78
+  Min.TemperatureF Min.VisibilityMiles PrecipitationIn WindDirDegrees
+1               39                  10            0.01            268
+2               38                   1            0.28            357
+3               32                   1            0.02            230
+4               31                   7               T            286
+5               32                  10               T            298
+6               33                  10            0.00            306
+``` 
+
+Gördüğümüz gibi measure değişkeni altındaki 22 farklı gözlem ayrı sütun isimleri olacak şekilde ayrıldı. value değişkenindeki değerler de karşılığı olan year, month ve day değişkenlerine göre bu yeni 22 değişkenin altına atandı. 
+
+Veri setimiz neredeyse istediğimiz formata ulaştı, bir diğer fonksiyonumuzla düzenlemeye devam edelim.
+
+# unite()
+
+Veri setimizdeki diğer bir sorun ise tarihle alakalı değişkenlerin ayrı olması. Tarih bilgisinin year, month ve day olarak 3 ayrı değişkenle ifade edilmesi hem görsellik açısından yeterince anlaşılır durmuyor hem de ileride yapacağımız filtreleme gibi işlemlerin uzamasına sebep olabilir. 
+Bu 3 ayrı değişkeni birleştirerek tek bir değişken haline getirmek istiyoruz. Bunun için unite() fonksiyonunu kullanacağız.
+
+Öncelikle bu fonksiyonun argümanlarını inceleyelim.
+
+```R
+?unite
+```
+**Ekran görüntüsü gelecek**
+
+*data* argümanı veri setimizi ifade ediyor.
+*col* argümanı yeni oluşacak değişkenimizin ismini gösteriyor, string veya sembol olarak girilmesi gerekiyor.
+*...* şeklinde gösterilen argüman birleştirmek istediğimiz değişkenleri ifade ediyor. 
+*sep* argümanı ise birleşecek olan değerler arasında kullanılacak ayracı belirtmemizi sağlıyor. 
+Veri setimiz üzerinde fonksiyonu uygulayarak bu argümanları daha iyi anlayabiliriz. 
+
+```R
+weather <- unite(weather, date, year, month, day, sep = "-")
+head(weather)
+
+>
+        date CloudCover    Events Max.Dew.PointF Max.Gust.SpeedMPH Max.Humidity Max.Sea.Level.PressureIn Max.TemperatureF
+1  2014-12-1          6      Rain             46                29           74                    30.45               64
+2 2014-12-10          8      Rain             45                29          100                    29.58               48
+3 2014-12-11          8 Rain-Snow             37                28           92                    29.81               39
+4 2014-12-12          7      Snow             28                21           85                    29.88               39
+5 2014-12-13          5                       28                23           75                    29.86               42
+6 2014-12-14          4                       29                20           82                    29.91               45
+  Max.VisibilityMiles Max.Wind.SpeedMPH Mean.Humidity Mean.Sea.Level.PressureIn Mean.TemperatureF Mean.VisibilityMiles
+1                  10                22            63                     30.13                52                   10
+2                  10                23            95                      29.5                43                    3
+3                  10                21            87                     29.61                36                    7
+4                  10                16            75                     29.85                35                   10
+5                  10                17            65                     29.82                37                   10
+6                  10                15            68                     29.83                39                   10
+  Mean.Wind.SpeedMPH MeanDew.PointF Min.DewpointF Min.Humidity Min.Sea.Level.PressureIn Min.TemperatureF Min.VisibilityMiles
+1                 13             40            26           52                    30.01               39                  10
+2                 13             39            37           89                    29.43               38                   1
+3                 13             31            27           82                    29.44               32                   1
+4                 11             27            25           64                    29.81               31                   7
+5                 12             26            24           55                    29.78               32                  10
+6                 10             27            25           53                    29.78               33                  10
+  PrecipitationIn WindDirDegrees
+1            0.01            268
+2            0.28            357
+3            0.02            230
+4               T            286
+5               T            298
+6            0.00            306
+```
+
+year, month ve day değişkenlerinin değerleri satır bazında, belirlemiş olduğumuz "-" ayraç işaretiyle, date isimli değişken altında birleşti. 
+
+Bir tarih değişkeni elde ettik ancak oluşturduğumuz bu değişkenin sınıfı da tarih formatında mı acaba?
+
+```R
+class(weather$date)
+
+>
+[1] "character"
+```
+
+Gördüğümüz gibi elde ettiğimiz değişken karakter formatında. R'ın bu değişkeni tarih olarak algılayabilmesi için bu şekilde işlememiz gerekiyor. Tarih formatıyla ilgili işlemleri "lubridate" paketini kullanarak yapıyoruz. Öncelikle paketi indirelim ve çağıralım.
+
+```R
+install.packages("lubridate")
+library(lubridate)
+```
+
+date değişkenimizi tarih formatına ymd() fonksiyonunu kullanarak çevireceğiz. Bu fonksiyonu kullanmamızın sebebi date değişkenindeki gözlemlerimizin "year-month-day" sırasında olması. Farklı sıralarda olan gözlemler için ydm(), mdy(), myd(), dmy(), dym() fonksiyonları gibi gözlemlerimize uygun olan fonksiyonu kullanabiliriz.
+
+date değişkenimizdeki değerleri tarih formatına çevirerek tekrar date değişkenine tanımlıyoruz. 
+
+```R
+weather$date <- ymd(weather$date)
+class(weather$date)
+
+>
+[1] "Date"
+```
+
+date değişkeninin sınıfı tarih formatına dönüştü. 
+
+Veri setimizin yapısını tekrar incelediğimizde “PreciptationIn” değişkeninde ondalıklı sayılar ile birlikte “T” harfinin de olduğunu görüyoruz. 
+
+```R
+str(weather)
+
+>
+'data.frame': 366 obs. of 23 variables:
+$ date : Date, format: "2014-12-01" "2014-12-10" "2014-12-11" "2014-12-12" ...
+$ CloudCover : chr "6" "8" "8" "7" ...
+$ Events : chr "Rain" "Rain" "Rain-Snow" "Snow" ...
+$ Max.Dew.PointF : chr "46" "45" "37" "28" ...
+$ Max.Gust.SpeedMPH : chr "29" "29" "28" "21" ...
+$ Max.Humidity : chr "74" "100" "92" "85" ...
+$ Max.Sea.Level.PressureIn : chr "30.45" "29.58" "29.81" "29.88" ...
+$ Max.TemperatureF : chr "64" "48" "39" "39" ...
+$ Max.VisibilityMiles : chr "10" "10" "10" "10" ...
+$ Max.Wind.SpeedMPH : chr "22" "23" "21" "16" ...
+$ Mean.Humidity : chr "63" "95" "87" "75" ...
+$ Mean.Sea.Level.PressureIn: chr "30.13" "29.5" "29.61" "29.85" ...
+$ Mean.TemperatureF : chr "52" "43" "36" "35" ...
+$ Mean.VisibilityMiles : chr "10" "3" "7" "10" ...
+$ Mean.Wind.SpeedMPH : chr "13" "13" "13" "11" ...
+$ MeanDew.PointF : chr "40" "39" "31" "27" ...
+$ Min.DewpointF : chr "26" "37" "27" "25" ...
+$ Min.Humidity : chr "52" "89" "82" "64" ...
+$ Min.Sea.Level.PressureIn : chr "30.01" "29.43" "29.44" "29.81" ...
+$ Min.TemperatureF : chr "39" "38" "32" "31" ...
+$ Min.VisibilityMiles : chr "10" "1" "1" "7" ...
+$ PrecipitationIn : chr "0.01" "0.28" "0.02" "T" ...
+$ WindDirDegrees : chr "268" "357" "230" "286" ...
+```
+
+İleride yapacağımız analizler için bu "T" değerleri yanlış sonuçlara sebep olabilir o yüzden bu değerleri diğerleri gibi bir sayıyla değiştirmek istiyoruz.
+PrecipitationIn değişkeni hakkında biraz araştırma yaptığımızda bu değişkenin meteoroloji alanında yağışı temsil ettiğini ve ilgili bölgenin çok az yağış alacağını belirttiğini öğreniyoruz. 
+Bu yüzden "T" harfi yerine bu gözlemlere 0 (sıfır) atarsak daha anlamlı sonuçlar elde edebiliriz. Bu işlemi "stringr" paketinde bulunan str_replace_all() fonsiyonunu kullanarak yapacağız. 
+
+Bu fonksiyonun argümanlarını inceleyelim.
+
+```R
+?str_replace_all
+```
+**Ekran görüntüsü gelecek**
+
+*string* argümanı değişiklik yapacağımız vektörü ifade ediyor. 
+*pattern* argümanı değiştimek istediğimiz, fonksiyonun vektör içinde arayacağı ifadeyi/kalıbı gösteriyor.
+*replacement* argümanı ise *pattern* argümanındaki ifadeyi ne ile değiştirmek istediğimizi ifade ediyor.
+Fonksiyonu veri setimiz üzerinde uygulayalım.
+
+```R
+weather$PrecipitationIn <- str_replace_all(weather$PrecipitationIn, "T", "0")
+head(weather$PrecipitationIn, 10)
+
+>
+[1] "0.01" "0.28" "0.02" "0" "0" "0.00" "0.00" "0" "0.43" "0.01"
+```
+
+PrecipitationIn değişkenindeki "T" ifadelerini "0" sayısıyla değiştirdik. 
