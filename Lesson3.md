@@ -30,6 +30,9 @@
 * [gather()](#gather())
 * [spread()](#spread())
 * [unite()](#unite())
+<<<<<<< HEAD
+>>>>>>> parent of b01acfe... Update Lesson3.md
+=======
 >>>>>>> parent of b01acfe... Update Lesson3.md
 * dplyr ile join işlemleri
 
@@ -1336,4 +1339,7 @@ head(weather$PrecipitationIn, 10)
 ```
 
 PrecipitationIn değişkenindeki "T" ifadelerini "0" sayısıyla değiştirdik. 
+<<<<<<< HEAD
+>>>>>>> parent of b01acfe... Update Lesson3.md
+=======
 >>>>>>> parent of b01acfe... Update Lesson3.md
