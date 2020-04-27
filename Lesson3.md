@@ -4,8 +4,8 @@
 * [Giriş](#giriş)
 * [Bir veriseti nasıl yüklenir?](#veri-manipülasiyonu)
 * [dyplr paketi](#dyplr-fonksiyonları)
-* [select()](#select-fonskyionu)
-* [filter()](#filter-fonskiyonu)
+* [select()](#select-fonksiyonu)
+* [filter()](#filter-fonksiyonu)
 * [Pipe %>% operatörü](#pipe--fonksiyonu-operatörü)
 * [mutate()](#mutate-fonksiyonu)
 * [arrange()](#arrange-fonksiyonu)
@@ -19,6 +19,7 @@
 * [gather()](#gather())
 * [spread()](#spread())
 * [unite()](#unite())
+* Veri Setindeki Eksik, Aykırı Gözlemler
 * dplyr ile join işlemleri
 
 
@@ -206,7 +207,7 @@ bodywt: kilogram cinsinden vücut ağırlığı
 
 ## dyplr fonksiyonları
 
-### select() fonskyionu
+### select() fonksiyonu
 
 Yapacağımız ilk işlem verimizden bir seçme yapmaktır.
 select fonksiyonları, içindeki yardımcı fonksiyonlar ile değişkenleri istediğimiz gibi seçip, sıralayabiliriz.
@@ -350,7 +351,7 @@ head(wt,10)
 10 0.09820  14.800
 ```
 
-### filter() fonskiyonu
+### filter() fonksiyonu
 filter() fonksiyonu veri setindeki satırları/gözlemleri istenilen şekilde filtrelemek için kullanılır. 
 Ayrıca, sütunlar/değişkenleri ayıklamak için kullanılan select() fonksiyonunun
 satırlar/gözlemler için kullanılan halidir diyebiliriz. 
@@ -1320,3 +1321,475 @@ head(weather$PrecipitationIn, 10)
 ```
 
 PrecipitationIn değişkenindeki "T" ifadelerini "0" sayısıyla değiştirdik. 
+
+head() fonksiyonuyla veri setimizin son haline bakalım.
+
+```R
+#İlk 5 satıra bakalım.
+head(weather, 5) 
+
+        date CloudCover    Events Max.Dew.PointF Max.Gust.SpeedMPH Max.Humidity Max.Sea.Level.PressureIn Max.TemperatureF
+1 2014-12-01          6      Rain             46                29           74                    30.45               64
+2 2014-12-10          8      Rain             45                29          100                    29.58               48
+3 2014-12-11          8 Rain-Snow             37                28           92                    29.81               39
+4 2014-12-12          7      Snow             28                21           85                    29.88               39
+5 2014-12-13          5                       28                23           75                    29.86               42
+  Max.VisibilityMiles Max.Wind.SpeedMPH Mean.Humidity Mean.Sea.Level.PressureIn Mean.TemperatureF Mean.VisibilityMiles
+1                  10                22            63                     30.13                52                   10
+2                  10                23            95                      29.5                43                    3
+3                  10                21            87                     29.61                36                    7
+4                  10                16            75                     29.85                35                   10
+5                  10                17            65                     29.82                37                   10
+  Mean.Wind.SpeedMPH MeanDew.PointF Min.DewpointF Min.Humidity Min.Sea.Level.PressureIn Min.TemperatureF Min.VisibilityMiles
+1                 13             40            26           52                    30.01               39                  10
+2                 13             39            37           89                    29.43               38                   1
+3                 13             31            27           82                    29.44               32                   1
+4                 11             27            25           64                    29.81               31                   7
+5                 12             26            24           55                    29.78               32                  10
+  PrecipitationIn WindDirDegrees
+1            0.01            268
+2            0.28            357
+3            0.02            230
+4               0            286
+5               0            298
+```
+
+Görsel açıdan daha düzgün bir veri seti elde etmek amacıyla date ve Events değişkenleri ilk iki sütunlarda olacak şekilde verimizi düzenlemek istiyoruz. Bu düzenlemeyi "dplyr" paketinde bulunan select() fonksiyonuyla yapacağız. 
+
+```R
+weather <- weather %>%
+  select(date, Events, everything())
+```
+select() fonksiyonuyla ilk sütun için date, ikinci sütün için Events değişkenlerini seçtikten sonra geri kalan değişkenlerin isimlerini teker teker yazmak yerine everything() fonksiyonunu kullanarak diğer değişkenleri de sıralıyoruz. Bu işlemi tekrar weather veri setimize atamayı da unutmamamız lazım. 
+
+Veri setimizin yapısını inceleyelim.
+```R
+str(weather)
+
+>
+'data.frame':	366 obs. of  23 variables:
+ $ date                     : Date, format: "2014-12-01" "2014-12-10" "2014-12-11" "2014-12-12" ...
+ $ Events                   : chr  "Rain" "Rain" "Rain-Snow" "Snow" ...
+ $ CloudCover               : chr  "6" "8" "8" "7" ...
+ $ Max.Dew.PointF           : chr  "46" "45" "37" "28" ...
+ $ Max.Gust.SpeedMPH        : chr  "29" "29" "28" "21" ...
+ $ Max.Humidity             : chr  "74" "100" "92" "85" ...
+ $ Max.Sea.Level.PressureIn : chr  "30.45" "29.58" "29.81" "29.88" ...
+ $ Max.TemperatureF         : chr  "64" "48" "39" "39" ...
+ $ Max.VisibilityMiles      : chr  "10" "10" "10" "10" ...
+ $ Max.Wind.SpeedMPH        : chr  "22" "23" "21" "16" ...
+ $ Mean.Humidity            : chr  "63" "95" "87" "75" ...
+ $ Mean.Sea.Level.PressureIn: chr  "30.13" "29.5" "29.61" "29.85" ...
+ $ Mean.TemperatureF        : chr  "52" "43" "36" "35" ...
+ $ Mean.VisibilityMiles     : chr  "10" "3" "7" "10" ...
+ $ Mean.Wind.SpeedMPH       : chr  "13" "13" "13" "11" ...
+ $ MeanDew.PointF           : chr  "40" "39" "31" "27" ...
+ $ Min.DewpointF            : chr  "26" "37" "27" "25" ...
+ $ Min.Humidity             : chr  "52" "89" "82" "64" ...
+ $ Min.Sea.Level.PressureIn : chr  "30.01" "29.43" "29.44" "29.81" ...
+ $ Min.TemperatureF         : chr  "39" "38" "32" "31" ...
+ $ Min.VisibilityMiles      : chr  "10" "1" "1" "7" ...
+ $ PrecipitationIn          : chr  "0.01" "0.28" "0.02" "0" ...
+ $ WindDirDegrees           : chr  "268" "357" "230" "286" ...
+```
+
+Gördüğümüz gibi, date formatına getirdiğimiz date değişkeni hariç diğer değişkenler karakter formatında. Events değişkeni hariç diğer bütün değişkenler tam veya ondalıklı sayılardan oluşuyor. Bu değişenleri numerik veri tipine dönüştürek istiyoruz. Bunu 3 farklı yoldan yapabiliriz.
+
+1. yol:
+İlk olarak "dplyr" paketindeki mutate_at fonksiyonuyla yapabiliriz. Argümanlara ilk olarak veri setimizi giriyoruz. İkinci argüman "vars()", formatını değiştirmek istediğimiz değişkenlerin isimlerini girmemize yarıyor. Bu değişkenlerin hepsi yan yana olduğu için "CloudCover:WindDirDegrees" şeklinde ilk ve son sütunlardaki değişkenlerin isimlerinin arasına : işareti koyarak yazabiliriz. Üçüncü argüman "funs()", yapmak istediğimiz işlemi/fonksiyonu girmemizi sağlar. Numerik veri tipine dönüştürmek istediğimiz için as.numeric() fonksiyonunu kullanacağız. 
+
+```R
+weather <- mutate_at(weather, vars(CloudCover:WindDirDegrees), funs(as.numeric))
+```
+
+2.yol:
+lapply() fonksiyonuyla veri setimizdeki numerik veri tipine çevirmek istediğimiz son 21 sütuna as.numeric() fonksiyonunu uygulayabiliriz. cbind() fonksiyonunu da kullanarak ilk 2 sütunla bu 21 sütunu birleştirebiliriz. 
+
+```R
+weather <- cbind(weather[1:2], lapply(weather[3:23], as.numeric))
+```
+
+3. yol:
+Son olarak her döngüde bir sütunu numerik veri tipine çevirecek olan bir for döngüsü de kurabiliriz. 
+```R
+for(i in 3:23) {
+  weather[,i] <- as.numeric(weather[,i])
+}
+```
+
+Değişkenlerin numerik veri tipine dönüşüp dönüşmediğini kontrol etmek için tekrar veri setimizin yapısını inceleyelim.
+```R
+str(weather)
+
+>
+'data.frame':	366 obs. of  23 variables:
+ $ date                     : Date, format: "2014-12-01" "2014-12-10" "2014-12-11" ...
+ $ Events                   : chr  "Rain" "Rain" "Rain-Snow" "Snow" ...
+ $ CloudCover               : num  6 8 8 7 5 4 2 8 8 7 ...
+ $ Max.Dew.PointF           : num  46 45 37 28 28 29 33 42 46 34 ...
+ $ Max.Gust.SpeedMPH        : num  29 29 28 21 23 20 21 10 26 30 ...
+ $ Max.Humidity             : num  74 100 92 85 75 82 89 96 100 89 ...
+ $ Max.Sea.Level.PressureIn : num  30.4 29.6 29.8 29.9 29.9 ...
+ $ Max.TemperatureF         : num  64 48 39 39 42 45 42 44 49 44 ...
+ $ Max.VisibilityMiles      : num  10 10 10 10 10 10 10 10 10 10 ...
+ $ Max.Wind.SpeedMPH        : num  22 23 21 16 17 15 15 8 20 23 ...
+ $ Mean.Humidity            : num  63 95 87 75 65 68 75 85 85 73 ...
+ $ Mean.Sea.Level.PressureIn: num  30.1 29.5 29.6 29.9 29.8 ...
+ $ Mean.TemperatureF        : num  52 43 36 35 37 39 37 40 45 40 ...
+ $ Mean.VisibilityMiles     : num  10 3 7 10 10 10 10 9 6 10 ...
+ $ Mean.Wind.SpeedMPH       : num  13 13 13 11 12 10 6 4 11 14 ...
+ $ MeanDew.PointF           : num  40 39 31 27 26 27 29 36 41 30 ...
+ $ Min.DewpointF            : num  26 37 27 25 24 25 27 30 32 26 ...
+ $ Min.Humidity             : num  52 89 82 64 55 53 60 73 70 57 ...
+ $ Min.Sea.Level.PressureIn : num  30 29.4 29.4 29.8 29.8 ...
+ $ Min.TemperatureF         : num  39 38 32 31 32 33 32 35 41 36 ...
+ $ Min.VisibilityMiles      : num  10 1 1 7 10 10 10 5 1 10 ...
+ $ PrecipitationIn          : num  0.01 0.28 0.02 0 0 0 0 0 0.43 0.01 ...
+ $ WindDirDegrees           : num  268 357 230 286 298 306 324 79 311 281 ...
+```
+
+## Veri Setindeki Eksik, Aykırı Gözlemler
+
+Veri setimiz üzerinde yapacağımız analizlerden doğru ve anlamlı sonuçlar alabilmemiz için her zaman eksik ve aykırı gözlemleri kontrol etmemiz gerekir.
+Eksik gözlemler veri setinde "NA" şeklinde görünebilir ya da hiçbir girdi olmayabilir.
+Veri setimizde "NA" olup olmadığını is.na() fonksiyonuyla kontrol edelim.
+
+```R
+is.na(weather)
+
+>
+date Events CloudCover Max.Dew.PointF Max.Gust.SpeedMPH Max.Humidity Max.Sea.Level.PressureIn Max.TemperatureF
+  [1,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+  [2,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+  [3,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+  [4,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+  [5,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+  [6,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+  [7,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+  [8,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+  [9,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [10,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [11,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [12,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [13,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [14,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [15,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [16,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [17,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [18,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [19,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [20,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [21,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [22,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [23,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [24,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [25,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [26,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [27,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [28,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [29,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [30,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [31,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [32,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [33,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [34,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [35,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [36,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [37,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [38,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [39,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [40,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [41,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [42,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+ [43,] FALSE  FALSE      FALSE          FALSE             FALSE        FALSE                    FALSE            FALSE
+       Max.VisibilityMiles Max.Wind.SpeedMPH Mean.Humidity Mean.Sea.Level.PressureIn Mean.TemperatureF
+  [1,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+  [2,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+  [3,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+  [4,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+  [5,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+  [6,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+  [7,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+  [8,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+  [9,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [10,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [11,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [12,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [13,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [14,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [15,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [16,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [17,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [18,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [19,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [20,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [21,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [22,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [23,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [24,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [25,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [26,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [27,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [28,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [29,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [30,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [31,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [32,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [33,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [34,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [35,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [36,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [37,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [38,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [39,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [40,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [41,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [42,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+ [43,]               FALSE             FALSE         FALSE                     FALSE             FALSE
+       Mean.VisibilityMiles Mean.Wind.SpeedMPH MeanDew.PointF Min.DewpointF Min.Humidity Min.Sea.Level.PressureIn
+  [1,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+  [2,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+  [3,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+  [4,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+  [5,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+  [6,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+  [7,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+  [8,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+  [9,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [10,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [11,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [12,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [13,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [14,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [15,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [16,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [17,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [18,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [19,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [20,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [21,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [22,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [23,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [24,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [25,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [26,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [27,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [28,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [29,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [30,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [31,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [32,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [33,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [34,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [35,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [36,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [37,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [38,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [39,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [40,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [41,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [42,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+ [43,]                FALSE              FALSE          FALSE         FALSE        FALSE                    FALSE
+       Min.TemperatureF Min.VisibilityMiles PrecipitationIn WindDirDegrees
+  [1,]            FALSE               FALSE           FALSE          FALSE
+  [2,]            FALSE               FALSE           FALSE          FALSE
+  [3,]            FALSE               FALSE           FALSE          FALSE
+  [4,]            FALSE               FALSE           FALSE          FALSE
+  [5,]            FALSE               FALSE           FALSE          FALSE
+  [6,]            FALSE               FALSE           FALSE          FALSE
+  [7,]            FALSE               FALSE           FALSE          FALSE
+  [8,]            FALSE               FALSE           FALSE          FALSE
+  [9,]            FALSE               FALSE           FALSE          FALSE
+ [10,]            FALSE               FALSE           FALSE          FALSE
+ [11,]            FALSE               FALSE           FALSE          FALSE
+ [12,]            FALSE               FALSE           FALSE          FALSE
+ [13,]            FALSE               FALSE           FALSE          FALSE
+ [14,]            FALSE               FALSE           FALSE          FALSE
+ [15,]            FALSE               FALSE           FALSE          FALSE
+ [16,]            FALSE               FALSE           FALSE          FALSE
+ [17,]            FALSE               FALSE           FALSE          FALSE
+ [18,]            FALSE               FALSE           FALSE          FALSE
+ [19,]            FALSE               FALSE           FALSE          FALSE
+ [20,]            FALSE               FALSE           FALSE          FALSE
+ [21,]            FALSE               FALSE           FALSE          FALSE
+ [22,]            FALSE               FALSE           FALSE          FALSE
+ [23,]            FALSE               FALSE           FALSE          FALSE
+ [24,]            FALSE               FALSE           FALSE          FALSE
+ [25,]            FALSE               FALSE           FALSE          FALSE
+ [26,]            FALSE               FALSE           FALSE          FALSE
+ [27,]            FALSE               FALSE           FALSE          FALSE
+ [28,]            FALSE               FALSE           FALSE          FALSE
+ [29,]            FALSE               FALSE           FALSE          FALSE
+ [30,]            FALSE               FALSE           FALSE          FALSE
+ [31,]            FALSE               FALSE           FALSE          FALSE
+ [32,]            FALSE               FALSE           FALSE          FALSE
+ [33,]            FALSE               FALSE           FALSE          FALSE
+ [34,]            FALSE               FALSE           FALSE          FALSE
+ [35,]            FALSE               FALSE           FALSE          FALSE
+ [36,]            FALSE               FALSE           FALSE          FALSE
+ [37,]            FALSE               FALSE           FALSE          FALSE
+ [38,]            FALSE               FALSE           FALSE          FALSE
+ [39,]            FALSE               FALSE           FALSE          FALSE
+ [40,]            FALSE               FALSE           FALSE          FALSE
+ [41,]            FALSE               FALSE           FALSE          FALSE
+ [42,]            FALSE               FALSE           FALSE          FALSE
+ [43,]            FALSE               FALSE           FALSE          FALSE
+ [ reached getOption("max.print") -- omitted 323 rows ]
+ ```
+ 
+Bu çıktı içinden TRUE değerlerini saymamız mümkün değil. Ancak sum() fonksiyonuyla TRUE değerlerini toplayabiliriz. (FALSE değerleri 0, TRUE değerleri 1 olarak algılanıyor, hatırlayalım.)
+
+```R
+sum(is.na(weather))
+
+>
+[1] 6
+```
+
+6 adet TRUE değerini olduğunu bulduk. Bu değerlerin hangi satırlarda olduğuna which() fonksiyonuyla bakabiliriz.``
+
+```R
+which(is.na(weather))
+
+>
+[1] 1625 1669 1737 1739 1772 1822
+```
+
+"NA" değerlerinin hangi değişkenlerde olduğunu bulmak için veri setimizin özetine bakalım.
+
+```R
+summary(weather)
+
+>
+      date               Events            CloudCover    Max.Dew.PointF  Max.Gust.SpeedMPH  Max.Humidity    
+ Min.   :2014-12-01   Length:366         Min.   :0.000   Min.   :-6.00   Min.   : 0.00     Min.   :  39.00  
+ 1st Qu.:2015-03-02   Class :character   1st Qu.:3.000   1st Qu.:32.00   1st Qu.:21.00     1st Qu.:  73.25  
+ Median :2015-06-01   Mode  :character   Median :5.000   Median :47.50   Median :25.50     Median :  86.00  
+ Mean   :2015-06-01                      Mean   :4.708   Mean   :45.48   Mean   :26.99     Mean   :  85.69  
+ 3rd Qu.:2015-08-31                      3rd Qu.:7.000   3rd Qu.:61.00   3rd Qu.:31.25     3rd Qu.:  93.00  
+ Max.   :2015-12-01                      Max.   :8.000   Max.   :75.00   Max.   :94.00     Max.   :1000.00  
+                                                                         NA's   :6                          
+ Max.Sea.Level.PressureIn Max.TemperatureF Max.VisibilityMiles Max.Wind.SpeedMPH Mean.Humidity  
+ Min.   :29.58            Min.   :18.00    Min.   : 2.000      Min.   : 8.00     Min.   :28.00  
+ 1st Qu.:30.00            1st Qu.:42.00    1st Qu.:10.000      1st Qu.:16.00     1st Qu.:56.00  
+ Median :30.14            Median :60.00    Median :10.000      Median :20.00     Median :66.00  
+ Mean   :30.16            Mean   :58.93    Mean   : 9.907      Mean   :20.62     Mean   :66.02  
+ 3rd Qu.:30.31            3rd Qu.:76.00    3rd Qu.:10.000      3rd Qu.:24.00     3rd Qu.:76.75  
+ Max.   :30.88            Max.   :96.00    Max.   :10.000      Max.   :38.00     Max.   :98.00  
+                                                                                                
+ Mean.Sea.Level.PressureIn Mean.TemperatureF Mean.VisibilityMiles Mean.Wind.SpeedMPH MeanDew.PointF   Min.DewpointF   
+ Min.   :29.49             Min.   : 8.00     Min.   :-1.000       Min.   : 4.00      Min.   :-11.00   Min.   :-18.00  
+ 1st Qu.:29.87             1st Qu.:36.25     1st Qu.: 8.000       1st Qu.: 8.00      1st Qu.: 24.00   1st Qu.: 16.25  
+ Median :30.03             Median :53.50     Median :10.000       Median :10.00      Median : 41.00   Median : 35.00  
+ Mean   :30.04             Mean   :51.40     Mean   : 8.861       Mean   :10.68      Mean   : 38.96   Mean   : 32.25  
+ 3rd Qu.:30.19             3rd Qu.:68.00     3rd Qu.:10.000       3rd Qu.:13.00      3rd Qu.: 56.00   3rd Qu.: 51.00  
+ Max.   :30.77             Max.   :84.00     Max.   :10.000       Max.   :22.00      Max.   : 71.00   Max.   : 68.00  
+                                                                                                                      
+  Min.Humidity   Min.Sea.Level.PressureIn Min.TemperatureF Min.VisibilityMiles PrecipitationIn  WindDirDegrees 
+ Min.   :16.00   Min.   :29.16            Min.   :-3.00    Min.   : 0.000      Min.   :0.0000   Min.   :  1.0  
+ 1st Qu.:35.00   1st Qu.:29.76            1st Qu.:30.00    1st Qu.: 2.000      1st Qu.:0.0000   1st Qu.:113.0  
+ Median :46.00   Median :29.94            Median :46.00    Median :10.000      Median :0.0000   Median :222.0  
+ Mean   :48.31   Mean   :29.93            Mean   :43.33    Mean   : 6.716      Mean   :0.1016   Mean   :200.1  
+ 3rd Qu.:60.00   3rd Qu.:30.09            3rd Qu.:60.00    3rd Qu.:10.000      3rd Qu.:0.0400   3rd Qu.:275.0  
+ Max.   :96.00   Max.   :30.64            Max.   :74.00    Max.   :10.000      Max.   :2.9000   Max.   :360.0 
+ ```
+ 
+6 "NA" değerinin de Max.Gust.SpeedMPH değişkeninde olduğunu görüyoruz. 
+
+Eksik gözlemler, aykırı gözlemler, beklenmeyen gözlemler ve bariz hatalar gibi durumlarda işlem yaparken aşağıdakiler dikkate alınmalıdır:
+-Değişkenlerin içerikleri önemlidir.
+-Değişkenlerin aralıkları akla yatkın olmalıdır.
+-Veri seti ölçütleri doğrulanmalıdır.
+
+Max.Gust.SpeedMPH değişkeninde eksik gözlemleri satır bazında silebiliriz ya da doldurabiliriz. Genel olarak eksik gözlemleri ortalama ile doldurmak yaygın olan bir kullanımdır.
+Biz de Max.Gust.SpeedMPH değişkenindeki eksik gözlemleri ortalama ile doldurmak istiyoruz. mean() fonksiyonuyla bu değişkenin ortalama değerini bulup, veri seti içindeki "NA" değerlerini seçerek bunlara atayabiliriz. Sonunda kontrol amaçlı tekrar veri setimizin özetini inceleyelim.
+
+```R
+weather[is.na(weather$Max.Gust.SpeedMPH), "Max.Gust.SpeedMPH"] <- mean(weather$Max.Gust.SpeedMPH, na.rm = T)
+summary(weather)
+
+>
+  date               Events            CloudCover    Max.Dew.PointF  Max.Gust.SpeedMPH  Max.Humidity    
+ Min.   :2014-12-01   Length:366         Min.   :0.000   Min.   :-6.00   Min.   : 0.00     Min.   :  39.00  
+ 1st Qu.:2015-03-02   Class :character   1st Qu.:3.000   1st Qu.:32.00   1st Qu.:21.00     1st Qu.:  73.25  
+ Median :2015-06-01   Mode  :character   Median :5.000   Median :47.50   Median :26.00     Median :  86.00  
+ Mean   :2015-06-01                      Mean   :4.708   Mean   :45.48   Mean   :26.99     Mean   :  85.69  
+ 3rd Qu.:2015-08-31                      3rd Qu.:7.000   3rd Qu.:61.00   3rd Qu.:31.00     3rd Qu.:  93.00  
+ Max.   :2015-12-01                      Max.   :8.000   Max.   :75.00   Max.   :94.00     Max.   :1000.00  
+ Max.Sea.Level.PressureIn Max.TemperatureF Max.VisibilityMiles Max.Wind.SpeedMPH Mean.Humidity  
+ Min.   :29.58            Min.   :18.00    Min.   : 2.000      Min.   : 8.00     Min.   :28.00  
+ 1st Qu.:30.00            1st Qu.:42.00    1st Qu.:10.000      1st Qu.:16.00     1st Qu.:56.00  
+ Median :30.14            Median :60.00    Median :10.000      Median :20.00     Median :66.00  
+ Mean   :30.16            Mean   :58.93    Mean   : 9.907      Mean   :20.62     Mean   :66.02  
+ 3rd Qu.:30.31            3rd Qu.:76.00    3rd Qu.:10.000      3rd Qu.:24.00     3rd Qu.:76.75  
+ Max.   :30.88            Max.   :96.00    Max.   :10.000      Max.   :38.00     Max.   :98.00  
+ Mean.Sea.Level.PressureIn Mean.TemperatureF Mean.VisibilityMiles Mean.Wind.SpeedMPH MeanDew.PointF   Min.DewpointF   
+ Min.   :29.49             Min.   : 8.00     Min.   :-1.000       Min.   : 4.00      Min.   :-11.00   Min.   :-18.00  
+ 1st Qu.:29.87             1st Qu.:36.25     1st Qu.: 8.000       1st Qu.: 8.00      1st Qu.: 24.00   1st Qu.: 16.25  
+ Median :30.03             Median :53.50     Median :10.000       Median :10.00      Median : 41.00   Median : 35.00  
+ Mean   :30.04             Mean   :51.40     Mean   : 8.861       Mean   :10.68      Mean   : 38.96   Mean   : 32.25  
+ 3rd Qu.:30.19             3rd Qu.:68.00     3rd Qu.:10.000       3rd Qu.:13.00      3rd Qu.: 56.00   3rd Qu.: 51.00  
+ Max.   :30.77             Max.   :84.00     Max.   :10.000       Max.   :22.00      Max.   : 71.00   Max.   : 68.00  
+  Min.Humidity   Min.Sea.Level.PressureIn Min.TemperatureF Min.VisibilityMiles PrecipitationIn  WindDirDegrees 
+ Min.   :16.00   Min.   :29.16            Min.   :-3.00    Min.   : 0.000      Min.   :0.0000   Min.   :  1.0  
+ 1st Qu.:35.00   1st Qu.:29.76            1st Qu.:30.00    1st Qu.: 2.000      1st Qu.:0.0000   1st Qu.:113.0  
+ Median :46.00   Median :29.94            Median :46.00    Median :10.000      Median :0.0000   Median :222.0  
+ Mean   :48.31   Mean   :29.93            Mean   :43.33    Mean   : 6.716      Mean   :0.1016   Mean   :200.1  
+ 3rd Qu.:60.00   3rd Qu.:30.09            3rd Qu.:60.00    3rd Qu.:10.000      3rd Qu.:0.0400   3rd Qu.:275.0  
+ Max.   :96.00   Max.   :30.64            Max.   :74.00    Max.   :10.000      Max.   :2.9000   Max.   :360.0  
+```
+
+Max.Gust.SpeedMPH değişkeninde "NA" değerlerinin artık olmadığını görüyoruz. Ancak o sırada gözümüze başka aykırı değerler çarpıyor. İlk olarak Max.Humidity değişkeninin maksimum değerinin 1000 olduğunu görüyoruz. Nem oranının 1000 olması mümkün değil, muhtemelen yanlışlıkla fazladan bir 0 eklenmiş. Bunu düzetmek için 1000 olan değer yerine 100 yazdıracağız. 
+İkinci olarak Mean.VisibilityMiles değişkeninde minimum değerin negatif bir sayı olduğunu fark ediyoruz. Visibility Miles kavramını araştırdığımızda negatif değerler alamayacağını öğreniyoruz. O yüzden bu değeri de değişkenin ortalama değeriyle değiştireceğiz.
+
+Bu iki işlemi iki farklı yöntemle yapacağız. İkisi de birbirine uyarlanabilir.
+
+```R
+weather[weather$Max.Humidity == 1000, "Max.Humidity"] <- 100
+
+weather$Mean.VisibilityMiles[which(weather$Mean.VisibilityMiles == -1)] <- mean(weather$Mean.VisibilityMiles)
+```
+
+Tekrar veri setimizin özetini inceleyelim.
+
+```R
+summary(weather)
+
+>
+       date               Events            CloudCover    Max.Dew.PointF  Max.Gust.SpeedMPH  Max.Humidity   
+ Min.   :2014-12-01   Length:366         Min.   :0.000   Min.   :-6.00   Min.   : 0.00     Min.   : 39.00  
+ 1st Qu.:2015-03-02   Class :character   1st Qu.:3.000   1st Qu.:32.00   1st Qu.:21.00     1st Qu.: 73.25  
+ Median :2015-06-01   Mode  :character   Median :5.000   Median :47.50   Median :26.00     Median : 86.00  
+ Mean   :2015-06-01                      Mean   :4.708   Mean   :45.48   Mean   :26.99     Mean   : 83.23  
+ 3rd Qu.:2015-08-31                      3rd Qu.:7.000   3rd Qu.:61.00   3rd Qu.:31.00     3rd Qu.: 93.00  
+ Max.   :2015-12-01                      Max.   :8.000   Max.   :75.00   Max.   :94.00     Max.   :100.00  
+ Max.Sea.Level.PressureIn Max.TemperatureF Max.VisibilityMiles Max.Wind.SpeedMPH Mean.Humidity  
+ Min.   :29.58            Min.   :18.00    Min.   : 2.000      Min.   : 8.00     Min.   :28.00  
+ 1st Qu.:30.00            1st Qu.:42.00    1st Qu.:10.000      1st Qu.:16.00     1st Qu.:56.00  
+ Median :30.14            Median :60.00    Median :10.000      Median :20.00     Median :66.00  
+ Mean   :30.16            Mean   :58.93    Mean   : 9.907      Mean   :20.62     Mean   :66.02  
+ 3rd Qu.:30.31            3rd Qu.:76.00    3rd Qu.:10.000      3rd Qu.:24.00     3rd Qu.:76.75  
+ Max.   :30.88            Max.   :96.00    Max.   :10.000      Max.   :38.00     Max.   :98.00  
+ Mean.Sea.Level.PressureIn Mean.TemperatureF Mean.VisibilityMiles Mean.Wind.SpeedMPH MeanDew.PointF   Min.DewpointF   
+ Min.   :29.49             Min.   : 8.00     Min.   : 1.000       Min.   : 4.00      Min.   :-11.00   Min.   :-18.00  
+ 1st Qu.:29.87             1st Qu.:36.25     1st Qu.: 8.000       1st Qu.: 8.00      1st Qu.: 24.00   1st Qu.: 16.25  
+ Median :30.03             Median :53.50     Median :10.000       Median :10.00      Median : 41.00   Median : 35.00  
+ Mean   :30.04             Mean   :51.40     Mean   : 8.888       Mean   :10.68      Mean   : 38.96   Mean   : 32.25  
+ 3rd Qu.:30.19             3rd Qu.:68.00     3rd Qu.:10.000       3rd Qu.:13.00      3rd Qu.: 56.00   3rd Qu.: 51.00  
+ Max.   :30.77             Max.   :84.00     Max.   :10.000       Max.   :22.00      Max.   : 71.00   Max.   : 68.00  
+  Min.Humidity   Min.Sea.Level.PressureIn Min.TemperatureF Min.VisibilityMiles PrecipitationIn  WindDirDegrees 
+ Min.   :16.00   Min.   :29.16            Min.   :-3.00    Min.   : 0.000      Min.   :0.0000   Min.   :  1.0  
+ 1st Qu.:35.00   1st Qu.:29.76            1st Qu.:30.00    1st Qu.: 2.000      1st Qu.:0.0000   1st Qu.:113.0  
+ Median :46.00   Median :29.94            Median :46.00    Median :10.000      Median :0.0000   Median :222.0  
+ Mean   :48.31   Mean   :29.93            Mean   :43.33    Mean   : 6.716      Mean   :0.1016   Mean   :200.1  
+ 3rd Qu.:60.00   3rd Qu.:30.09            3rd Qu.:60.00    3rd Qu.:10.000      3rd Qu.:0.0400   3rd Qu.:275.0  
+ Max.   :96.00   Max.   :30.64            Max.   :74.00    Max.   :10.000      Max.   :2.9000   Max.   :360.0 
+````
+
+Son olarak View() fonksiyonuyla veri setimizi gözlemlediğimizde Events değişkeninde eksik gözlemler olduğunu görüyoruz. Ancak bu değerler "NA" olarak değil boşluk olarak işlenmiş. Bu yüzden bu değerler yerine "None" diye bir değer atamak istiyoruz.
+
+```R
+weather[weather$Events == "", "Events"] <- "None"
+```
+
+Veri setimiz yapacağımız analizler için hazır! Tabi ki yapacağımız analizlerin amacına göre veri setimizi farklı şekillerde düzenleyebilir, içinden kesitler alarak farklı veri setleri oluşturabilir ya da başka veri setleriyle birleştirebiliriz. Bu birleştirme işlemini "dplyr" paketiyle nasıl yaptığımızı bir sonraki bölümde bulabilirsiniz. 
