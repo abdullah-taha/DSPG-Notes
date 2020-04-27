@@ -9,6 +9,7 @@
 * [Pipe %>% operatörü](#pipe--fonksiyonu-operatörü)
 * mutate()
 * [arrange()](#arrange-fonksiyonu)
+<<<<<<< HEAD
 * transmute()
 * summarise()
 * group_by()
@@ -18,6 +19,18 @@
 * gather()
 * spread()
 * unite()
+=======
+* [transmute()](#transmute-fonksiyonu)
+* [summarise()](#summarise-fonksiyonu)
+* [group_by()](#group_by-fonksiyonu)
+* [count()](#count-fonksiyonu)
+* [top_n()](#top_n-fonksiyonu)
+* [genel egzersiz](#genel-egzersiz)
+* [tidyr paketi](#tidyr-paketi)
+* [gather()](#gather())
+* [spread()](#spread())
+* [unite()](#unite())
+>>>>>>> parent of b01acfe... Update Lesson3.md
 * dplyr ile join işlemleri
 
 
@@ -799,4 +812,528 @@ msleep %>%
 # ... with 12 more rows
 ```
 ## top_n() fonskiyonu
+<<<<<<< HEAD
 yazılacak
+=======
+**top_n()** fonksiyonu belli bir değişkene göre belirlenen bir sayıda en yüksek değerli verileri getirir. Hemen nasıl çalıştığını inceleyelim.
+
+Uyanık kalma süreleri en fazla olan ilk 10 canlıyı getirelim.
+```R
+msleep %>%
+  top_n(awake, n=10)
+>
+               name         genus  vore          order conservation sleep_total sleep_rem sleep_cycle awake brainwt   bodywt
+1               Cow           Bos herbi   Artiodactyla domesticated         4.0       0.7   0.6666667 20.00  0.4230  600.000
+2          Roe deer     Capreolus herbi   Artiodactyla           lc         3.0        NA          NA 21.00  0.0982   14.800
+3    Asian elephant       Elephas herbi    Proboscidea           en         3.9        NA          NA 20.10  4.6030 2547.000
+4             Horse         Equus herbi Perissodactyla domesticated         2.9       0.6   1.0000000 21.10  0.6550  521.000
+5            Donkey         Equus herbi Perissodactyla domesticated         3.1       0.4          NA 20.90  0.4190  187.000
+6           Giraffe       Giraffa herbi   Artiodactyla           cd         1.9       0.4          NA 22.10      NA  899.995
+7       Pilot whale Globicephalus carni        Cetacea           cd         2.7       0.1          NA 21.35      NA  800.000
+8  African elephant     Loxodonta herbi    Proboscidea           vu         3.3        NA          NA 20.70  5.7120 6654.000
+9             Sheep          Ovis herbi   Artiodactyla domesticated         3.8       0.6          NA 20.20  0.1750   55.500
+10     Caspian seal         Phoca carni      Carnivora           vu         3.5       0.4          NA 20.50      NA   86.000
+```
+
+Çıktımıza baktığımızda uyanık kalma süreleri en büyük olan ilk 10 canlının tüm özellikleri geldi. Şimdi ise bir egzersiz yapalım.
+
+>**Egzersiz** Beyin ağırlığı en fazla olan ilk 10 canlıyı vücut ağırlığına göre büyükten küçüğe sıralayalım.
+
+```R
+msleep %>%
+  top_n(brainwt, n=10) %>%
+  arrange(desc(bodywt))
+>
+               name        genus  vore          order conservation sleep_total sleep_rem sleep_cycle awake brainwt   bodywt
+1  African elephant    Loxodonta herbi    Proboscidea           vu         3.3        NA          NA  20.7   5.712 6654.000
+2    Asian elephant      Elephas herbi    Proboscidea           en         3.9        NA          NA  20.1   4.603 2547.000
+3               Cow          Bos herbi   Artiodactyla domesticated         4.0       0.7   0.6666667  20.0   0.423  600.000
+4             Horse        Equus herbi Perissodactyla domesticated         2.9       0.6   1.0000000  21.1   0.655  521.000
+5            Donkey        Equus herbi Perissodactyla domesticated         3.1       0.4          NA  20.9   0.419  187.000
+6               Pig          Sus  omni   Artiodactyla domesticated         9.1       2.4   0.5000000  14.9   0.180   86.250
+7         Gray seal Haliochoerus carni      Carnivora           lc         6.2       1.5          NA  17.8   0.325   85.000
+8             Human         Homo  omni       Primates         <NA>         8.0       1.9   1.5000000  16.0   1.320   62.000
+9        Chimpanzee          Pan  omni       Primates         <NA>         9.7       1.4   1.4166667  14.3   0.440   52.200
+10           Baboon        Papio  omni       Primates         <NA>         9.4       1.0   0.6666667  14.6   0.180   25.235
+```
+Bingo!! Tahmin edilebileceği gibi aramıza Afrika'dan katılan Afrika Filleri yarışmamızın 1.si oluyor. :tada: :tada:
+
+## Genel Egzersiz
+
+Aşağıdaki soruları çözmeye çalışalım.
+
+1. İnsan canlısının özellikleri nedir? ("name" kolonu "Human")
+
+2. Hangi canlı cinsi (genus) en fazla sayıda?
+
+3. Yeme şekillerine göre (vore), "herbi" ve "carni" olanlarla çalışmak istiyoruz. Hangi canlı türü ortalama daha fazla uyuyor? Hangi
+canlı türünün ortalama beyin ağırlığı daha fazla? "herbi" olarak beslenen canlılardan hangisi en fazla uyanık kalıyor (awake) ve uyanık
+kalma süresi nedir?
+**İpucu** Tüm soruyu tek bir pipe operatörü ile yapmak zorunda değiliz.
+
+4. BrBo_ratio isimli bir değişken oluşturalım. Bu değişken bir canlının beyin ağırlığının vücut ağırlığına oranını temsil etsin. Bu
+oranın ortalama orandan fazla olanlara "brbo_fazla", ortalama orandan az olanlara "brbo_az" olarak kategorikleştirip bu değişkenin
+ismini brbo_kategorik koyduktan sonra, canlılardan kaç tanesinin brbo_fazla kaç tanesi brbo_az olduğunu bulalım.
+
+5. Korunma durumlarına göre (conservation) canlıların vücut ağırlığı özet istatistiklerini çıkaralım.(min, max, mean, median, sd).
+Ortalama vücut ağırlıklarına göre büyükten küçüğe doğru sıralattığımızda hangi korunma durumundaki canlıların vücut ağırlığı ortalaması
+en yüksektir?
+
+**Çözümler**
+
+1. 
+```R
+# Burada insan canlısının özellikleri istendiği için filter ile özellikleri getirebiliriz.
+msleep %>%
+  filter(name == "Human")
+>
+   name genus vore    order conservation sleep_total sleep_rem sleep_cycle awake brainwt bodywt
+1 Human  Homo omni Primates         <NA>           8       1.9         1.5    16    1.32     62
+```
+
+2.
+```R
+# Bizden bir sayma işlemi isteniyor. Genus özelliğimizde kategorik. En kısa yoldan count() işimizi görecektir
+#count() fonksiyonunu hatırlarsak sort argümanı ile sıralamayı da büyükten küçüğe ayarlayabiliriz.
+
+msleep %>%
+  count(genus, sort=T)
+># A tibble: 77 x 2
+     genus            n
+   <fct>        <int>
+ 1 Panthera         3
+ 2 Spermophilus     3
+ 3 Equus            2
+ 4 Vulpes           2
+ 5 Acinonyx         1
+ 6 Aotus            1
+ 7 Aplodontia       1
+ 8 Blarina          1
+ 9 Bos              1
+10 Bradypus         1
+# ... with 67 more rows
+````
+
+3.
+```R
+#Sorumuzun ilk kısmı yani carni ve herbiyi beraber inceleyeceğimiz kısım.
+msleep %>%
+  filter(vore %in% c("herbi", "carni")) %>%
+  group_by(genus) %>%
+  summarise(ort_uyku = mean(sleep_total),
+            ort_beyin_agir= mean(brainwt, na.rm = T)) %>%
+  arrange(desc(ort_uyku))
+
+># A tibble: 45 x 3
+   genus        ort_uyku ort_beyin_agir
+   <fct>           <dbl>          <dbl>
+ 1 Lutreolina       19.4      NaN      
+ 2 Dasypus          17.4        0.0108 
+ 3 Tamias           15.8      NaN      
+ 4 Spermophilus     15.4        0.00485
+ 5 Eutamias         14.9      NaN      
+ 6 Neofiber         14.6      NaN      
+ 7 Onychomys        14.5      NaN      
+ 8 Aplodontia       14.4      NaN      
+ 9 Bradypus         14.4      NaN      
+10 Mesocricetus     14.3        0.001  
+# ... with 35 more rows
+
+#ikinci kısmımıza bakalım burada da sadece herbi ile ilgileneceğiz.
+msleep %>%
+  filter(vore == "herbi" & awake == max(awake))
+
+> 
+      name   genus  vore        order conservation sleep_total sleep_rem sleep_cycle awake brainwt  bodywt
+1 Giraffe Giraffa herbi Artiodactyla           cd         1.9       0.4          NA  22.1      NA 899.995
+```
+
+4.
+```R
+# Yeni bir değişken oluşturacağımız zaman hangi fonksiyonu kullandığımız hatırlayalım
+msleep %>%
+  mutate(BrBo_ratio = brainwt / bodywt,
+         brbo_kategorik = case_when(BrBo_ratio > mean(BrBo_ratio, na.rm=T)~"brbo_fazla",
+                                    BrBo_ratio < mean(BrBo_ratio, na.rm = T)~"brbo_az")) %>%
+  count(brbo_kategorik) %>%
+  filter(!is.na(brbo_kategorik)) %>%
+  mutate(oran = n/sum(n)*100)
+#filter işleminde is.na fonksiyonunu kullandık. Veri setimizde NA değerler olduğu için filterdan sonraki mutate işleminde is.na #kullanmasaydık değerlerin çoğu NA gelecekti. NA ile bir işlem yaptığımızda sonuç NA gelir bunu hatırlayalım
+
+># A tibble: 2 x 3
+  brbo_kategorik     n  oran
+  <chr>          <int> <dbl>
+1 brbo_az           37  66.1
+2 brbo_fazla        19  33.9
+```
+
+5.
+```R
+# Özet istatistiklere bakmak gerektiğinde summarise fonksiyonunu kullandığımızı hatırlayalım.
+msleep %>%
+  group_by(conservation) %>%
+  summarise(min_bodywt = min(bodywt, na.rm = T),
+            max_bodywt = max(bodywt, na.rm = T),
+            ort_bodywt = mean(bodywt, na.rm = T),
+            med_bodywt = median(bodywt, na.rm = T),
+            sd_bodywt = sd(bodywt, na.rm = T),
+            sıklık = n(),
+            uyanıklık_ort = mean(awake, na.rm = T)) %>% 
+  arrange(desc(ort_bodywt))
+
+># A tibble: 7 x 8
+  conservation min_bodywt max_bodywt ort_bodywt med_bodywt sd_bodywt sıklık uyanıklık_ort
+  <fct>             <dbl>      <dbl>      <dbl>      <dbl>     <dbl>  <int>         <dbl>
+1 vu                1.67       6654     1026.       86        2483.       7          17.1
+2 cd              800           900.     850.      850.         70.7      2          21.7
+3 en                0.12       2547      692.      111.       1238.       4          11.0
+4 domesticated      0.42        600      147.       34.8       226.      10          16.4
+5 nt                0.022       100       25.4       0.808      49.7      4          11.0
+6 NA                0.01        173.      11.9       0.9        34.5     29          12.8
+7 lc                0.005        85        8.05      0.77       19.1     27          12.6
+Warning message:
+Factor `conservation` contains implicit NA, consider using `forcats::fct_explicit_na` 
+```
+## tidyr paketi
+
+Uygulamada veri setleri iki şekilde karşımıza çıkar: Uzun (Long) ve Geniş (Wide) olarak. Uzun veri setleri sırasıyla her bir değişkenin
+her birim için değerleri alt alta barındırdığı veri setleridir. Geniş veri setleri ise her bir birim için değişkenlerin ayrı ayrı
+sıralandığı veri setleridir. Uygulamada sağladığı kolaylıklar açısından uzun veri setleri geniş veri setlerine tercih edilmektedir.R’de
+veri setlerinin geniş veya uzun hale getirilmesi için genellikle tidyr paketi kullanılır.
+
+Kullanacağımız bazı fonksiyonlar:
+spread()
+gather()
+unite().
+
+tidyr paketini indirelim ve çağıralım.
+```R
+install.packages("tidyr")
+library(tidyr)
+```
+
+weather isimli veri setimizi direkt olarak "datacamp" sitesinden indirelim ve weather isimli değişkene atayalım.
+```R
+if(!file.exists("weather.rds")){download.file("https://assets.datacamp.com/production/repositories/34/datasets/b3c1036d9a60a9dfe0f99051d2474a54f76055ea/weather.rds", "weather.rds")
+  dateDownloaded <- date()}
+weather <- readRDS('weather.rds')
+```
+Her zamanki gibi elimize veri seti geçtiği zaman yapacağımız ilk iş onun yapısına bakmaktır.
+```R
+str(weather)
+
+>
+'data.frame':	286 obs. of  35 variables:
+ $ X      : int  1 2 3 4 5 6 7 8 9 10 ...
+ $ year   : int  2014 2014 2014 2014 2014 2014 2014 2014 2014 2014 ...
+ $ month  : int  12 12 12 12 12 12 12 12 12 12 ...
+ $ measure: chr  "Max.TemperatureF" "Mean.TemperatureF" "Min.TemperatureF" "Max.Dew.PointF" ...
+ $ X1     : chr  "64" "52" "39" "46" ...
+ $ X2     : chr  "42" "38" "33" "40" ...
+ $ X3     : chr  "51" "44" "37" "49" ...
+ $ X4     : chr  "43" "37" "30" "24" ...
+ $ X5     : chr  "42" "34" "26" "37" ...
+ $ X6     : chr  "45" "42" "38" "45" ...
+ $ X7     : chr  "38" "30" "21" "36" ...
+ $ X8     : chr  "29" "24" "18" "28" ...
+ $ X9     : chr  "49" "39" "29" "49" ...
+ $ X10    : chr  "48" "43" "38" "45" ...
+ $ X11    : chr  "39" "36" "32" "37" ...
+ $ X12    : chr  "39" "35" "31" "28" ...
+ $ X13    : chr  "42" "37" "32" "28" ...
+ $ X14    : chr  "45" "39" "33" "29" ...
+ $ X15    : chr  "42" "37" "32" "33" ...
+ $ X16    : chr  "44" "40" "35" "42" ...
+ $ X17    : chr  "49" "45" "41" "46" ...
+ $ X18    : chr  "44" "40" "36" "34" ...
+ $ X19    : chr  "37" "33" "29" "25" ...
+ $ X20    : chr  "36" "32" "27" "30" ...
+ $ X21    : chr  "36" "33" "30" "30" ...
+ $ X22    : chr  "44" "39" "33" "39" ...
+ $ X23    : chr  "47" "45" "42" "45" ...
+ $ X24    : chr  "46" "44" "41" "46" ...
+ $ X25    : chr  "59" "52" "44" "58" ...
+ $ X26    : chr  "50" "44" "37" "31" ...
+ $ X27    : chr  "52" "45" "38" "34" ...
+ $ X28    : chr  "52" "46" "40" "42" ...
+ $ X29    : chr  "41" "36" "30" "26" ...
+ $ X30    : chr  "30" "26" "22" "10" ...
+ $ X31    : chr  "30" "25" "20" "8" ...
+```
+
+Veri yapısına baktığımızda 35 değişkenimiz ve 286 adet gözlemimiz olduğunu görebiliriz. Değikenlerimize baktığımız zaman year ve month olarak zaman değişkenleri var. İlk X değişkeninin ne olduğunu bilmiyoruz. Onun dışında çok fazla X ile başlayan değişken var. Son olarak measure değişkeninde çok fazla sayıda biricik(unique) özellik olduğunu görebiliriz. Verimizin ilk gözlemlerine bakarak bu değişkenleri anlamaya çalışalım.
+
+```R
+head(weather)
+
+>
+  X year month           measure X1 X2 X3 X4 X5 X6 X7 X8 X9 X10 X11 X12 X13 X14 X15 X16 X17 X18 X19 X20 X21
+1 1 2014    12  Max.TemperatureF 64 42 51 43 42 45 38 29 49  48  39  39  42  45  42  44  49  44  37  36  36
+2 2 2014    12 Mean.TemperatureF 52 38 44 37 34 42 30 24 39  43  36  35  37  39  37  40  45  40  33  32  33
+3 3 2014    12  Min.TemperatureF 39 33 37 30 26 38 21 18 29  38  32  31  32  33  32  35  41  36  29  27  30
+4 4 2014    12    Max.Dew.PointF 46 40 49 24 37 45 36 28 49  45  37  28  28  29  33  42  46  34  25  30  30
+5 5 2014    12    MeanDew.PointF 40 27 42 21 25 40 20 16 41  39  31  27  26  27  29  36  41  30  22  24  27
+6 6 2014    12     Min.DewpointF 26 17 24 13 12 36 -3  3 28  37  27  25  24  25  27  30  32  26  20  20  25
+  X22 X23 X24 X25 X26 X27 X28 X29 X30 X31
+1  44  47  46  59  50  52  52  41  30  30
+2  39  45  44  52  44  45  46  36  26  25
+3  33  42  41  44  37  38  40  30  22  20
+4  39  45  46  58  31  34  42  26  10   8
+5  34  42  44  43  29  31  35  20   4   5
+6  25  37  41  29  28  29  27  10  -6   1
+````
+Veriye baktığımızda ilk değişkenimizin gereksiz olduğunu anlayabiliyoruz. X ile başlayan değişkenlere baktığımızda ise bunların günler olduğunu anlayabiliyoruz. Ayrıca measure değişkenine bakarsak buradaki değerlerin değişken olması gerektiğini anlayabiliyoruz. Artık veri üzerinde yapmamız gereken işlemler belirginleşti. O zaman işe koyulalım. :computer: :computer:
+
+## gather()
+
+Karşımıza çıkan ilk problemi çözelim. X ile başlayan değerler göz sağlığı için çok faydalı durmamakta. Bu değerler aslında değişken olmalı. Bu değerler bir ayın günlerini temsil etmekte.
+Bu sütunları tek bir gün (day) değişkeni oluşturacak şekilde toplamamız gerekiyor. Bunu ise gather() fonksiyonu ile yapabiliriz.
+
+İlk önce bu fonksiyonun hangi argümanlar aldığına bakalım.
+```R
+?gather
+```
+**buraya resim gelecek**
+İlk argümanımız *data* yani üzerinde çalışacağımız veri setimiz.
+*key* ve *value* argümanlarına bakarsak *key* değişkenlerimizin yeni kaydedileceği sütunu *value* bu değişkenlere karşılık gelen değerlerin kaydedileceği sütunu göstermekte. Buraya isimleri string olarak girmeliyiz.
+Bu argümanlardan sonra değiştireceğimiz değişkenleri argüman olarak vermeliyiz. Örneğimizde daha rahat anlayacaksınız.
+
+```R
+weather <- gather(weather, key="day", value="value", X1:X31, na.rm = T)
+head(weather)
+
+>
+X year month           measure day value
+1 1 2014    12  Max.TemperatureF  X1    64
+2 2 2014    12 Mean.TemperatureF  X1    52
+3 3 2014    12  Min.TemperatureF  X1    39
+4 4 2014    12    Max.Dew.PointF  X1    46
+5 5 2014    12    MeanDew.PointF  X1    40
+6 6 2014    12     Min.DewpointF  X1    26
+```
+
+Artık sonsuza kadar giden X değerlerimizi day değişkeninde topladık. Şimdi ise gereksiz olan ilk değişken X'den kurtulalım. Veri setinde bir değişken silmemiz için o değişkene NULL atamamız yeterli olacaktır.
+
+```R
+weather$X <- NULL
+```
+
+Artık "day" isimli gün kolonumuzu elde ettik. Fakat her günün önünde "X" karakteri mevcut.Bu "X" karakterlerini stringr paketinden str_remove_all() fonksiyonu kullanarak silelim.
+
+```R
+install.packages("stringr")
+library(stringr)
+weather$day <- str_remove_all(weather$day, "X")
+
+head(weather)
+
+>
+   year month           measure day value
+1 2014    12  Max.TemperatureF   1    64
+2 2014    12 Mean.TemperatureF   1    52
+3 2014    12  Min.TemperatureF   1    39
+4 2014    12    Max.Dew.PointF   1    46
+5 2014    12    MeanDew.PointF   1    40
+6 2014    12     Min.DewpointF   1    26
+```
+
+Veri setimiz şekillenmeye başladı. Şimdi ise ara vermeden devam edelim. :star: :star:
+
+## spread()
+
+Veri setimizdeki ikinci sorun ise measure değişkeni. Measure değişkeni "Max.TemperatureF", "Mean.TemperatureF" gibi aslında değişken ismi olması gereken gözlemler içeriyor.
+Bu değişkendeki farklı her bir gözlemi ayrı bir değişken haline getirmemiz gerekiyor. Bunu spread() fonksiyonu ile yapabiliriz. 
+
+Yine ilk olarak bu fonksiyonun argümanlarına bakalım.
+
+```R
+?spread
+```
+**Ekran görüntüsü gelecek**
+
+İlk argümanımız *data* yani veri setimiz.
+*key* argümanı yeni değişkenlere ayrılacak olan sütunu, *value* argümanı ise yeni oluşacak değişkenlere ait olan gözlemleri barındırdan sütunu ifade ediyor. İsimleri gather() fonksiyonunda olduğu gibi string olarak girmeliyiz.
+Biz veri setimizde measure değişkenini value değişkenindeki gözlemlerle çoklu sütunlar haline getirmek istiyoruz. spread() fonksiyonunu şu şekilde uyarlayabiliriz.
+
+```R
+weather <- spread(weather, measure, value)
+head(weather)
+
+>
+  year month day CloudCover    Events Max.Dew.PointF Max.Gust.SpeedMPH Max.Humidity Max.Sea.Level.PressureIn
+1 2014    12   1          6      Rain             46                29           74                    30.45
+2 2014    12  10          8      Rain             45                29          100                    29.58
+3 2014    12  11          8 Rain-Snow             37                28           92                    29.81
+4 2014    12  12          7      Snow             28                21           85                    29.88
+5 2014    12  13          5                       28                23           75                    29.86
+6 2014    12  14          4                       29                20           82                    29.91
+  Max.TemperatureF Max.VisibilityMiles Max.Wind.SpeedMPH Mean.Humidity Mean.Sea.Level.PressureIn Mean.TemperatureF
+1               64                  10                22            63                     30.13                52
+2               48                  10                23            95                      29.5                43
+3               39                  10                21            87                     29.61                36
+4               39                  10                16            75                     29.85                35
+5               42                  10                17            65                     29.82                37
+6               45                  10                15            68                     29.83                39
+  Mean.VisibilityMiles Mean.Wind.SpeedMPH MeanDew.PointF Min.DewpointF Min.Humidity Min.Sea.Level.PressureIn
+1                   10                 13             40            26           52                    30.01
+2                    3                 13             39            37           89                    29.43
+3                    7                 13             31            27           82                    29.44
+4                   10                 11             27            25           64                    29.81
+5                   10                 12             26            24           55                    29.78
+6                   10                 10             27            25           53                    29.78
+  Min.TemperatureF Min.VisibilityMiles PrecipitationIn WindDirDegrees
+1               39                  10            0.01            268
+2               38                   1            0.28            357
+3               32                   1            0.02            230
+4               31                   7               T            286
+5               32                  10               T            298
+6               33                  10            0.00            306
+``` 
+
+Gördüğümüz gibi measure değişkeni altındaki 22 farklı gözlem ayrı sütun isimleri olacak şekilde ayrıldı. value değişkenindeki değerler de karşılığı olan year, month ve day değişkenlerine göre bu yeni 22 değişkenin altına atandı. 
+
+Veri setimiz neredeyse istediğimiz formata ulaştı, bir diğer fonksiyonumuzla düzenlemeye devam edelim.
+
+## unite()
+
+Veri setimizdeki diğer bir sorun ise tarihle alakalı değişkenlerin ayrı olması. Tarih bilgisinin year, month ve day olarak 3 ayrı değişkenle ifade edilmesi hem görsellik açısından yeterince anlaşılır durmuyor hem de ileride yapacağımız filtreleme gibi işlemlerin uzamasına sebep olabilir. 
+Bu 3 ayrı değişkeni birleştirerek tek bir değişken haline getirmek istiyoruz. Bunun için unite() fonksiyonunu kullanacağız.
+
+Öncelikle bu fonksiyonun argümanlarını inceleyelim.
+
+```R
+?unite
+```
+**Ekran görüntüsü gelecek**
+
+*data* argümanı veri setimizi ifade ediyor.
+*col* argümanı yeni oluşacak değişkenimizin ismini gösteriyor, string veya sembol olarak girilmesi gerekiyor.
+*...* şeklinde gösterilen argüman birleştirmek istediğimiz değişkenleri ifade ediyor. 
+*sep* argümanı ise birleşecek olan değerler arasında kullanılacak ayracı belirtmemizi sağlıyor. 
+Veri setimiz üzerinde fonksiyonu uygulayarak bu argümanları daha iyi anlayabiliriz. 
+
+```R
+weather <- unite(weather, date, year, month, day, sep = "-")
+head(weather)
+
+>
+        date CloudCover    Events Max.Dew.PointF Max.Gust.SpeedMPH Max.Humidity Max.Sea.Level.PressureIn Max.TemperatureF
+1  2014-12-1          6      Rain             46                29           74                    30.45               64
+2 2014-12-10          8      Rain             45                29          100                    29.58               48
+3 2014-12-11          8 Rain-Snow             37                28           92                    29.81               39
+4 2014-12-12          7      Snow             28                21           85                    29.88               39
+5 2014-12-13          5                       28                23           75                    29.86               42
+6 2014-12-14          4                       29                20           82                    29.91               45
+  Max.VisibilityMiles Max.Wind.SpeedMPH Mean.Humidity Mean.Sea.Level.PressureIn Mean.TemperatureF Mean.VisibilityMiles
+1                  10                22            63                     30.13                52                   10
+2                  10                23            95                      29.5                43                    3
+3                  10                21            87                     29.61                36                    7
+4                  10                16            75                     29.85                35                   10
+5                  10                17            65                     29.82                37                   10
+6                  10                15            68                     29.83                39                   10
+  Mean.Wind.SpeedMPH MeanDew.PointF Min.DewpointF Min.Humidity Min.Sea.Level.PressureIn Min.TemperatureF Min.VisibilityMiles
+1                 13             40            26           52                    30.01               39                  10
+2                 13             39            37           89                    29.43               38                   1
+3                 13             31            27           82                    29.44               32                   1
+4                 11             27            25           64                    29.81               31                   7
+5                 12             26            24           55                    29.78               32                  10
+6                 10             27            25           53                    29.78               33                  10
+  PrecipitationIn WindDirDegrees
+1            0.01            268
+2            0.28            357
+3            0.02            230
+4               T            286
+5               T            298
+6            0.00            306
+```
+
+year, month ve day değişkenlerinin değerleri satır bazında, belirlemiş olduğumuz "-" ayraç işaretiyle, date isimli değişken altında birleşti. 
+
+Bir tarih değişkeni elde ettik ancak oluşturduğumuz bu değişkenin sınıfı da tarih formatında mı acaba?
+
+```R
+class(weather$date)
+
+>
+[1] "character"
+```
+
+Gördüğümüz gibi elde ettiğimiz değişken karakter formatında. R'ın bu değişkeni tarih olarak algılayabilmesi için bu şekilde işlememiz gerekiyor. Tarih formatıyla ilgili işlemleri "lubridate" paketini kullanarak yapıyoruz. Öncelikle paketi indirelim ve çağıralım.
+
+```R
+install.packages("lubridate")
+library(lubridate)
+```
+
+date değişkenimizi tarih formatına ymd() fonksiyonunu kullanarak çevireceğiz. Bu fonksiyonu kullanmamızın sebebi date değişkenindeki gözlemlerimizin "year-month-day" sırasında olması. Farklı sıralarda olan gözlemler için ydm(), mdy(), myd(), dmy(), dym() fonksiyonları gibi gözlemlerimize uygun olan fonksiyonu kullanabiliriz.
+
+date değişkenimizdeki değerleri tarih formatına çevirerek tekrar date değişkenine tanımlıyoruz. 
+
+```R
+weather$date <- ymd(weather$date)
+class(weather$date)
+
+>
+[1] "Date"
+```
+
+date değişkeninin sınıfı tarih formatına dönüştü. 
+
+Veri setimizin yapısını tekrar incelediğimizde “PreciptationIn” değişkeninde ondalıklı sayılar ile birlikte “T” harfinin de olduğunu görüyoruz. 
+
+```R
+str(weather)
+
+>
+'data.frame': 366 obs. of 23 variables:
+$ date : Date, format: "2014-12-01" "2014-12-10" "2014-12-11" "2014-12-12" ...
+$ CloudCover : chr "6" "8" "8" "7" ...
+$ Events : chr "Rain" "Rain" "Rain-Snow" "Snow" ...
+$ Max.Dew.PointF : chr "46" "45" "37" "28" ...
+$ Max.Gust.SpeedMPH : chr "29" "29" "28" "21" ...
+$ Max.Humidity : chr "74" "100" "92" "85" ...
+$ Max.Sea.Level.PressureIn : chr "30.45" "29.58" "29.81" "29.88" ...
+$ Max.TemperatureF : chr "64" "48" "39" "39" ...
+$ Max.VisibilityMiles : chr "10" "10" "10" "10" ...
+$ Max.Wind.SpeedMPH : chr "22" "23" "21" "16" ...
+$ Mean.Humidity : chr "63" "95" "87" "75" ...
+$ Mean.Sea.Level.PressureIn: chr "30.13" "29.5" "29.61" "29.85" ...
+$ Mean.TemperatureF : chr "52" "43" "36" "35" ...
+$ Mean.VisibilityMiles : chr "10" "3" "7" "10" ...
+$ Mean.Wind.SpeedMPH : chr "13" "13" "13" "11" ...
+$ MeanDew.PointF : chr "40" "39" "31" "27" ...
+$ Min.DewpointF : chr "26" "37" "27" "25" ...
+$ Min.Humidity : chr "52" "89" "82" "64" ...
+$ Min.Sea.Level.PressureIn : chr "30.01" "29.43" "29.44" "29.81" ...
+$ Min.TemperatureF : chr "39" "38" "32" "31" ...
+$ Min.VisibilityMiles : chr "10" "1" "1" "7" ...
+$ PrecipitationIn : chr "0.01" "0.28" "0.02" "T" ...
+$ WindDirDegrees : chr "268" "357" "230" "286" ...
+```
+
+İleride yapacağımız analizler için bu "T" değerleri yanlış sonuçlara sebep olabilir o yüzden bu değerleri diğerleri gibi bir sayıyla değiştirmek istiyoruz.
+PrecipitationIn değişkeni hakkında biraz araştırma yaptığımızda bu değişkenin meteoroloji alanında yağışı temsil ettiğini ve ilgili bölgenin çok az yağış alacağını belirttiğini öğreniyoruz. 
+Bu yüzden "T" harfi yerine bu gözlemlere 0 (sıfır) atarsak daha anlamlı sonuçlar elde edebiliriz. Bu işlemi "stringr" paketinde bulunan str_replace_all() fonsiyonunu kullanarak yapacağız. 
+
+Bu fonksiyonun argümanlarını inceleyelim.
+
+```R
+?str_replace_all
+```
+**Ekran görüntüsü gelecek**
+
+*string* argümanı değişiklik yapacağımız vektörü ifade ediyor. 
+*pattern* argümanı değiştimek istediğimiz, fonksiyonun vektör içinde arayacağı ifadeyi/kalıbı gösteriyor.
+*replacement* argümanı ise *pattern* argümanındaki ifadeyi ne ile değiştirmek istediğimizi ifade ediyor.
+Fonksiyonu veri setimiz üzerinde uygulayalım.
+
+```R
+weather$PrecipitationIn <- str_replace_all(weather$PrecipitationIn, "T", "0")
+head(weather$PrecipitationIn, 10)
+
+>
+[1] "0.01" "0.28" "0.02" "0" "0" "0.00" "0.00" "0" "0.43" "0.01"
+```
+
+PrecipitationIn değişkenindeki "T" ifadelerini "0" sayısıyla değiştirdik. 
+>>>>>>> parent of b01acfe... Update Lesson3.md
