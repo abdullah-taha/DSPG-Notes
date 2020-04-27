@@ -1,7 +1,8 @@
 # Ders 4
 
 ## Başlıklar:
-* ggplot2
+* [Giriş](#giriş)
+* [ggplot2](#ggplot2)
 * Grafik çeşitleri
 * Tek değişkenli grafikler (sürekli)-(continouse variables)
 * Tek değişkenli grafikler (kesikli)-(discrete variable)
