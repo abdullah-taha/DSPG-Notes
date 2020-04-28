@@ -666,7 +666,7 @@ Myframe bir dataframe olduğu için listeden çağırdığımızda da dataframe 
 #-Egzersiz-
 #Oluşturduğumuz mylist listemizden myframe veri setine erişip Zeynep'in kilosunu 60 olarak değiştirip
 #yeniset isimli data frame olarak atayalım.
-
+```R
 mylist[[4]]["Zeynep","kilo"] <- 60
 yeniset <- mylist[[4]]
 
@@ -680,5 +680,5 @@ Zeynep          5     Zeynep   60 169         A
 ```
 
 Kesitimize ulaştıktan sonra atama operatörü ile yeni değerini verebiliriz. Ayrıca yeni halinide endeksleme ile yeni bir değişkene atayabiliriz. Eğer listedeki elemanların isimleri olsaydı endeksleme yerine isimler ile de atama yapabilirdik.
-```
+
 
