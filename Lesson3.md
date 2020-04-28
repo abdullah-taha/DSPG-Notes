@@ -16,11 +16,11 @@
 * [top_n()](#top_n-fonksiyonu)
 * [genel egzersiz](#genel-egzersiz)
 * [tidyr paketi](#tidyr-paketi)
-* [gather()](#gather())
-* [spread()](#spread())
-* [unite()](#unite())
-* Veri Setindeki Eksik, Aykırı Gözlemler
-* dplyr ile join işlemleri
+* [gather()](#gather()-fonksiyonu)
+* [spread()](#spread()-fonksiyonu)
+* [unite()](#unite()-fonksiyonu)
+* [Veri setindeki eksik, aykırı gözlemler](#Veri-setindeki-eksik,-aykırı-gözlemler)
+* [dplyr ile join işlemleri](#dplyr-ile-join-işlemleri)
 
 
 
@@ -1072,7 +1072,7 @@ head(weather)
 ````
 Veriye baktığımızda ilk değişkenimizin gereksiz olduğunu anlayabiliyoruz. X ile başlayan değişkenlere baktığımızda ise bunların günler olduğunu anlayabiliyoruz. Ayrıca measure değişkenine bakarsak buradaki değerlerin değişken olması gerektiğini anlayabiliyoruz. Artık veri üzerinde yapmamız gereken işlemler belirginleşti. O zaman işe koyulalım. :computer: :computer:
 
-## gather()
+## gather() fonksiyonu
 
 Karşımıza çıkan ilk problemi çözelim. X ile başlayan değerler göz sağlığı için çok faydalı durmamakta. Bu değerler aslında değişken olmalı. Bu değerler bir ayın günlerini temsil etmekte.
 Bu sütunları tek bir gün (day) değişkeni oluşturacak şekilde toplamamız gerekiyor. Bunu ise gather() fonksiyonu ile yapabiliriz.
@@ -1127,7 +1127,7 @@ head(weather)
 
 Veri setimiz şekillenmeye başladı. Şimdi ise ara vermeden devam edelim. :star: :star:
 
-## spread()
+## spread() fonksiyonu
 
 Veri setimizdeki ikinci sorun ise measure değişkeni. Measure değişkeni "Max.TemperatureF", "Mean.TemperatureF" gibi aslında değişken ismi olması gereken gözlemler içeriyor.
 Bu değişkendeki farklı her bir gözlemi ayrı bir değişken haline getirmemiz gerekiyor. Bunu spread() fonksiyonu ile yapabiliriz. 
@@ -1182,7 +1182,7 @@ Gördüğümüz gibi measure değişkeni altındaki 22 farklı gözlem ayrı sü
 
 Veri setimiz neredeyse istediğimiz formata ulaştı, bir diğer fonksiyonumuzla düzenlemeye devam edelim.
 
-## unite()
+## unite() fonksiyonu
 
 Veri setimizdeki diğer bir sorun ise tarihle alakalı değişkenlerin ayrı olması. Tarih bilgisinin year, month ve day olarak 3 ayrı değişkenle ifade edilmesi hem görsellik açısından yeterince anlaşılır durmuyor hem de ileride yapacağımız filtreleme gibi işlemlerin uzamasına sebep olabilir. 
 Bu 3 ayrı değişkeni birleştirerek tek bir değişken haline getirmek istiyoruz. Bunun için unite() fonksiyonunu kullanacağız.
@@ -1452,7 +1452,7 @@ str(weather)
  $ WindDirDegrees           : num  268 357 230 286 298 306 324 79 311 281 ...
 ```
 
-## Veri Setindeki Eksik, Aykırı Gözlemler
+## Veri setindeki eksik, aykırı gözlemler
 
 Veri setimiz üzerinde yapacağımız analizlerden doğru ve anlamlı sonuçlar alabilmemiz için her zaman eksik ve aykırı gözlemleri kontrol etmemiz gerekir.
 Eksik gözlemler veri setinde "NA" şeklinde görünebilir ya da hiçbir girdi olmayabilir.
@@ -1841,7 +1841,7 @@ publishers <- tribble(
 “superheroes” veri setimiz süper kahramanın ismini, kötü ya da iyi olarak karakterini, cinsiyetini ve  yayıncı kuruluşu içeriyor. “publishers” veri setimiz ise yayıncı kuruluşların ismini ve kuruluş yıllarını içeriyor. 
 Bu veri setleri içinde aynı olan bir değişkenimiz var ancak değişken isimleri farklı. “superheroes” veri setindeki publisher değişkeniyle, “publishers” veri setindeki name değişkeni aslında aynı değişkenler. Veri setlerimizi bu değişkene göre birleştireceğiz. 
 
-*inner_join() fonksiyonu*
+**inner_join() fonksiyonu
 
 Bu fonksiyon her iki tablodaki eşleşen satırları ve her iki tablodaki değişkenleri getirir. Veri setlerimiz üzerinde deneyelim. 
 Veri setlerinde aynı olan değişkenlerimizin ismi farklıydı. Eğer aynı olsaydı, inner_join() foksiyonuna argüman olarak sadece veri setlerinin isimlerini girmemiz yeterliydi. Ancak aynı olmadığı için ‘by=’ argümanıyla hangi değişkenlere göre birleştirmek istediğimizi belirtmemiz lazım. 
@@ -1864,7 +1864,7 @@ inner_join(superheroes, publishers, by = "publisher" = “name”)
 Argüman olarak ilk yazdığımız veri setinin değişkenleri başta olacak şekilde tablolarımız publisher ve name değişkenlerine göre birleşti. Ortak olan değişkenin ismi de yine ilk argüman olarak yazdığımız veri setindeki publisher ismini aldı. 
 Burada dikkat etmemiz gereken nokta, superheroes veri setindeki "Dark Horse Comics" gözleminin olduğu satır ve publishers veri setindeki "Image" gözleminin olduğu satırın birleşmiş halinde bulunmaması. inner_join fonksiyonu sadece her iki tabloda eşleşen satırları getirdiği için bu satırlar bulunmuyor. 
 
-*semi_join() foksiyonu*
+**semi_join() foksiyonu
 
 Her iki tablodaki eşleşen satırları getirir ama ikinci tablodaki ortak olan sütun hariç diğer sütunları getirmez.
 
@@ -1885,7 +1885,7 @@ semi_join(superheroes, publishers, by = c("publisher" = "name"))
 
 Gördüğümüz gibi, inner_join() fonksiyonundaki gibi sadece eşleşen satırlar geldi ancak, ikinci tablodaki yani publishers veri setindeki sütunlar gelmedi. (Burada ortak olan sütun haricinde tek bir sütun vardı: yr_founded)
 
-*left_join() fonksiyonu*
+**left_join() fonksiyonu
 
 İlk tablodaki tüm satırlar ile birlikte her iki tablodaki tüm değişkenleri/sütunları getirir.
 
@@ -1907,7 +1907,7 @@ left_join(superheroes, publishers, by = c("publisher" = "name"))
 
 inner_join() fonksiyonunda olduğu gibi her iki veri setindeki bütün değişkenler geldi ancak farklı olarak ilk veri setindeki tüm satırlar geldi. "Dark Horse Comics" gözleminin publishers veri setinde karşılığı olmadığı için yr_founded değişkeninde gözlemi “NA” olarak gözüküyor. 
 
-*right_join() fonksiyonu*
+**right_join() fonksiyonu
 
 İkinci tablodaki tüm satırlar ile birlikte her iki tablodaki tüm değişkenleri/sütunları getirir. 
 
@@ -1929,7 +1929,7 @@ right_join(superheroes, publishers, by = c("publisher" = "name"))
 
 left_join() fonksiyonunun tersi olan right_join() fonksiyonunda da her iki veri setindeki tüm değişkenler geldi. Bu seferde, “Image” gözleminin karşılığı superheroes veri setinde bulunmadığı için bu veri setinin değişkenlerinde değeri “NA” geldi. 
 
-*anti_join() fonksiyonu*
+**anti_join() fonksiyonu
 
 İlk tabloda olup ikinci tabloda olmayan satırları ve ilk tablonun sütunlarını getirir.
 
@@ -1956,7 +1956,7 @@ anti_join(publishers, superheroes, by = c(“name” = "publisher"))
 1 Image       1992
 ```
 
-*full_join() fonksiyonu*
+**full_join() fonksiyonu
 
 Her iki tablodaki tüm satırları ve sütunları getirir.
 
