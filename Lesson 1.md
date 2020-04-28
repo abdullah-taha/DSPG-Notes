@@ -12,7 +12,7 @@
 * [Faktörler](#faktörler-factors)
 * [Dataframeler](#data-frames)
 * [R notasyonları](#r-notasyonları)
-* R'da Listeler
+* [R'da Listeler](#rda-listeler)
 
 ## Sosyal Fayda için Veri Bilimi nedir ?
 yazılacak
@@ -608,5 +608,77 @@ Levels: A B C
  # 2.yol
  myframe[1:4,-1][1,"harf_notu"]
 
+## R'da Listeler
+Hatırlayacağınız gibi R'da vektörlerin elemanları aynı tipte değişkenlerden oluşuyordu. Listeler ise bunun tam tersi şeklinde olmakta. Listeler karakter, nümerik, data frame vb. değişkinlerden oluşabilir. Liste oluşturmak için ise **list()** fonksiyonunu kullanıyoruz. Hemen örneklere bakalım.
+```R
+mylist<-list(sayılar=c(1:6),karakter=c("DSPG","CADS","TEDU"),mantık=c(T,F,T),myframe)
+mylist
+>$sayılar
+[1] 1 2 3 4 5 6
+
+$karakterler
+[1] "DSPG" "CADS" "TEDU"
+
+$mantıksal
+[1]  TRUE FALSE  TRUE
+
+[[4]]
+       ogrenci_id ogrenci_ad kilo boy harf_notu
+Ayşe            1       Ayşe   65 160         A
+Fatma           2      Fatma   56 165         B
+Ali             3        Ali   75 177         C
+Mehmet          4     Mehmet   89 196         A
+Zeynep          5     Zeynep   60 169         A
+```
+
+Gördüğünüz gibi listeye istediğimiz veri tipindeki elemanları eklyebiliyoruz. Ayrıca verdiğimiz istersek isim de verebiliyoruz. Listemizi çağırdığımızda isim verdiğimiz değişkenlerin isimlerini, vermediklerimizin ise endeksini görmekteyiz. Bahsedilen isimlendirme ve endeksleme ile listemizden parça alabiliriz.
+```R
+#mylist listesinden sayıları değişkenini elde edelim.
+mylist$sayılar
+#ya da
+mylist[[1]]
+>1 2 3 4 5 6
+
+#mylist listesinden data frame'i elde edelim.Data Frame bir isme sahip değil çağırırken dikkat edelim.
+mylist[[4]]
+>       ogrenci_id ogrenci_ad kilo boy harf_notu
+Ayşe            1       Ayşe   65 160         A
+Fatma           2      Fatma   56 165         B
+Ali             3        Ali   75 177         C
+Mehmet          4     Mehmet   89 196         A
+Zeynep          5     Zeynep   60 169         A
+```
+
+Gördüğünüz gibi isimlendirdiğimiz elemanı ismi ile çağırabiliyoruz. İsimsiz olanları ise endeksine göre çağırmalıyız. Şimdi ise çağırdığımız elemanlardan parçalar alalım.
+```R
+#-Egzersiz-
+#Oluşturduğumuz mylist listemizden myframe veri setine erişip Mehmet'in boyuna ulaşalım.
+
+mylist[[4]]["Mehmet", "boy"]
+>196
+#ya da
+mylist[[4]]$boy[4]
+>196
+```
+
+Myframe bir dataframe olduğu için listeden çağırdığımızda da dataframe bölümünde gördüğümüz kesit alma yöntemleri ile kesit alabiliyoruz. Şimdi ise bu kesit değerlerini nasıl değiştirebileceğimize bakalım.
+```R
+#-Egzersiz-
+#Oluşturduğumuz mylist listemizden myframe veri setine erişip Zeynep'in kilosunu 60 olarak değiştirip
+#yeniset isimli data frame olarak atayalım.
+
+mylist[[4]]["Zeynep","kilo"] <- 60
+yeniset <- mylist[[4]]
+
+yeniset
+>       ogrenci_id ogrenci_ad kilo boy harf_notu
+Ayşe            1       Ayşe   65 160         A
+Fatma           2      Fatma   56 165         B
+Ali             3        Ali   75 177         C
+Mehmet          4     Mehmet   89 196         A
+Zeynep          5     Zeynep   60 169         A
+```
+
+Kesitimize ulaştıktan sonra atama operatörü ile yeni değerini verebiliriz. Ayrıca yeni halinide endeksleme ile yeni bir değişkene atayabiliriz. Eğer listedeki elemanların isimleri olsaydı endeksleme yerine isimler ile de atama yapabilirdik.
 ```
 
