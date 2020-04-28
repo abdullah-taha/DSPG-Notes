@@ -1797,3 +1797,184 @@ weather[weather$Events == "", "Events"] <- "None"
 ```
 
 Veri setimiz yapacağımız analizler için hazır! Tabi ki yapacağımız analizlerin amacına göre veri setimizi farklı şekillerde düzenleyebilir, içinden kesitler alarak farklı veri setleri oluşturabilir ya da başka veri setleriyle birleştirebiliriz. Bu birleştirme işlemini "dplyr" paketiyle nasıl yaptığımızı bir sonraki bölümde bulabilirsiniz. 
+
+## dplyr ile join işlemleri
+
+Aynı değişkeni içeren birden fazla veri setine sahip olduğumuz durumlarda, bu veri setlerini “dplyr” paketinin join() fonksiyonlarıyla birleştirebiliriz. İstediğimiz değişkenleri ve gözlemleri seçerek bu birleştirme işlemini yapmamızı sağlayan bazı fonksiyonlar şunlardır:
+- left_join()
+- right_join()
+- inner_join()
+- full_join()
+- anti_join()
+- semi_join()
+
+Bu fonksiyonları kendi tanımlayacağımız iki veri seti üzerinde deneyeceğiz. Daha önce gördüğümüz data frame gibi yöntemler yerine “tibble” formatında veri setlerimizi tanımlayacağız. Tibble’lar okunabilirliği yüksek olan küçük tablolar için kullanılabilen bir formattır. Değişkenlerin altında gözlemler satır satır dizilmiş halde bulunur. 
+Tibble oluşturmak için tribble() fonksiyonunu kullanacağız. Bu fonksiyon aslında “tibble” paketi içinde bulunuyor. Ancak ek paketleri içinde “tibble”, “dplyr” ve “tidyr” gibi paketleri de barındıran “tidyverse” paketini de çağırabiliriz. Tabi ki ilk defa kullanacağımız bir paketse, öncelikle install.packages() fonksiyonuyla yüklememiz gerekiyor. 
+
+```R
+install.packages("tidyverse")
+library(tidyverse)
+```
+
+“superheroes” ve “publishers” adında süper kahramanlarla ilgili iki tibble tanımlayacağız. Değişken isimlerimizi belli etmek için başına ‘~’ işareti koymamız gerekiyor. Daha sonra her değişkenin gözlemi değişken isminin altına gelecek şekilde yani bir tablo halinde gözlemlerimizi giriyoruz. 
+
+```R
+superheroes <- tribble(
+  ~name,     ~alignment,    ~gender,    ~publisher,
+  "Magneto",   "bad",       "male",      "Marvel",
+  "Storm",     "good",      "female",    "Marvel",
+  "Mystique",  "bad",       "female",    "Marvel",
+  "Batman",    "good",      "male",      "DC",
+  "Joker",     "bad",       "male",      "DC",  
+  "Catwoman",  "bad",       "female",    "DC",
+  "Hellboy",    "good",     "male",      "Dark Horse Comics"
+)
+
+publishers <- tribble(
+  ~name,   ~yr_founded,
+  "DC",         1934L,  
+  "Marvel",     1939L,
+  "Image",      1992L
+)
+```
+
+“superheroes” veri setimiz süper kahramanın ismini, kötü ya da iyi olarak karakterini, cinsiyetini ve  yayıncı kuruluşu içeriyor. “publishers” veri setimiz ise yayıncı kuruluşların ismini ve kuruluş yıllarını içeriyor. 
+Bu veri setleri içinde aynı olan bir değişkenimiz var ancak değişken isimleri farklı. “superheroes” veri setindeki publisher değişkeniyle, “publishers” veri setindeki name değişkeni aslında aynı değişkenler. Veri setlerimizi bu değişkene göre birleştireceğiz. 
+
+*inner_join() fonksiyonu*
+
+Bu fonksiyon her iki tablodaki eşleşen satırları ve her iki tablodaki değişkenleri getirir. Veri setlerimiz üzerinde deneyelim. 
+Veri setlerinde aynı olan değişkenlerimizin ismi farklıydı. Eğer aynı olsaydı, inner_join() foksiyonuna argüman olarak sadece veri setlerinin isimlerini girmemiz yeterliydi. Ancak aynı olmadığı için ‘by=’ argümanıyla hangi değişkenlere göre birleştirmek istediğimizi belirtmemiz lazım. 
+
+```R
+inner_join(superheroes, publishers, by = "publisher" = “name”)
+
+>
+# A tibble: 6 x 5
+  name     alignment gender publisher yr_founded
+  <chr>    <chr>     <chr>  <chr>          <int>
+1 Magneto  bad       male   Marvel          1939
+2 Storm    good      female Marvel          1939
+3 Mystique bad       female Marvel          1939
+4 Batman   good      male   DC              1934
+5 Joker    bad       male   DC              1934
+6 Catwoman bad       female DC              1934
+```
+
+Argüman olarak ilk yazdığımız veri setinin değişkenleri başta olacak şekilde tablolarımız publisher ve name değişkenlerine göre birleşti. Ortak olan değişkenin ismi de yine ilk argüman olarak yazdığımız veri setindeki publisher ismini aldı. 
+Burada dikkat etmemiz gereken nokta, superheroes veri setindeki "Dark Horse Comics" gözleminin olduğu satır ve publishers veri setindeki "Image" gözleminin olduğu satırın birleşmiş halinde bulunmaması. inner_join fonksiyonu sadece her iki tabloda eşleşen satırları getirdiği için bu satırlar bulunmuyor. 
+
+*semi_join() foksiyonu*
+
+Her iki tablodaki eşleşen satırları getirir ama ikinci tablodaki ortak olan sütun hariç diğer sütunları getirmez.
+
+```R
+semi_join(superheroes, publishers, by = c("publisher" = "name"))
+
+>
+# A tibble: 6 x 4
+  name     alignment gender publisher
+  <chr>    <chr>     <chr>  <chr>    
+1 Magneto  bad       male   Marvel   
+2 Storm    good      female Marvel   
+3 Mystique bad       female Marvel   
+4 Batman   good      male   DC       
+5 Joker    bad       male   DC       
+6 Catwoman bad       female DC  
+```
+
+Gördüğümüz gibi, inner_join() fonksiyonundaki gibi sadece eşleşen satırlar geldi ancak, ikinci tablodaki yani publishers veri setindeki sütunlar gelmedi. (Burada ortak olan sütun haricinde tek bir sütun vardı: yr_founded)
+
+*left_join() fonksiyonu*
+
+İlk tablodaki tüm satırlar ile birlikte her iki tablodaki tüm değişkenleri/sütunları getirir.
+
+```R
+left_join(superheroes, publishers, by = c("publisher" = "name"))
+
+>
+# A tibble: 7 x 5
+  name     alignment gender publisher         yr_founded
+  <chr>    <chr>     <chr>  <chr>                  <int>
+1 Magneto  bad       male   Marvel                  1939
+2 Storm    good      female Marvel                  1939
+3 Mystique bad       female Marvel                  1939
+4 Batman   good      male   DC                      1934
+5 Joker    bad       male   DC                      1934
+6 Catwoman bad       female DC                      1934
+7 Hellboy  good      male   Dark Horse Comics         NA
+```
+
+inner_join() fonksiyonunda olduğu gibi her iki veri setindeki bütün değişkenler geldi ancak farklı olarak ilk veri setindeki tüm satırlar geldi. "Dark Horse Comics" gözleminin publishers veri setinde karşılığı olmadığı için yr_founded değişkeninde gözlemi “NA” olarak gözüküyor. 
+
+*right_join() fonksiyonu*
+
+İkinci tablodaki tüm satırlar ile birlikte her iki tablodaki tüm değişkenleri/sütunları getirir. 
+
+```R
+right_join(superheroes, publishers, by = c("publisher" = "name"))
+
+>
+# A tibble: 7 x 5
+  name     alignment gender publisher yr_founded
+  <chr>    <chr>     <chr>  <chr>          <int>
+1 Batman   good      male   DC              1934
+2 Joker    bad       male   DC              1934
+3 Catwoman bad       female DC              1934
+4 Magneto  bad       male   Marvel          1939
+5 Storm    good      female Marvel          1939
+6 Mystique bad       female Marvel          1939
+7 NA       NA        NA     Image           1992
+```
+
+left_join() fonksiyonunun tersi olan right_join() fonksiyonunda da her iki veri setindeki tüm değişkenler geldi. Bu seferde, “Image” gözleminin karşılığı superheroes veri setinde bulunmadığı için bu veri setinin değişkenlerinde değeri “NA” geldi. 
+
+*anti_join() fonksiyonu*
+
+İlk tabloda olup ikinci tabloda olmayan satırları ve ilk tablonun sütunlarını getirir.
+
+```R
+anti_join(superheroes, publishers, by = c("publisher" = "name"))
+
+>
+# A tibble: 1 x 4
+  name    alignment gender publisher        
+  <chr>   <chr>     <chr>  <chr>            
+1 Hellboy good      male   Dark Horse Comics
+```
+
+"Dark Horse Comics" gözlemi ikinci tablonun name değişkeninde bulunmuyordu, bu yüzden sadece bu satır geldi.
+Tabloların yerini değiştirerek superheroes tablosundaki ortak olmayan satıra da erişebiliriz. Tabi ki birinci ve ikinci argümanın yeri değiştiği için ‘by=’ argümanında da sütun isimlerinin yerini değiştirmemiz gerekiyor.
+
+```R
+anti_join(publishers, superheroes, by = c(“name” = "publisher"))
+
+>
+# A tibble: 1 x 2
+  name  yr_founded
+  <chr>      <int>
+1 Image       1992
+```
+
+*full_join() fonksiyonu*
+
+Her iki tablodaki tüm satırları ve sütunları getirir.
+
+```R
+full_join(superheroes, publishers, by = c("publisher" = "name"))
+
+>
+# A tibble: 8 x 5
+  name     alignment gender publisher         yr_founded
+  <chr>    <chr>     <chr>  <chr>                  <int>
+1 Magneto  bad       male   Marvel                  1939
+2 Storm    good      female Marvel                  1939
+3 Mystique bad       female Marvel                  1939
+4 Batman   good      male   DC                      1934
+5 Joker    bad       male   DC                      1934
+6 Catwoman bad       female DC                      1934
+7 Hellboy  good      male   Dark Horse Comics         NA
+8 NA       NA        NA     Image                   1992
+```
+
+Tüm satırlar ve sütunları birleştirdik. Karşılığı olmayan gözlemler yerine otomatik olarak “NA” değeri geldi. 
