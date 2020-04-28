@@ -607,7 +607,7 @@ Levels: A B C
 
  # 2.yol
  myframe[1:4,-1][1,"harf_notu"]
-
+```
 ## R'da Listeler
 Hatırlayacağınız gibi R'da vektörlerin elemanları aynı tipte değişkenlerden oluşuyordu. Listeler ise bunun tam tersi şeklinde olmakta. Listeler karakter, nümerik, data frame vb. değişkinlerden oluşabilir. Liste oluşturmak için ise **list()** fonksiyonunu kullanıyoruz. Hemen örneklere bakalım.
 ```R
