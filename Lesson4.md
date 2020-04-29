@@ -36,7 +36,9 @@ ggplot2 veri görselleştirme konsunda dünyada yaygın kullanınlan bir R paket
 Bar grafiği ile elmas veri setimizin belirli kategorilerinde kaçar adet elmas olduğunu gösterebiliyorduk. 
 Sıklıkları bar grafiği ile gösterebiliyorduk da diyebiliriz.
 Şimdi bu sıklıkların oranlarını bar grafiği ile nasıl gösterebiliriz ona bakalım.
+
 Sıklık oranlarını görmek aslında her kategori için o kategorinin elmasların yüzde kaçını oluşturduğunu görmek demek.
+
 Kategorilerimizi berraklık değişkeni oluştursun, çeşitli berraklıkta elmaslarımız olduğunu biliyoruz. Bunların her birinden kaç tane olduğunu gösteren bar grafiğini çizelim.
 ```R
 ggplot(diamonds)+
