@@ -128,6 +128,108 @@ vektörüm <- c(vektörüm[c(1:3)], 999, vektörüm[c(4:6)])
 Burada yeni dördüncü elemanımızı ekliyoruz, değeri de 999. Eski dördüncü eleman ve sonrasındaki elemanların endeksi bir sağa kayıyor ve vektörümüzün eleman sayısı artıyor.
 
 ## Data Frame Modifikasyonu
+
+Elimizdeki "data frame"leri modifiye etmek isteyebiliriz. Yeni bir kolon eklemek, var olan bir kolonu silmek veya var olan satır ve sütunlardaki değerleri değiştirmek için hangi komutları kullandığımıza bakalım.
+
+Öncelikle bir "data frame" oluşturalım. 
+
+Diyelim ki iskambil destesini bir "data frame" şeklinde tutmak istiyoruz.
+Dört tane kolonumuz olsun. İlk kolon kartımızın simgesi için, ikinci kolon kartımızın tipi için, üçüncü kolon kartımızın değeri için, dördüncü kolon da kartımızın destedeki sırası için olsun.
+
+Dört tane simgemiz ve on üç tane kart tipimiz olduğu için, her bir simge için on üç tane girdimiz olmalı. rep() fonksiyonunu kullanarak simge vektörümüzü bu özelliğe göre oluşturalım.
+```R
+simge <- c(rep("Maça",13),rep("Sinek",13),rep("Karo",13),rep("Kupa",13))
+```
+rep() fonksiyonunu kullanmak işimizi kolaylaştırıyor, on üç kere "Maça" yazmaktansa rep("Maça", 13) yazıyoruz ve bu işi bizim yerimize yapıyor.
+
+Şimdi kart tipi için olan kolonumuzu oluşturacak kart vektörümüzü oluşturalım. Her bir simge için on üç tane kart tipi var öncelikle bu on üç kart tipini içeren vektörümüzü oluşturalım.
+```R
+kart_tipleri <- c("papaz","kiz","vale","on","dokuz","sekiz","yedi","alti","bes","dört","üç","iki","as")
+```
+Bu kart tipleri her bir simge için var olmalı, burada da rep() fonksiyonunu kullanarak bu kart tiplerinin dört kere ard arda kart vektöründe bulunmalarını sağlıyoruz.
+```R
+kart <- rep(kart_tipleri, 4)
+```
+Her kartımızın bir değeri var, papazın değeri on üç ve papaz, kız, vale, 10, 9, ... şeklinde geriye doğru giderken değerimiz bir azalsın ve en son asın değeri bir olsun. On üç tane değerimiz var bunları içeren vektörümüzü oluşturalım.
+```R
+değerler <- 13:1
+```
+Bu değerlerin de her simge için tekrar etmesi gerekiyor, rep() fonksiyonunu kullanarak değer kolonumuzu oluşturacak değer vektörünü oluşturalım.
+```R
+deger <- rep(değerler, 4)
+```
+
+Son kolonumuzu yani kartlarımızın sırasını gösteren kolonu "data frame"imizi oluşturduktan sonra ekleyelim.
+"Data frame"imizi oluşturuyoruz.
+```R
+deste <- data.frame(
+  kart,
+  simge,
+  deger
+)
+```
+
+Şimdi deste ismindeki "data frame"imize yeni bir kolon eklemeyi görelim. Yukarıda söylediğimiz gibi bu kolon kartlarımızın sırasını gösterecek.
+
+"$" işareti ile tanımladığımız kolonumuza istediğimiz vektörü atıyoruz ve istediğimiz değerlere sahip kolonu "data frame"imize eklemiş oluyoruz.
+
+Kolonumuzun ismi sıra olsun.
+```R
+deste$sıra 
+```
+ifadesiyle bu kolonu tanımlıyoruz, fakat bu "data frame"imize yeni bir kolon eklemiyor çünkü kolonumuzun elemanlarını daha atamadık.
+Elli iki tane kartımız olduğu için birden elli ikiye kadar olan sayılardan oluşan bir vektör oluşturalım ve kolonumuzun elemanları olarak bu vektörü atayalım.
+```R
+deste$sıra <- 1:52
+```
+Evet bu komutla yeni kolonumuzu eklemiş oluyoruz.
+
+Şimdi bir kolonu silmek istersek ne yapmamız gerektiğine bakalım.
+En son eklediğimiz sıra kolonunu silmek istediğimizi varsayalım.
+
+Silmek istediğimiz kolona özel bir değer atayacağız ve bu kolon "data frame"imizden silinmiş olacak.
+Bu özel değer NULL değeri, bu değere boş değer diyebiliriz. Rda ve çoğu programlama dilinde tanımlı bir değer NULL.
+Silmek istediğimiz kolona bu değeri atadığımızda kolonun değerlerini boş değere eşitlemiş oluyoruz ve kolonumuz siliniyor.
+```R
+deste$sıra <- NULL
+```
+Sıra kolonunu bu şekilde silmiş oluyoruz.
+
+Şimdi "data frame"imizdeki bir verinin değerini değiştirmeye bakalım.
+
+Diyelim ki on üçüncü, yirmi altıncı, otuz dokuzuncu ve elli ikinci satırlardaki değerleri bir olan kartlarımızın değerlerini on dört yapmak istiyoruz.
+Öncelikle bu satırlara ulaşmamız gerekiyor.
+Aşağıdaki ifadelerle bu satırlara erişebiliyorduk.
+```R
+deste[13,]
+deste[26,]
+deste[39,]
+deste[52,]
+deste[c(13,26,39,52),]
+```
+Tek tek erişebiliriz veya c() fonksiyonunu kullanarak hepsine birden erişebilirz.
+
+Bu kartların değerlerini değiştirmek istemiştik, o zaman bu satırlardaki değer kolonuna erişelim.
+```R
+"$" işareti ile erişebiliriz:
+deste[c(13,26,39,52),]$deger
+
+Kolonun endeksi ile erişebiliriz:
+deste[c(13,26,39,52),3]
+
+Kolonun ismi ile erişebiliriz:
+deste[c(13,26,39,52),"deger"]
+
+Önce kolona erişip ardından satırlara erişebiliriz.
+deste$deger[c(13,26,39,52)]
+```
+Yukarıda dört farklı şekilde istediğimiz satırların değer kolonuna erişme ifadelerini görüyoruz.
+Şimdi bu değerleri modifiye edelim.
+Yapmamız gereken tek şey istediğimiz değeri az önce seçtiğimiz satırlardaki kolona atamak.
+```R
+deste[c(13,26,39,52),]$deger <- 14
+```
+
 ## Mantıksal Testler
 
 Mantıksal testler iki girdi arasında karşılaştırma yapmak için kullanılır ve çıktı olarak Boolean (TRUE veya FALSE) döndürür.
