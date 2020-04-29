@@ -30,6 +30,7 @@ ggplot2 veri görselleştirme konsunda dünyada yaygın kullanınlan bir R paket
 1. Aesthetics katmanı: bu katmanda veri kayanağından plot etmek istediğimiz değişkenleri belirliyoruz. Üstelik neye göre renklendirelim ve neye göre şeffaflandıralım gibi soruları bu katmanda da belirlenir
 1. Geometries katmanı: bu katmanda çizmek istediğimiz gradiği belirliyoruz (nokta grafiği, çizgi grafiği, bar grafizi vs.)
 <img src=".images/ggplot_layers.png">
+
 ## Bar Grafiği ile Oran Gösterme
 ## Facetting
 ## Koordinat Sistemleri
