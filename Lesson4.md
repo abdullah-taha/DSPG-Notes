@@ -1,14 +1,14 @@
 # Ders 4
 
 ## Başlıklar:
-* [Giriş](#giriş)
-* [ggplot2](#ggplot2)
-* Grafik çeşitleri
-* Tek değişkenli grafikler (sürekli)-(continouse variables)
-* Tek değişkenli grafikler (kesikli)-(discrete variable)
-* İki Değişkenli Grafikler (ikisi sürekli)
-* İki Değişkenli Grafikler (biri kesik biri sürekli)
-* Grafik ile özet istatistik Belirtme
+* [Giriş](#giriş) 
+* [ggplot2](#ggplot2) 
+* Grafik çeşitleri - Abdullah
+* Tek değişkenli grafikler (sürekli)-(continouse variables) - Abdullah
+* Tek değişkenli grafikler (kesikli)-(discrete variable) - Abdullah
+* İki Değişkenli Grafikler (ikisi sürekli) - Abdullah
+* İki Değişkenli Grafikler (biri kesik biri sürekli) - Abdullah
+* Grafik ile özet istatistik Belirtme - Abdullah
 * Bar Grafiği ile Oran Gösterme
 * Facetting
 * Koordinat Sistemleri
