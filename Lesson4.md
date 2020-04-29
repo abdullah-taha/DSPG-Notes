@@ -70,7 +70,38 @@ Bu komut bize aşağıdaki grafiği veriyor. Artık her berraklık kategorisinde
 
 <img src=".images/plot_bar_oran3.png">
 
-
 ## Facetting
+
+Facetting başka bir grafik oluşturma yöntemidir. Diyelim verimiz ile ilgili bir grafik çıkardık ve ihtiyacımız olan şey bu grağin farklı özelliklerin kategorileri için özelleşmiş versiyonlarını incelemek. Yani bir özelliğin her bir kategorisi için ayrı grafik çıkarmamız gereken durumlarda kullandığımız bir yöntem.
+
+Örnek verecek olursak, karat ve fiyat arasındaki ilişkiyi incelediğimizi düşünelim ve istiyoruz ki tüm elmaslar için değil de ayrı ayrı her berraklık kategorisi için karat ve fiyat arasındaki ilişkiyi görelim.
+
+Elmaslar veri setimizin berraklık kategorilerine bölünmüş kesitlerini alıp her birinin grafiğini çizmemiz gerekiyor. Fakat neyse ki bunu bizim için yapan bir fonksiyon var, üstelik bu grafikleri aynı görselde buluşturuyor. 
+
+Fonksiyonumuz facet_grid() fonksiyonu, yapmamız gereken tek şey bu fonksiyona istediğimiz özelliği vermek. Bu fonksiyon da çizdiğimiz ilk bütüncül grafiği tek tek bu özelliğin kategorilerine uygulayıp kategori sayısı kadar grafiği karşımıza getirecek.
+```R
+elmaslar +
+  geom_point(aes(x=carat, y=price)) +
+  facet_grid(.~clarity)
+```
+Gördüğünüz üzere berraklık özelliğini argüman olarak facet_grid() fonksiyonuna verdik. Fakat ".~" ne anlama geliyor? 
+
+facet_grid()in kaç tane kategori varsa o kadar grafik verdiğini söylemiştik, bu grafiklerin görselde nasıl görüneceklerini belirlemek için eklediğimiz bir ifade. Grafikler yatay veya dikey görünebilir. Yukarıdaki örnekte dikey şekilde görüyoruz.
+```R
+elmaslar +
+  geom_point(aes(x=carat, y=price)) +
+  facet_grid(clarity~.)
+```
+
+Bu durumda ise yatay şekilde görüyoruz.
+
+
+Grafiklerimizi kutucuklara bölünmüş şekilde de görmek isteyebilirdik, bu durumda başka bir facetting fonksiyonu olan facet_wrap() fonksiyonunu kullanıyoruz. Ona da aynı şekilde berraklık argümanını sağlıyoruz.
+```R
+elmaslar +
+  geom_point(aes(x=carat, y=price)) +
+  facet_wrap(~clarity)
+```
+
 ## Koordinat Sistemleri
 ## Temalar
