@@ -9,10 +9,10 @@
 * İki Değişkenli Grafikler (ikisi sürekli) - Abdullah
 * İki Değişkenli Grafikler (biri kesik biri sürekli) - Abdullah
 * Grafik ile özet istatistik Belirtme - Abdullah
-* Bar Grafiği ile Oran Gösterme(#Bar Grafiği ile Oran Gösterme) - Petek
-* Facetting - Petek 
-* Koordinat Sistemleri - Petek
-* Temalar - Petek
+* [Bar Grafiği ile Oran Gösterme](#BarGrafiğiOranGösterme) - Petek
+* [Facetting](#Facetting) - Petek 
+* [Koordinat Sistemleri](#KoordinatSistemleri) - Petek
+* [Temalar](#Temalar) - Petek
 * TED: The best stats you've ever seen | Hans Rosling
 * ggplot2 ile Yapılabilecek Diğer Şeyler 
 * Case Study 1 (Genel Egzersiz) : mpg veri seti
@@ -30,6 +30,8 @@ ggplot2 veri görselleştirme konsunda dünyada yaygın kullanınlan bir R paket
 1. Aesthetics katmanı: bu katmanda veri kayanağından plot etmek istediğimiz değişkenleri belirliyoruz. Üstelik neye göre renklendirelim ve neye göre şeffaflandıralım gibi soruları bu katmanda da belirlenir
 1. Geometries katmanı: bu katmanda çizmek istediğimiz gradiği belirliyoruz (nokta grafiği, çizgi grafiği, bar grafizi vs.)
 
-
-
+## Bar Grafiği ile Oran Gösterme
+## Facetting
+## Koordinat Sistemleri
+## Temalar
 <img src=".images/ggplot_layers.png">
