@@ -46,9 +46,18 @@ ggplot(diamonds)+
 ```
 Bu komut bize aşağıdaki grafiği veriyor.
 
-<img align="left" src=".images/plot_bar_oran_1.png">
+<src=".images/plot_bar_oran_1.png">
 
+Oranları görmek istersek yapmamız gereken y eksenini oranları gösterecek şekilde tanımlamak. 
 
+Bunu aes() fonksiyonundaki y argümanına ..prop.. atayarak yapacağız. ..prop.. R'a oranları göstermesini istediğimizi söylememize yarayan bir anahtar kelime. 
+
+Fakat bir argümanı daha tanımlamamız gerekiyor bu da grup argümanı, eğer bu argümanı sağlamazsak R her bir kategori için bir grup oluşturacak ve oranları bu gruplara göre alacak dolayısıyla bütün oranları 1 olarak göreceğiz. Bizim istediğimiz bütün kategorileri bir grup olarak alması ve her kategorideki elmasları total elmaslara oranlaması, dolayısıyla R'a bir tane grup istediğimizi belirtmemiz gerekiyor.
+```R
+elmaslar +
+  geom_bar(aes(x=clarity, y=..prop.., group=1))
+```
+Bu komut bize aşağıdaki grafiği veriyor. Y eksenindeki değerlerin değişimini gözlemleyebilirsiniz.
 
 ## Facetting
 ## Koordinat Sistemleri
