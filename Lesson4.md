@@ -9,7 +9,7 @@
 * İki Değişkenli Grafikler (ikisi sürekli) - Abdullah
 * İki Değişkenli Grafikler (biri kesik biri sürekli) - Abdullah
 * Grafik ile özet istatistik Belirtme - Abdullah
-* Bar Grafiği ile Oran Gösterme - Petek
+* Bar Grafiği ile Oran Gösterme(#Bar Grafiği ile Oran Gösterme) - Petek
 * Facetting - Petek 
 * Koordinat Sistemleri - Petek
 * Temalar - Petek
