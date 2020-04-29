@@ -48,7 +48,8 @@ Bu komut bize aşağıdaki grafiği veriyor.
 
 <img align="left" src=".images/plot_bar_oran_1.png">
 
+
+
 ## Facetting
 ## Koordinat Sistemleri
 ## Temalar
-
