@@ -80,7 +80,52 @@ ve
 
 vektörüm[c(1,4)] <- c(3,8)
 ```
+İstediğimiz sayıda ve istediğimiz endekslerde olan verileri nasıl başka bir değer ile değiştireceğimizi gördük. Şimdi, elimizdeki verileri o verilerin kendilerini kullanarak nasıl değiştireceğimize bakalım.
 
+Örneğin, vektörüm vektörümüzdeki ilk üç elemanını bir ile toplamak istiyoruz. Yani ilk üç elemanın bir ile toplanmış hallerini vektörümüzün ilk üç elemanına atamak istiyoruz. 
+
+İlk yapmamız gereken şeyi biliyoruz, vektörümüzün ilk üç elemanına ulaşmak, yani vektörüm vektöründen ilgili kesiti alacağız ve buna istediğimizi atayacağız. Peki, atayacağımız vektör ne? Tekrar ilgili kesite ulaşıp buna bir eklemeli ve kesitimize atamalıyız. 
+```R
+vektörüm[c(1,2,3)]
+
+Kesitimizi aldık.
+
+vektörüm[c(1,2,3)] + 1
+
+Bu komut ile de bu kesitin yani aslında küçük vektörümüzün her elemanına bir ekliyoruz.
+
+vektörüm[c(1,2,3)] <- vektörüm[c(1,2,3)] + 1
+
+Son olarak vektörümüzün ilgili kesitine yine bu vektörün her elemanını bir ile topladığımızda oluşan vektörü atıyoruz.
+```
+
+Bu şekilde, vektörümüzün elemanlarının veri tipine göre işlemler uygulayarak, hali hazırda elimizde olan kesitleri modifiye edip tekrar ilgili kesite atayabiliriz.
+
+Vektörlerimizi son bir şekilde daha modifiye edebiliriz, yeni bir eleman eklemek. Aslında tekrar c() fonksiyonunu kullanacğız, fakat bu sefer c() fonksiyonuna verdiğimiz değerler sayılar değil, vektörler olacak, veya bir vektör ve bir sayı olacak.
+
+Örneğin vektörüm vektörümüzün sonuna bir eleman daha ekleyelim, değeri de 999 olsun. 
+Yapacağımız şey ilk elemanları vektörüm vektöründeki elemanlar olan son elemanı da 999 olan br vektör oluşturmak, c() fonksiyonunu burada kullanıyoruz.
+```R
+c(vektörüm, 999)
+
+Bu komut istediğimiz vektörü oluşturacaktır.
+```
+Bundan sonra yapmamız gereken tek şey ismi vektörüm olan vektör değişkenimize bu yeni vektörü atamak.
+```R
+vektörüm <- c(vektörüm, 999)
+```
+Aynı bu şekilde vektörümüzün önüne de bir eleman ekleyebiliriz. Diyelim en öne bir eleman ekleyeceğiz ve bunun da değerinin 999 olmasını istiyoruz. Yani vektörümüzün eleman sayısı artacak fakat ilk elemanı değiştirmiş olacağız ve her elemanın endeksi bir sağa kaymış olacak.
+Benzer şekilde aşağıdaki komut ile bunu başarabiliriz.
+```R
+vektörüm <- c(999, vektörüm)
+```
+
+Vektörümüzün ortasındaki bir yere de bir eleman ekleyebiliriz yapmamız gereken tek şey ilgili vektörü oluşturmak.
+Örneğin,
+```R
+vektörüm <- c(vektörüm[c(1:3)], 999, vektörüm[c(4:6)])
+```
+Burada yeni dördüncü elemanımızı ekliyoruz, değeri de 999. Eski dördüncü eleman ve sonrasındaki elemanların endeksi bir sağa kayıyor ve vektörümüzün eleman sayısı artıyor.
 
 ## Data Frame Modifikasyonu
 ## Mantıksal Testler
