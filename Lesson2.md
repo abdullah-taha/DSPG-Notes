@@ -8,8 +8,8 @@
 * [Kontrol İfadeleri](#kontrol-ifadeleri)
 * [for döngüsü](#for-döngüsü)
 * [paste() fonksiyonu](#paste-fonksiyonu)
-* [while döngüsü](#while-döngüsü)
-* [Fonksiyonlar](#fonksiyonlar)
+* [while döngüsü - yunus](#while-döngüsü)
+* [Fonksiyonlar - yunus](#fonksiyonlar)
 * [Apply Fonksiyonları](#apply-fonksiyonları)
 
 ## Vektör Modifikasyonu
