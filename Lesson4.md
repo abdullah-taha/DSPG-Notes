@@ -46,7 +46,7 @@ ggplot(diamonds)+
 ```
 Bu komut bize aşağıdaki grafiği veriyor.
 
-<src=".images/plot_bar_oran_1.png">
+<img src=".images/plot_bar_oran_1.png">
 
 Oranları görmek istersek yapmamız gereken y eksenini oranları gösterecek şekilde tanımlamak. 
 
@@ -58,6 +58,8 @@ elmaslar +
   geom_bar(aes(x=clarity, y=..prop.., group=1))
 ```
 Bu komut bize aşağıdaki grafiği veriyor. Y eksenindeki değerlerin değişimini gözlemleyebilirsiniz.
+
+<img src=".images/plot_bar_oran2.png">
 
 ## Facetting
 ## Koordinat Sistemleri
