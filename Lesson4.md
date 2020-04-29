@@ -45,7 +45,8 @@ ggplot(diamonds)+
   geom_bar(aes(x=clarity))
 ```
 Bu komut bize aşağıdaki grafiği veriyor.
-<img src=".images/plot_bar_oran_1.png">
+
+<img align="left" src=".images/plot_bar_oran_1.png">
 
 ## Facetting
 ## Koordinat Sistemleri
