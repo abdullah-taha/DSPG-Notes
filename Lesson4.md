@@ -9,10 +9,10 @@
 * İki Değişkenli Grafikler (ikisi sürekli) - Abdullah
 * İki Değişkenli Grafikler (biri kesik biri sürekli) - Abdullah
 * Grafik ile özet istatistik Belirtme - Abdullah
-* Bar Grafiği ile Oran Gösterme
-* Facetting
-* Koordinat Sistemleri
-* Temalar
+* Bar Grafiği ile Oran Gösterme - Petek
+* Facetting - Petek 
+* Koordinat Sistemleri - Petek
+* Temalar - Petek
 * TED: The best stats you've ever seen | Hans Rosling
 * ggplot2 ile Yapılabilecek Diğer Şeyler 
 * Case Study 1 (Genel Egzersiz) : mpg veri seti
