@@ -61,6 +61,16 @@ Bu komut bize aşağıdaki grafiği veriyor. Y eksenindeki değerlerin değişim
 
 <img src=".images/plot_bar_oran2.png">
 
+Grafiğimizi daha anlaşılır kılmak için y ekseninde kategorilerin total elmasların yüzde kaçını oluşturduklarını görmek istiyoruz. Y eksenindeki her değeri 100 ile çarparsak istediğimiz grafiği elde edebiliriz.
+```R
+elmaslar +
+  geom_bar(aes(x=clarity, y=..prop..*100, group=1))
+```
+Bu komut bize aşağıdaki grafiği veriyor. Artık her berraklık kategorisindeki elmas sayılarının total elmasların yüzde kaçını oluşturduklarını net bir şekilde görebiliyoruz.
+
+<img src=".images/plot_bar_oran3.png">
+
+
 ## Facetting
 ## Koordinat Sistemleri
 ## Temalar
