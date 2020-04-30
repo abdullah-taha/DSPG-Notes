@@ -293,18 +293,32 @@ coord_polar() fonksiyonumuz grafiğimizi kartezyen kordinat sistemindeki standar
 
 Oranları gösteren bir bar grafiğimiz olsun, berraklık kategorilerinin oranlarını görüyoruz. Bu grafiği polar kordinat sistemindeki gösterimine çevirdiğimizde pasta grafiği şeklinde görebiliyoruz ve gösterim açısından çok daha açık oluyor.
 ```R
-elmaslar +
+ggplot(diamonds) +
   geom_bar(aes(x=clarity, y=..prop.., group=1))
 ```
 <img src=".images/lesson4/koord5.png">
 
 ```R
-elmaslar +
+ggplot(diamonds) +
   geom_bar(aes(x=clarity, y=..prop.., group=1)) +
   coord_polar()
 ```
 <img src=".images/lesson4/koord6.png">
 
+Başka bir örnek daha görelim. 
+Kesim kategorilerinin her birinde kaçar tane elmas olduğunu gösteren bir bar grafiğimiz olsun ve her bir kategoriyi farklı bir renge boyayalım. Daha sonra bu grafiğin gösterimini polar kordinatlara taşıyalım.
+```R
+ggplot(diamonds) +
+  geom_bar(aes(x=cut, fill=cut))
+```
+<img src=".images/lesson4/koord7.png">
+
+```R
+ggplot(diamonds) +
+  geom_bar(aes(x=cut, fill=cut)) +
+  coord_polar()
+```
+<img src=".images/lesson4/koord8.png">
 
 
 ## Temalar
