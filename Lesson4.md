@@ -174,7 +174,7 @@ Bunu aes() fonksiyonundaki y argümanına ..prop.. atayarak yapacağız. ..prop.
 
 Fakat bir argümanı daha tanımlamamız gerekiyor bu da grup argümanı, eğer bu argümanı sağlamazsak R her bir kategori için bir grup oluşturacak ve oranları bu gruplara göre alacak dolayısıyla bütün oranları 1 olarak göreceğiz. Bizim istediğimiz bütün kategorileri bir grup olarak alması ve her kategorideki elmasları total elmaslara oranlaması, dolayısıyla R'a bir tane grup istediğimizi belirtmemiz gerekiyor.
 ```R
-elmaslar +
+ggplot(diamonds) +
   geom_bar(aes(x=clarity, y=..prop.., group=1))
 ```
 Bu komut bize aşağıdaki grafiği veriyor. Y eksenindeki değerlerin değişimini gözlemleyebilirsiniz.
@@ -183,7 +183,7 @@ Bu komut bize aşağıdaki grafiği veriyor. Y eksenindeki değerlerin değişim
 
 Grafiğimizi daha anlaşılır kılmak için y ekseninde kategorilerin total elmasların yüzde kaçını oluşturduklarını görmek istiyoruz. Y eksenindeki her değeri 100 ile çarparsak istediğimiz grafiği elde edebiliriz.
 ```R
-elmaslar +
+ggplot(diamonds)+
   geom_bar(aes(x=clarity, y=..prop..*100, group=1))
 ```
 Bu komut bize aşağıdaki grafiği veriyor. Artık her berraklık kategorisindeki elmas sayılarının total elmasların yüzde kaçını oluşturduklarını net bir şekilde görebiliyoruz.
@@ -204,7 +204,7 @@ Elmaslar veri setimizin berraklık kategorilerine bölünmüş kesitlerini alıp
 
 Fonksiyonumuz facet_grid() fonksiyonu, yapmamız gereken tek şey bu fonksiyona istediğimiz özelliği vermek. Bu fonksiyon da çizdiğimiz ilk bütüncül grafiği tek tek bu özelliğin kategorilerine uygulayıp kategori sayısı kadar grafiği karşımıza getirecek.
 ```R
-elmaslar +
+ggplot(diamonds) +
   geom_point(aes(x=carat, y=price)) +
   facet_grid(.~clarity)
 ```
@@ -215,7 +215,7 @@ Gördüğünüz üzere berraklık özelliğini argüman olarak facet_grid() fonk
 facet_grid()in kaç tane kategori varsa o kadar grafik verdiğini söylemiştik, bu grafiklerin görselde nasıl görüneceklerini belirlemek için eklediğimiz bir ifade. Grafikler yatay veya dikey görünebilir, yani satırda veya sütunda olabilirler. Yukarıdaki örnekte dikey şekilde görüyoruz. Grafiklerimizi sütunlarda görmek istediğimiz için "~" işaretinin sağ tarafına özelliğimizi yazdık. Sol tarafına ise "." yazdık, bu satırlar için herhangi bir isteğimiz olmadığını söylüyor.
 
 ```R
-elmaslar +
+ggplot(diamonds) +
   geom_point(aes(x=carat, y=price)) +
   facet_grid(clarity~.)
 ```
@@ -225,7 +225,7 @@ Bu durumda ise yatay şekilde yani grafiklerimizi satırlarda görüyoruz.
 
 Grafiklerimizi kutucuklara bölünmüş şekilde de görmek isteyebilirdik, bu durumda başka bir facetting fonksiyonu olan facet_wrap() fonksiyonunu kullanıyoruz. Ona da aynı şekilde berraklık argümanını sağlıyoruz.
 ```R
-elmaslar +
+ggplot(diamonds) +
   geom_point(aes(x=carat, y=price)) +
   facet_wrap(~clarity)
 ```
@@ -237,7 +237,7 @@ Yukarıdaki örneklerde tek bir kategorik değişken ile facetting uygulamayı g
 
 Örneğimizde renk ve berraklık özelliklerini kullanmak istiyoruz. Satırlarda renkler ve sütunlarda berraklıklara göre ayrılmış bir görsel olsun ve her bir renk ve berraklık kombinasyonu için olan karat ve değer grafiklerimizi görelim.
 ```R
-elmaslar +
+ggplot(diamonds) +
   geom_point(aes(x=carat, y=price)) +
   facet_grid(color~clarity)
 ```
