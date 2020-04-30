@@ -204,7 +204,7 @@ elmaslar +
   geom_point(aes(x=carat, y=price)) +
   facet_grid(.~clarity)
 ```
-
+<img src=".images/facet1.png"> 
 
 Gördüğünüz üzere berraklık özelliğini argüman olarak facet_grid() fonksiyonuna verdik. Fakat ".~" ne anlama geliyor? 
 
