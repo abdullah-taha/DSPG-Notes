@@ -7,8 +7,8 @@
 * Tek değişkenli grafikler (sürekli)-(continouse variables) - Abdullah
 * Tek değişkenli grafikler (kesikli)-(discrete variable) - Abdullah
 * İki Değişkenli Grafikler (ikisi sürekli) - Abdullah
-* İki Değişkenli Grafikler (biri kesik biri sürekli) 
-* Grafik ile özet istatistik Belirtme
+* İki Değişkenli Grafikler (biri kesik biri sürekli) - Cansu
+* Grafik ile özet istatistik Belirtme - Cansu
 * [Bar Grafiği ile Oran Gösterme](#BarGrafiğiOranGösterme) - Petek
 * [Facetting](#Facetting) - Petek 
 * [Koordinat Sistemleri](#KoordinatSistemleri) - Petek
