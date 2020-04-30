@@ -261,19 +261,17 @@ coord_cartesian() fonksiyonumuzu grafiği çıkarmak için kullandığımız kod
 Örnek olarak, tekrardan karat ve fiyat arasındaki ilişkiyi incelediğimizi ve bütün grafiği görmek yerine grafiğin belirli bir kesitini görmek istediğimizi düşünelim. Bu kesit de karatın 0 lie 2 arasında olduğu ve fiyatın 10000 ve 20000 arasında olduğu bölge olsun.
 ```R
 elmaslar +
+  geom_point(aes(x=carat, y=price))
+ ```
+<img src=".images/lesson4/koord1.png">
+
+```R
+elmaslar +
   geom_point(aes(x=carat, y=price)) +
   coord_cartesian(xlim=c(0,2), ylim=c(10000,20000))
 ```
-Yukarıdaki kod parçasında gördüğünüz gibi, coord_cartesian fonksiyonumuza ilgili sınırlayıcı argümanları vektör şeklinde verdik ve grafiğimizi oluşturduğumuz koda ekledik. 
-Grafiğin tamamını ve coord_cartesian() ile alınmış kesitini aşağıda görebilirsiniz.
-Grafiğimizin tamamı:
-<img src=".images/lesson4/koord1.png">
-
-
-Yukarıdaki koddan elde ettiğimiz kesit: 
-
--x değerleri 0 ile 2 arasında, y değerleri 10000 ile 20000 arasında-
 <img src=".images/lesson4/koord2.png">
+
 
 
 
