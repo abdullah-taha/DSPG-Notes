@@ -260,19 +260,32 @@ coord_cartesian() fonksiyonumuzu grafiği çıkarmak için kullandığımız kod
 
 Örnek olarak, tekrardan karat ve fiyat arasındaki ilişkiyi incelediğimizi ve bütün grafiği görmek yerine grafiğin belirli bir kesitini görmek istediğimizi düşünelim. Bu kesit de karatın 0 lie 2 arasında olduğu ve fiyatın 10000 ve 20000 arasında olduğu bölge olsun.
 ```R
-elmaslar +
+ggplot(diamonds) +
   geom_point(aes(x=carat, y=price))
  ```
 <img src=".images/lesson4/koord1.png">
 
 ```R
-elmaslar +
+ggplot(diamonds) +
   geom_point(aes(x=carat, y=price)) +
   coord_cartesian(xlim=c(0,2), ylim=c(10000,20000))
 ```
 <img src=".images/lesson4/koord2.png">
 
 
+coord_flip() fonksyionumuz grafiğimizin koordinatlarının yerini değiştirmemizi sağlıyor. Grafiğimizi çıkardığımız kod parçasına coord_flip() fonksiyonumuzu eklediğimizde x ekseni dikey eksene, y ekseni de yatay eksene taşınıyor. 
+Her kesim kategorisinden kaç tane olduğunu gösteren bar grafiğimizi alalım ve coor_flip() fonksiyonu ile eksenlerin yerini değiştirelim.
+```R
+ggplot(diamonds) +
+  geom_bar(aes(cut)) 
+```
+<img src=".images/lesson4/koord3.png">
 
+```R
+ggplot(diamonds) +
+  geom_bar(aes(cut)) +
+  coord_flip()
+```
+<img src=".images/lesson4/koord4.png">
 
 ## Temalar
