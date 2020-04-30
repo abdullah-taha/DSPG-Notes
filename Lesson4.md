@@ -166,7 +166,7 @@ ggplot(diamonds)+
 ```
 Bu komut bize aşağıdaki grafiği veriyor.
 
-<img src=".images/plot_bar_oran_1.png">
+<img src=".images/lesson4/plot_bar_oran_1.png">
 
 Oranları görmek istersek yapmamız gereken y eksenini oranları gösterecek şekilde tanımlamak. 
 
@@ -179,7 +179,7 @@ elmaslar +
 ```
 Bu komut bize aşağıdaki grafiği veriyor. Y eksenindeki değerlerin değişimini gözlemleyebilirsiniz.
 
-<img src=".images/plot_bar_oran2.png">
+<img src=".images/lesson4/plot_bar_oran2.png">
 
 Grafiğimizi daha anlaşılır kılmak için y ekseninde kategorilerin total elmasların yüzde kaçını oluşturduklarını görmek istiyoruz. Y eksenindeki her değeri 100 ile çarparsak istediğimiz grafiği elde edebiliriz.
 ```R
@@ -188,7 +188,7 @@ elmaslar +
 ```
 Bu komut bize aşağıdaki grafiği veriyor. Artık her berraklık kategorisindeki elmas sayılarının total elmasların yüzde kaçını oluşturduklarını net bir şekilde görebiliyoruz.
 
-<img src=".images/plot_bar_oran3.png">
+<img src=".images/lesson4/plot_bar_oran3.png">
 
 ## Facetting
 
@@ -208,7 +208,7 @@ elmaslar +
   geom_point(aes(x=carat, y=price)) +
   facet_grid(.~clarity)
 ```
-<img src=".images/facet1.png"> 
+<img src=".images/lesson4/facet1.png"> 
 
 Gördüğünüz üzere berraklık özelliğini argüman olarak facet_grid() fonksiyonuna verdik. Fakat ".~" ne anlama geliyor? 
 
@@ -219,7 +219,7 @@ elmaslar +
   geom_point(aes(x=carat, y=price)) +
   facet_grid(clarity~.)
 ```
-<img src=".images/facet2.png"> 
+<img src=".images/lesson4/facet2.png"> 
 
 Bu durumda ise yatay şekilde yani grafiklerimizi satırlarda görüyoruz.
 
@@ -229,7 +229,7 @@ elmaslar +
   geom_point(aes(x=carat, y=price)) +
   facet_wrap(~clarity)
 ```
-<img src=".images/facet3.png">
+<img src=".images/lesson4/facet3.png">
 
 Yukarıdaki örneklerde tek bir kategorik değişken ile facetting uygulamayı gördük.
 
@@ -242,7 +242,7 @@ elmaslar +
   facet_grid(color~clarity)
 ```
 
-<img src=".images/facet4.png">
+<img src=".images/lesson4/facet4.png">
 
 ## Koordinat Sistemleri
 ## Temalar
