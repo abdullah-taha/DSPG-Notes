@@ -322,3 +322,36 @@ ggplot(diamonds) +
 
 
 ## Temalar
+
+Grafiklerimizin temasını değiştirebiliriz. Tema dediğimiz şey, arka plan rengi, genel görünüm, çizgilerin rengi gibi görsel değişkenlerin belirlendiği bir bütündür. 
+
+R'da temaları içeren bir paketimiz var. Bu paketi indirdiğimizde paketin içindeki temaları istediğimiz gibi grafiklerimize ekleyebiliyoruz ve grafiklerimizin görsel gücünü artırabiliyoruz.
+
+Bir önceki bölümün sonunda yarattığımız pasta grafiğimize bir tema ekleyelim ve ne olacağına bakalım.
+
+Önce "ggthemes" ismindeki paketimizi indirmemiz ve ardından çağırmamız gerekiyor. Çağırmak demek R'a bu paketi kullanacağımızı ve bu paketin içerisindeki fonksiyonları hazırda bulundurması gerektiğini söylemek demek.
+```R
+Paketimizi indiriyoruz:
+install.packages("ggthemes")
+
+Paketimizi çağırıyoruz:
+library(ggthemes)
+```
+Paketleri kullanmak için yalnız bir kere indirmemiz yeterli, fakat o pakete ait bir fonksiyon kullanacaksak kodumuzda bu fonksiyonu kullanmadan önce mutlaka paketi çağırmamız gerekiyor. Genelde kullanacağımız paketleri kodumuzun en başında çağırırız, yani herhangi bir başka kod yazmadan önce, ve sonrasında bir daha çağırmamıza gerek kalmaz.
+
+Bir önceki pasta grafiğimizi hatırlayalım.
+```R
+ggplot(diamonds) +
+  geom_bar(aes(x=cut, fill=cut)) +
+  coord_polar()
+```
+<img src=".images/lesson4/koord8.png">
+
+Şimdi bu pasta grafiğimizin temasını "ekonomist" teması diye geçen tema yapalım. İlgili fonksiyon olan theme_economist() fonksiyonunu grafiğimizi oluşturduğumuz kod parçasına eklememiz yeterli.
+```R
+ggplot(diamonds) +
+  geom_bar(aes(x=cut, fill=cut)) +
+  coord_polar() +
+  theme_economist()
+```
+<img src=".images/lesson4/koord9.png">
