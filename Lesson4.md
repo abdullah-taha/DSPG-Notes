@@ -192,7 +192,11 @@ Bu komut bize aşağıdaki grafiği veriyor. Artık her berraklık kategorisinde
 
 ## Facetting
 
-Facetting başka bir grafik oluşturma yöntemidir. Diyelim verimiz ile ilgili bir grafik çıkardık ve ihtiyacımız olan şey bu grağin farklı özelliklerin kategorileri için özelleşmiş versiyonlarını incelemek. Yani bir özelliğin her bir kategorisi için ayrı grafik çıkarmamız gereken durumlarda kullandığımız bir yöntem.
+Facetting başka bir grafik oluşturma yöntemidir. Diyelim verimiz ile ilgili bir grafik çıkardık ve ihtiyacımız olan şey bu grafiğin farklı kesikli özelliklerin kategorileri için özelleşmiş versiyonlarını incelemek. Yani bir özelliğin her bir kategorisi için ayrı grafik çıkarmamız gereken durumlarda kullandığımız bir yöntem.
+
+Facettingi yalnızca kesikli özellikler için kullanabildiğimizi unutmayalım. Grafiğimizin özelleşmiş versiyonlarını yalnızca kategorileri olan özellikler için görebiliyoruz. 
+
+Sürekli değerlere sahip özellikler için facetting uygulamak istersek verimizin bu özelliğe göre kesitlerini alıp kesikli bir özellik gibi davranmasını sağlayabilir ve facetting uygulayabiliriz.
 
 Örnek verecek olursak, karat ve fiyat arasındaki ilişkiyi incelediğimizi düşünelim ve istiyoruz ki tüm elmaslar için değil de ayrı ayrı her berraklık kategorisi için karat ve fiyat arasındaki ilişkiyi görelim.
 
@@ -208,7 +212,8 @@ elmaslar +
 
 Gördüğünüz üzere berraklık özelliğini argüman olarak facet_grid() fonksiyonuna verdik. Fakat ".~" ne anlama geliyor? 
 
-facet_grid()in kaç tane kategori varsa o kadar grafik verdiğini söylemiştik, bu grafiklerin görselde nasıl görüneceklerini belirlemek için eklediğimiz bir ifade. Grafikler yatay veya dikey görünebilir. Yukarıdaki örnekte dikey şekilde görüyoruz.
+facet_grid()in kaç tane kategori varsa o kadar grafik verdiğini söylemiştik, bu grafiklerin görselde nasıl görüneceklerini belirlemek için eklediğimiz bir ifade. Grafikler yatay veya dikey görünebilir, yani satırda veya sütunda olabilirler. Yukarıdaki örnekte dikey şekilde görüyoruz. Grafiklerimizi sütunlarda görmek istediğimiz için "~" işaretinin sağ tarafına özelliğimizi yazdık. Sol tarafına ise "." yazdık, bu satırlar için herhangi bir isteğimiz olmadığını söylüyor.
+
 ```R
 elmaslar +
   geom_point(aes(x=carat, y=price)) +
@@ -216,7 +221,7 @@ elmaslar +
 ```
 <img src=".images/facet2.png"> 
 
-Bu durumda ise yatay şekilde görüyoruz.
+Bu durumda ise yatay şekilde yani grafiklerimizi satırlarda görüyoruz.
 
 Grafiklerimizi kutucuklara bölünmüş şekilde de görmek isteyebilirdik, bu durumda başka bir facetting fonksiyonu olan facet_wrap() fonksiyonunu kullanıyoruz. Ona da aynı şekilde berraklık argümanını sağlıyoruz.
 ```R
@@ -225,6 +230,19 @@ elmaslar +
   facet_wrap(~clarity)
 ```
 <img src=".images/facet3.png">
+
+Yukarıdaki örneklerde tek bir kategorik değişken ile facetting uygulamayı gördük.
+
+Şimdi hem satır hem sütun için bir kategorik değişken tanımlayalım ve ne ile karşılaşacağımızı görelim.
+
+Örneğimizde renk ve berraklık özelliklerini kullanmak istiyoruz. Satırlarda renkler ve sütunlarda berraklıklara göre ayrılmış bir görsel olsun ve her bir renk ve berraklık kombinasyonu için olan karat ve değer grafiklerimizi görelim.
+```R
+elmaslar +
+  geom_point(aes(x=carat, y=price)) +
+  facet_grid(color~clarity)
+```
+
+<img src=".images/facet4.png">
 
 ## Koordinat Sistemleri
 ## Temalar
