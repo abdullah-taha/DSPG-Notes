@@ -204,6 +204,8 @@ elmaslar +
   geom_point(aes(x=carat, y=price)) +
   facet_grid(.~clarity)
 ```
+<img src=".images/facet1.png">
+
 Gördüğünüz üzere berraklık özelliğini argüman olarak facet_grid() fonksiyonuna verdik. Fakat ".~" ne anlama geliyor? 
 
 facet_grid()in kaç tane kategori varsa o kadar grafik verdiğini söylemiştik, bu grafiklerin görselde nasıl görüneceklerini belirlemek için eklediğimiz bir ifade. Grafikler yatay veya dikey görünebilir. Yukarıdaki örnekte dikey şekilde görüyoruz.
@@ -212,9 +214,9 @@ elmaslar +
   geom_point(aes(x=carat, y=price)) +
   facet_grid(clarity~.)
 ```
+<img src=".images/facet2.png">
 
 Bu durumda ise yatay şekilde görüyoruz.
-
 
 Grafiklerimizi kutucuklara bölünmüş şekilde de görmek isteyebilirdik, bu durumda başka bir facetting fonksiyonu olan facet_wrap() fonksiyonunu kullanıyoruz. Ona da aynı şekilde berraklık argümanını sağlıyoruz.
 ```R
@@ -222,6 +224,7 @@ elmaslar +
   geom_point(aes(x=carat, y=price)) +
   facet_wrap(~clarity)
 ```
+<img src=".images/facet3.png">
 
 ## Koordinat Sistemleri
 ## Temalar
