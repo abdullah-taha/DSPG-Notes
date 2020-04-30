@@ -267,11 +267,12 @@ elmaslar +
 Yukarıdaki kod parçasında gördüğünüz gibi, coord_cartesian fonksiyonumuza ilgili sınırlayıcı argümanları vektör şeklinde verdik ve grafiğimizi oluşturduğumuz koda ekledik. 
 Grafiğin tamamını ve coord_cartesian() ile alınmış kesitini aşağıda görebilirsiniz.
 
+Grafiğimizin tamamı:
 <img src=".images/lesson4/koord1.png">
-Grafiğimizin tamamı
 
+Yukarıdaki koddan elde ettiğimiz kesit: 
+-x değerleri 0 ile 2 arasında, y değerleri 10000 ile 20000 arasında-
 <img src=".images/lesson4/koord2.png">
-Yukarıdaki koddan elde ettiğimiz kesit, x değerleri 0 ile 2 arasında, y değerleri 10000 ile 20000 arasında.
 
 
 
