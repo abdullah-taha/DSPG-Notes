@@ -214,7 +214,7 @@ elmaslar +
   geom_point(aes(x=carat, y=price)) +
   facet_grid(clarity~.)
 ```
-<img src=".images/facet2.png">
+<img src=".images/facet2.png"> 
 
 Bu durumda ise yatay şekilde görüyoruz.
 
