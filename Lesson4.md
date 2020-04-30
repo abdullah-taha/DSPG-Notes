@@ -7,8 +7,8 @@
 * Tek değişkenli grafikler (sürekli)-(continouse variables) - Abdullah
 * Tek değişkenli grafikler (kesikli)-(discrete variable) - Abdullah
 * İki Değişkenli Grafikler (ikisi sürekli) - Abdullah
-* İki Değişkenli Grafikler (biri kesik biri sürekli) - Abdullah
-* Grafik ile özet istatistik Belirtme - Abdullah
+* İki Değişkenli Grafikler (biri kesik biri sürekli) 
+* Grafik ile özet istatistik Belirtme
 * [Bar Grafiği ile Oran Gösterme](#BarGrafiğiOranGösterme) - Petek
 * [Facetting](#Facetting) - Petek 
 * [Koordinat Sistemleri](#KoordinatSistemleri) - Petek
@@ -25,11 +25,131 @@
 Geçen haftalarda veriyi kesip biömeyi, filtrelemeyi, istatistikleri çıkarmayı öğrenmiştik. Şimdi ise kesip biçtiğimiz veriyi karşı tarafa anlayabilecekleri şekilde sunmayı öğreneceğiz. bu süreçte veri görselleştirme büyük bir rol oynar.
 
 ## ggplot2
-ggplot2 veri görselleştirme konsunda dünyada yaygın kullanınlan bir R paketi. Temelde 3 katmandan oluşur:
+ggplot2, (grammar of graphics) veri görselleştirme yapmamızı sağlayan bir R paketidir.  Dünyada kullanımı oldukça yaygın ve popüler olan bir görselleştirme paketidir..
+
+ggplot, veri görselleştirmenin bir grameri olarak düşünebiliriz, ilk başta kolay bir cümle kuracağız ve sonra zenginleştirmeye çalışacağız.
+```R
+#Paketi indirip çağıralım
+install.packages("ggplot2")
+library(ggplot2)
+```
+ggplot temelde 3 katmandan oluşur: (aslında 7 katmandan oluşur ama şimdilik ilk üçüne bakacağız. Daha fazla bilgi için [buraya](https://www.youtube.com/watch?v=PiY9hwOkL8U) bakabilirsiniz.)
 1. Data katmanı: bu katmanda kullanmak istediğimiz veri kaynağını beliriyoruz
 1. Aesthetics katmanı: bu katmanda veri kayanağından plot etmek istediğimiz değişkenleri belirliyoruz. Üstelik neye göre renklendirelim ve neye göre şeffaflandıralım gibi soruları bu katmanda da belirlenir
 1. Geometries katmanı: bu katmanda çizmek istediğimiz gradiği belirliyoruz (nokta grafiği, çizgi grafiği, bar grafizi vs.)
+
+
+
 <img src=".images/ggplot_layers.png">
+
+
+
+Önce veri setimizi tanımlarız (Data) sonra estetikleri(değişkenleri, renkleri, şekilleri) tanımlarız (Aesthetics) sonrasında ise çizdirmek istediğimiz grafiği tanımlarız (Geometries).
+
+Bugün kullanacağımız her bir komutun çokça argümanı var\ o yüzden argümanları okumaya ve internette araştırmaya alışmamız lazım.
+
+ Veri görselleştirmenin bir sınırı yok. Burada ggplot'un temel kullanma mantığını öğreneceğiz ama kalanı sizin yaratıcılığınıza kalır.  
+
+Neler yapılabildiğine dair merak ediyorsanız buraya bakabilirsiniz: https://www.r-graph-gallery.com
+
+ggplot içinde "diamonds" veri setine erişebiliriz, verisetinin bilgilerine ve faklı değişkenlerin anlamlarına *?diamonds* komutuyla bakabiliriz. dıamnds diye bir değişkene atalım ve  yapısını inceleyelim,
+```R
+diamonds <- diamonds 
+str(diamonds)
+
+> tibble [53,940 x 10] (S3: tbl_df/tbl/data.frame)
+ $ carat  : num [1:53940] 0.23 0.21 0.23 0.29 0.31 0.24 0.24 0.26 0.22 0.23 ...
+ $ cut    : Ord.factor w/ 5 levels "Fair"<"Good"<..: 5 4 2 4 2 3 3 3 1 3 ...
+ $ color  : Ord.factor w/ 7 levels "D"<"E"<"F"<"G"<..: 2 2 2 6 7 7 6 5 2 5 ...
+ $ clarity: Ord.factor w/ 8 levels "I1"<"SI2"<"SI1"<..: 2 3 5 4 2 6 7 3 4 5 ...
+ $ depth  : num [1:53940] 61.5 59.8 56.9 62.4 63.3 62.8 62.3 61.9 65.1 59.4 ...
+ $ table  : num [1:53940] 55 61 65 58 58 57 57 55 61 61 ...
+ $ price  : int [1:53940] 326 326 327 334 335 336 336 337 337 338 ...
+ $ x      : num [1:53940] 3.95 3.89 4.05 4.2 4.34 3.94 3.95 4.07 3.87 4 ...
+ $ y      : num [1:53940] 3.98 3.84 4.07 4.23 4.35 3.96 3.98 4.11 3.78 4.05 ...
+ $ z      : num [1:53940] 2.43 2.31 2.31 2.63 2.75 2.48 2.47 2.53 2.49 2.39 ...
+
+summary(diamonds)
+
+>      carat               cut        color        clarity          depth           table           price      
+ Min.   :0.2000   Fair     : 1610   D: 6775   SI1    :13065   Min.   :43.00   Min.   :43.00   Min.   :  326  
+ 1st Qu.:0.4000   Good     : 4906   E: 9797   VS2    :12258   1st Qu.:61.00   1st Qu.:56.00   1st Qu.:  950  
+ Median :0.7000   Very Good:12082   F: 9542   SI2    : 9194   Median :61.80   Median :57.00   Median : 2401  
+ Mean   :0.7979   Premium  :13791   G:11292   VS1    : 8171   Mean   :61.75   Mean   :57.46   Mean   : 3933  
+ 3rd Qu.:1.0400   Ideal    :21551   H: 8304   VVS2   : 5066   3rd Qu.:62.50   3rd Qu.:59.00   3rd Qu.: 5324  
+ Max.   :5.0100                     I: 5422   VVS1   : 3655   Max.   :79.00   Max.   :95.00   Max.   :18823  
+                                    J: 2808   (Other): 2531                                                  
+       x                y                z         
+ Min.   : 0.000   Min.   : 0.000   Min.   : 0.000  
+ 1st Qu.: 4.710   1st Qu.: 4.720   1st Qu.: 2.910  
+ Median : 5.700   Median : 5.710   Median : 3.530  
+ Mean   : 5.731   Mean   : 5.735   Mean   : 3.539  
+ 3rd Qu.: 6.540   3rd Qu.: 6.540   3rd Qu.: 4.040  
+ Max.   :10.740   Max.   :58.900   Max.   :31.800  
+```
+
+ggplot katmanla çalışan bir paket, ve bir katmanı '+' işareti ile ekleyebilirsiniz. 
+
+```R
+ggplot(diamonds, aes(x=carat, y=price))  +
+  geom_point() 
+```
+<img src=".images/lesson4/diamonds1.JPG" width=400>
+
+Gördüğümüz gibi bir nokta gradiği elde edebildik! yaklaşık 54 bin nokta var ve noktaların çoğunu üstüste çizilmiş durumda. Ama genel bir şekilde, carat değeri arttıkça price'ın değerinin arttığıa dair bir gözlem yapabiliriz. Merak etmeyin ilerde bunların istatistiksel analizlerini yapıyor olacağız !
+
+estetikleri geom_point() içinde yazarak ta grafiğimizi elde edebilirdik, 
+```R
+ggplot(diamonds) + 
+  geom_point(aes(x=carat, y=price))
+```
+Yalnızca ggplot()'un içinde yazdığımız zaman, ardından gelen tüm katmanlar buna göre çizecek. İkinci yöntem ise her bir katmanın ayrı estetiğini belirleyebiliriz. 
+
+Argümanları incelemeyi başlayalım! Eğer grafiği renklendirmek istersek "color" argümanı kullancağız.
+
+```R
+ggplot(diamonds) + 
+  geom_point(aes(x=carat, y=price), color="red")
+```
+<img src=".images/lesson4/diamonds2.JPG" width=400>
+
+
+
+Eğer grafikle daha çok şey açıklamak istersek noktaları bir değişkene göre renklendirebiliriz. Bunu yaparken ilgilii argümanı aes() fonksiyonu içine yazıyoruz
+
+> **Not: noktalara sabit bir renk vermek istiyorsak aes()'in dışına yazmamız lazım. Belli bir değişkene göre renklendirmek istersek aes()'in içine yazarız.** 
+
+```R
+ggplot(diamonds) + 
+  geom_point(aes(x=carat,y=price,color=clarity))
+```
+<img src=".images/lesson4/diamonds3.JPG" width=400>
+
+İyice bakarsak, caratı 1.5 civarında olanların fiyatı 5 bin iken, yine caratı 0.5 olanların fiyatı da 5 bindir. Buna istinaden clarity'nin fiyata bir etkisi var olduğunu düşünebiliriz.
+
+geom_point fonksiyonunun yardım açıklamalarına bakacak olursak bir çok alpha, color, fill, group, shape, size, stroke gibi aesthetics'ler ile grafiğimizi daha açıklayıcı hale getirebiliriz.
+
+> **Egzersiz:** Elmas karatı ile fiyat arasındaki ilişkiye saçılım (point)grafiği ile bakmıştık. Peki bu grafiği alpha argümanını kullanarak elmas genişliği (*table*) değişkeni ile karat ve fiyatları nasıl değiştiğine bakalım.
+
+```R
+
+ggplot(diamonds) + 
+  geom_point(aes(x=carat,y=price,alpha=table))
+
+```
+
+<img src=".images/lesson4/diamonds4.JPG" width=400>
+
+Gördüğümüz gibi şeffaflığıa göre grafiğimize table bilgisi ekleyebilirdik. Burada noktalar üst üste bindiği için görmekte zorluk çekiyoruz. Üst üste binen noktaları daha iyi görebilmek için noktalara (*alpha*) argümanı ile şeffaflaştırabiliriz. (0'a yaklaştıkça daha şeffaf olur)
+
+```R
+ggplot(diamonds) + 
+  geom_point(aes(x=carat,y=price),alpha=0.1)
+```
+
+<img src=".images/lesson4/diamonds5.JPG" width=400>
+
+Biraz daha iyi, değil mi ?
 
 ## Bar Grafiği ile Oran Gösterme
 
