@@ -288,4 +288,23 @@ ggplot(diamonds) +
 ```
 <img src=".images/lesson4/koord4.png">
 
+
+coord_polar() fonksiyonumuz grafiğimizi kartezyen kordinat sistemindeki standart gösteriminden polar kordinat sistemindeki gösterimine çeviriyor.
+
+Oranları gösteren bir bar grafiğimiz olsun, berraklık kategorilerinin oranlarını görüyoruz. Bu grafiği polar kordinat sistemindeki gösterimine çevirdiğimizde pasta grafiği şeklinde görebiliyoruz ve gösterim açısından çok daha açık oluyor.
+```R
+elmaslar +
+  geom_bar(aes(x=clarity, y=..prop.., group=1))
+```
+<img src=".images/lesson4/koord5.png">
+
+```R
+elmaslar +
+  geom_bar(aes(x=clarity, y=..prop.., group=1)) +
+  coord_polar()
+```
+<img src=".images/lesson4/koord6.png">
+
+
+
 ## Temalar
