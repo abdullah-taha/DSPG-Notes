@@ -3,7 +3,7 @@
 ## Başlıklar:
 * [Giriş](#giriş) 
 * [ggplot2](#ggplot2) 
-* Grafik çeşitleri - Abdullah
+* [Grafik çeşitleri](#grafik-cesitleri) - Abdullah
 * Tek değişkenli grafikler (sürekli)-(continouse variables) - Abdullah
 * Tek değişkenli grafikler (kesikli)-(discrete variable) - Abdullah
 * İki Değişkenli Grafikler (ikisi sürekli) - Abdullah
@@ -150,6 +150,38 @@ ggplot(diamonds) +
 <img src=".images/lesson4/diamonds5.JPG" width=400>
 
 Biraz daha iyi, değil mi ?
+
+> **Soru: alpha değeri neye göre 0.1 seçtik ?**
+
+ Bu durumda 0.5 değerini denedik göremedik, 0.1 koyduğumuz zaman daha net görebildik. Veri görselleştirme yaparkan bu tip sorularla çok karşılaşacaksınız. Bir şey çizdirdiğinizde size bir şey ifade etmiyorsa ya da kafanızı karıştırıyorsa yanlış yapıyorsunuz demektir. Net bir sonuç alana kadar bir şeyler değiştirmeniz gerekmektedir. 
+
+ ## Grafik Çeşitleri:
+
+Daha önce söylediğimiz gibi, bir şeyin çizdirmesinin sınırı yok. Şimdi ise sürekli ve ayrık verilerin çizerken kullanılan en yaygın grafik çeşitlerine bakacağız.
+
+> Hatırlatma: **Sürekli değişkenler** (continious variables) sonsuz değer alan değişkenlerdir. Yani bir aralık içinde herhangi bir değer alabilirler (örneğin: boy değişkeni süreklidir çünkü 1.5, 1.78329 gibi sonsuz sayıda değer alabilir). **Ayrık değişkenler** ise belli sayıda değerleri alan değişkenlerdir (örneğin: cinsiyet, araba kaza sayısı, bir takımın kişi sayısı).
+
+Elinizdeki veriilere göre kullanabileceğiniz grafik çeşitlerini ezberlemenize gerek yok, bu [cheat cheet](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=2ahUKEwia_emB6ZLpAhXKbsAKHTpHDHsQFjAAegQIARAB&url=https%3A%2F%2Frstudio.com%2Fwp-content%2Fuploads%2F2015%2F03%2Fggplot2-cheatsheet.pdf&usg=AOvVaw3HCeJmzFIA2HeSMzySfo1s)'ten bakabilirsiniz. 
+
+## Tek değişkenli grafikler (sürekli)-(continouse variables)
+* Histogram: geom_histogram()
+* Yoğunluk: geom_density()
+* Nokta: geom_dotplot()
+* Alan: geom_area()
+* Sıklık: geom_freqpoly()
+
+## Tek değişkenli grafikler (kesikli)-(discrete variable)
+* Bar: geom_bar()
+
+Elmasların fiyat dağılım grafiği nasıl acaba ? fiyat değişkeninin sürekli değer aldığını biliyoruz, sürekli değerler için en yaygın grafik tipi histogram ve density. 
+
+```R
+ggplot(diamonds) + 
+  geom_histogram(aes(x=price))
+```
+
+Sağa çarpık bir dağılıma sahip olduğunu, pahalı elmasıların daha az olduğunu görebiliyoruz.
+
 
 ## Bar Grafiği ile Oran Gösterme
 
