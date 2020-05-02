@@ -1978,3 +1978,65 @@ full_join(superheroes, publishers, by = c("publisher" = "name"))
 ```
 
 Tüm satırlar ve sütunları birleştirdik. Karşılığı olmayan gözlemler yerine otomatik olarak “NA” değeri geldi. 
+
+Veri setimizde ortak olan değişken haricinde aynı isimli değişkenler olursa ne olur? Oluşturduğumuz iki tabloyu bu şekilde revize ederek sonuca bakalım.
+
+```R
+superheroes_yeni <- tribble(
+  ~name,     ~alignment,    ~gender,    ~publisher_id,   
+  "Magneto",   "bad",       "male",         "101",         
+  "Storm",     "good",      "female",       "101",         
+  "Mystique",  "bad",       "female",       "101",         
+  "Batman",    "good",      "male",         "102",         
+  "Joker",     "bad",       "male",         "102",          
+  "Catwoman",  "bad",       "female",       "102",        
+  "Hellboy",    "good",     "male",         "103"
+)
+
+publishers_yeni <- tribble(
+  ~publisher_id,   ~name,                ~yr_founded,
+  "101",           "Marvel",               1939L,
+  "102",           "DC",                   1934L,  
+  "103",           "Dark Horse Comics",    1986L,
+  "104",           "Image",                1992L
+)
+```
+
+Tabloların yeni halini oluşturarak ikisine de publisher_id değişkenini ekledik ve superheroes tablosundan yayıncı isimlerini çıkardık. Artık ortak olan değişkenimiz publisher_id ancak her iki tabloda da name isimli aslında ortak olmayan iki değişken var. inner_join() fonksiyonuyla tabloları birleştirip sonucu inceleyelim. 
+
+```R
+inner_join(superheroes_yeni, publishers_yeni, by = "publisher_id")
+
+>
+# A tibble: 7 x 6
+  name.x   alignment gender publisher_id name.y            yr_founded
+  <chr>    <chr>     <chr>  <chr>        <chr>                  <int>
+1 Magneto  bad       male   101          Marvel                  1939
+2 Storm    good      female 101          Marvel                  1939
+3 Mystique bad       female 101          Marvel                  1939
+4 Batman   good      male   102          DC                      1934
+5 Joker    bad       male   102          DC                      1934
+6 Catwoman bad       female 102          DC                      1934
+7 Hellboy  good      male   103          Dark Horse Comics       1986
+```
+
+İsmi aynı olan değişkenlerin sonuna farklı olduklarını belli etmek için otomatik olarak '.x' ve '.y' ifadeleri geldi. Tahmin edebileceğiniz gibi, '.x' ifadesi 1. veri setindeki değişkene, '.y' ifadesi 2. tablodaki değişkene geliyor. Ancak dışarıdan bakan biri için yeterince açıklayıcı değiller.
+Bu sorunumuzu join fonksiyonunu yazarken 'suffix=" argümanı ekleyerek çözebiliriz. Bu argüman aynı isimli değişkenlerin isimlerinin sonuna getirmek istediğimiz ekleri girmemizi sağlıyor.
+
+```R
+inner_join(superheroes_yeni, publishers_yeni, by = "publisher_id", suffix = c("_superhero", "_publisher"))
+
+>
+# A tibble: 7 x 6
+  name_superhero alignment gender publisher_id name_publisher    yr_founded
+  <chr>          <chr>     <chr>  <chr>        <chr>                  <int>
+1 Magneto        bad       male   101          Marvel                  1939
+2 Storm          good      female 101          Marvel                  1939
+3 Mystique       bad       female 101          Marvel                  1939
+4 Batman         good      male   102          DC                      1934
+5 Joker          bad       male   102          DC                      1934
+6 Catwoman       bad       female 102          DC                      1934
+7 Hellboy        good      male   103          Dark Horse Comics       1986
+```
+
+Gördüğümüz gibi, name değişkenlerinin isimlerini ait oldukları tablolara göre değiştirdik. 
