@@ -180,7 +180,82 @@ ggplot(diamonds) +
   geom_histogram(aes(x=price))
 ```
 
-Sağa çarpık bir dağılıma sahip olduğunu, pahalı elmasıların daha az olduğunu görebiliyoruz.
+<img src=".images/lesson4/diamonds6.JPG" width=400>
+
+Sağa çarpık bir dağılıma sahip olduğunu, pahalı elmasıların daha az olduğunu görebiliyoruz. Pahalı elmasların daha az, ucuz elmasların daha çok olduğu yorumunu yapabiliyoruz. 
+
+Dikkat edersenz bir uyarı aldık. Bu bize barların default olarak 30 tane geldiğini, yani barın genişliği değişkenin aralığı/30 şeklinde hesaplanmış olduğunu söylüyor. Gelen barların genişliğini bulmaya çalışalım.
+
+```R
+diff(range(diamonds$price))/30
+
+> 616.5667
+
+#2.yol
+(max(diamonds$price)-min(diamonds$price)) / 30
+> 616.5667
+```
+
+Daha iyi b'r görünüm elde etmek için barın genişliği 1000 olarak değiştirelim
+
+```R
+ggplot(diamonds) + 
+  geom_histogram(aes(x=price), binwidth = 1000))   
+```
+
+<img src=".images/lesson4/diamonds7.JPG" width=400> 
+
+
+> *Egzeriz:* Elmasların karatlarının dağılımı nasıl? Barların rengini maviye boyayıp bar genişliğini 0.5 yapalım.
+
+```R
+ggplot(diamonds) +
+  geom_histogram(aes(x=carat),fill="blue", binwidth = 0.5)
+```
+
+<img src=".images/lesson4/diamonds8.JPG" width=400> 
+
+**NOT:** ggplot'taki farklı renklerin isimleri [buradan](http://sape.inf.usi.ch/quick-reference/ggplot2/colour)  bulabilirsiniz. 
+
+Bir önceki komutta binwidth argümanı 1000 iken burada 0.5 yazmıştık. Bin sayısı aralıklara göre değişir. Ayrıca onu azalttığınızda uzaktan bakıyorsunuz gibi düşünebilirsiniz, arttırdığınızda ise zoomlayıp yakından bakıyorsunuz gibi düşünebilirsiniz.
+
+> *Egzersiz:* Elmasların kesim kalitesi (cut) sıklıklarını nasıl?
+
+Bunun cevabını bulmak için ilk cut değişkeninin tipine bakalım. ayrık mı yoksa sürekli bir değşken midir ?
+```R
+str(diamonds$cut)
+> Ord.factor w/ 5 levels "Fair"<"Good"<..: 5 4 2 4 2 3 3 3 1 3 ...
+
+summary(diamonds$cut)
+>     Fair      Good Very Good   Premium     Ideal 
+     1610      4906     12082     13791     21551 
+```
+
+Gördüğümüz gibi ayrık bir değişkendir. Bunun sıklıklarını bar grafiği ile elde edebiliriz.
+```R
+ggplot(diamonds) +
+  geom_bar(aes(x=cut))
+```
+
+<img src=".images/lesson4/diamonds9.JPG" width=400> 
+
+> *Egzersiz:* Elmasların kesim kalitesi (cut) dağılımı renk (color) değişkeni ile nasıl değişiyor?
+İpucu: position = "dodge" ile daha kıyaslanabilir bir grafik elde edebiliriz.
+
+```R
+ggplot(diamonds) +
+  geom_bar(aes(x=cut,fill=color))
+```
+<img src=".images/lesson4/diamonds10.JPG" width=400> 
+
+Gördüğümüz gibi İdeal elmasların çoğunu H rengindedir. Yalnızca fair ve good elmasların renklerini kıyaslamak zordur. Daha iyi bir kıyaslama elde edebilmek için position argümanı kullanabiliriz. position argümanı, bir barın içindeki değerlerin nasıl gösterilmesi gerektiğini belirliyor. 
+
+```R
+ggplot(diamonds) + 
+  geom_bar(aes(x=cut, fill=color), position="dodge")
+```
+<img src=".images/lesson4/diamonds11.JPG" width=400> 
+
 
 
 ## Bar Grafiği ile Oran Gösterme
