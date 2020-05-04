@@ -1,11 +1,11 @@
 # Ders 4
 
 ## Başlıklar:
-* [Giriş](#giriş) 
-* [ggplot2](#ggplot2) 
-* [Grafik çeşitleri](#grafik-cesitleri) 
-* [Tek değişkenli grafikler (sürekli)-(continouse variables)](#tek-değişkenli-grafikler-kesikli-discrete-variable) 
-* [Tek değişkenli grafikler (kesikli)-(discrete variable)](#tek-değişkenli-grafikler-kesikli-discrete-variable) 
+* [Giriş](#giriş) - Berke
+* [ggplot2](#ggplot2) - Berke
+* [Grafik çeşitleri](#grafik-cesitleri) - Berke
+* [Tek değişkenli grafikler (sürekli)-(continouse variables)](#tek-değişkenli-grafikler-kesikli-discrete-variable) - Berke
+* [Tek değişkenli grafikler (kesikli)-(discrete variable)](#tek-değişkenli-grafikler-kesikli-discrete-variable) - Berke
 * [İki Değişkenli Grafikler (ikisi sürekli)](#t#i̇ki-değişkenli-grafikler-ikisi-sürekli) -Abdullah
 * İki Değişkenli Grafikler (biri kesik biri sürekli) - Cansu
 * Grafik ile özet istatistik Belirtme - Cansu
