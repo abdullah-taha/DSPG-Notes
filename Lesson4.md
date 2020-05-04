@@ -256,7 +256,43 @@ ggplot(diamonds) +
 ```
 <img src=".images/lesson4/diamonds11.JPG" width=400> 
 
+Tek değişkenle nerler yapabildiğimizi gördük. peki ya iki değişkenin arasnıdaki bağlantıya bakmak istersek ?
 
+## İki Değişkenli Grafikler (ikisi sürekli) 
+
+İki değişken çizerken en yaygın kullanılan grafikler şunlardır,
+* Nokta, Saçılım: (geom_point()): en  yaygın kullanılan
+* Jitter: (geom_jitter()) : point grafiği gibi. Noktalar üstüste geliyorsa noktaları biraz dağıtarak daha net bir gösterim sağlar.  
+* Smooth, (geom_smooth()): belli bir algoritma göre noktaların izlediği yolu(çizgiyi) çizer
+* Text,   (geom_text()): elinizde text datası varsa onu grafa plot eder.
+
+Pratik yaparak daha iyi anlaşılır, hemen ilk örneğimize bakaılm. 
+
+> *Egzersiz:*Elmas derinliği (depth) ile fiyat (price) arasında nasıl bir ilişki var mı?
+
+```R
+ggplot(diamonds) + 
+  geom_point(aes(x=depth,y=price))
+```
+
+<img src=".images/lesson4/diamonds12.JPG" width=400> 
+Gördüğümüz gibi biraz anlamsız bir graf gelmiş. Elmasıların 60 civarında yoğunlaştığı görebiliyoruz. ama fiyatla ilgili bir yorum yapmak zordur.
+
+**NOT:** Bir değişken diğerine etikleyip etkilemediğine bakmak istersek, görsellik açısından etkilenen değişkeninin y eksenine koyarsak daha anlaşılır bir graf elde ederiz.
+
+depth ile price birlikte nasıl hareket ediyor bakmak istersek, geom_smooth()
+katmanı ekleyebiliriz.
+
+```R
+ggplot(diamonds) + 
+  geom_point(aes(x=depth, y=price)) +
+  geom_smooth(aes(x=depth,y=price))
+```
+<img src=".images/lesson4/diamonds13.JPG" width=400>  
+
+Çok anlamlı bir şey ifade etmiyor aslında. iyi bir model değil yani.
+
+Bu çizgiyi default olarak "gam" algoritmasına göre yapıyor, gri olan kısmı error'u ifade ediyor.
 
 ## Bar Grafiği ile Oran Gösterme
 
