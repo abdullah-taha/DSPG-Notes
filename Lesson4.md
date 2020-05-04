@@ -14,9 +14,9 @@
 * [Koordinat Sistemleri](#KoordinatSistemleri) - Petek
 * [Temalar](#Temalar) - Petek
 * TED: The best stats you've ever seen | Hans Rosling - Abdullah
-* ggplot2 ile Yapılabilecek Diğer Şeyler 
-* Case Study 1 (Genel Egzersiz) : mpg veri seti
-* Case Study 2: gapminder verisi ile animasyonlu görselleştirme
+* ggplot2 ile Yapılabilecek Diğer Şeyler - Berke
+* Case Study 1 (Genel Egzersiz) : mpg veri seti - Berke
+* Case Study 2: gapminder verisi ile animasyonlu görselleştirme - Berke
 
 ## Giriş
 
