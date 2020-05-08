@@ -6,7 +6,7 @@
 * [Grafik çeşitleri](#grafik-cesitleri) 
 * [Tek değişkenli grafikler (sürekli)-(continouse variables)](#tek-değişkenli-grafikler-kesikli-discrete-variable) 
 * [Tek değişkenli grafikler (kesikli)-(discrete variable)](#tek-değişkenli-grafikler-kesikli-discrete-variable)
-* [İki Değişkenli Grafikler (ikisi sürekli)](#t#i̇ki-değişkenli-grafikler-ikisi-sürekli) -Abdullah
+* [İki Değişkenli Grafikler (ikisi sürekli)](##i̇ki-değişkenli-grafikler-ikisi-sürekli) -Abdullah
 * İki Değişkenli Grafikler (biri kesik biri sürekli) - Cansu
 * Grafik ile özet istatistik Belirtme - Cansu
 * [Bar Grafiği ile Oran Gösterme](#BarGrafiğiOranGösterme) - Petek
