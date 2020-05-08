@@ -290,9 +290,65 @@ ggplot(diamonds) +
 ```
 <img src=".images/lesson4/diamonds13.JPG" width=400>  
 
-Çok anlamlı bir şey ifade etmiyor aslında. iyi bir model değil yani.
 
-Bu çizgiyi default olarak "gam" algoritmasına göre yapıyor, gri olan kısmı error'u ifade ediyor.
+Çok anlamlı bir şey ifade etmiyor aslında. iyi bir model olmadığı ortada.
+
+Bu çizgiyi default olarak "gam" algoritmasına göre yapıyor(bize gelen uyarıda görebiliriz). Gri olan kısmı hesaplama hatasini ifade ediyor.(nasıl hesaplandığı ve ne anlama geldiğini daha sonraki derslerde göreceğiz). Bunu görmek istemiyorsak "SE" argümanı FALSE olarak belirleyebiliriz.
+
+Gördüğümüz gibi son kod parçası, bir öncekinin aysını ama üzerine bir katman daha ekledik. Bu çök yaygın olan bir şey yalnızca kod tekrarından kurtulmak için grafiğimizi kolayca bir değişkene atayabiliriz.
+```R
+p <- ggplot(diamonds) + 
+  geom_point(aes(x=depth, y=price))
+```
+Öylece ana grafiğimiz "p" değişkenin içinde oldu ama ekranda bir şey gelmedi. Onu çağırarak çizdirebiliriz.
+```R
+p
+```
+<img src=".images/lesson4/diamonds12.JPG" width=400>
+
+artık işlemlerimizi p üzerine ekleyerek yapabiliriz. 
+
+daha önce smooth fonksiyonu çağırdığımızda "gam"algoritmasına göre çizildiğini söyledik. peki *depth* ile *price* arasındaki lineer (regresiyon) ilişkisine bakmak istersek ne yapabiliriz? 
+
+Bunu *method* argümanını "lm" (linear model) yazarak elde edebiliriz.
+```R
+p +
+  geom_smooth(aes(x=depth,y=price), method="lm")
+```
+<img src=".images/lesson4/diamonds14.JPG" width=400>
+
+> *Egzersiz*: Elmas karatı ile fiyat arasında nasıl bir ilişki var? Regresyon (lineer)model çizgisi ile gösterelim. 
+Karat arttıkça fiyat artıyor diyebilir miyiz? Renk (color) değişkenini color argümanına atayalım. Renklerde
+karat-fiyat ilişkisi nasıl?
+
+karat ike fiyat arasındaki lineer ilişkisini çizdirmekle başlayalım,
+```R
+elmaslar <- ggplot(diamonds)
+
+elmaslar + 
+  geom_smooth(aes(x=carat,y=price,method="lm")
+```
+<img src=".images/lesson4/diamonds15.JPG" width=400>
+
+karşımıza iyi bir lineer model gelmiş gibi. Ama iyiyce fit edip etmediğini öğrenmek için point grafiğine bakarak daha iyi bir yorum yapabiliriz.
+```R
+elmaslar + 
+  geom_point(aes(x=carat,y=price)) +
+  geom_smooth(aes(x=carat,y=price),method="lm")
+```
+<img src=".images/lesson4/diamonds16.JPG" width=400>
+
+Burada karatın 0-3 arasındayken mavi çizgi noktaların tam ortasından geçtiğini görebiliriz. Ama karat 3 tan büyük oldukça noktalar artık mavi çizginin etrafında değildir. Yani bu model, bir yere kadar iyi fit edildiğini söyleyebiliriz.
+
+```R
+elmaslar + 
+  geom_smooth(aes(x=carat,y=price, color=color),method="lm")
+```
+<img src=".images/lesson4/diamonds17.JPG" width=400>
+
+
+## İki Değişkenli Grafikler (biri kesik biri sürekli
+## Grafik ile özet istatistik Belirtme 
 
 ## Bar Grafiği ile Oran Gösterme
 
