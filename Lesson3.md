@@ -21,7 +21,7 @@
 * [unite()](#unite-fonksiyonu)
 * [Veri setindeki eksik, aykırı gözlemler](#Veri-setindeki-eksik-aykırı-gözlemler)
 * [dplyr ile join işlemleri](#dplyr-ile-join-işlemleri)
-* Vaka Çalışması
+* [Vaka Çalışması](#Flights-veri-seti-ile-vaka-çalışması)
 
 
 
