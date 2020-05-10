@@ -2,9 +2,9 @@
 
 ##Başlıklar
 
-* Giriş
-* Mekansal Veri (Spatial Data)
-* ggplot2 ile Haritalandırma 
+* Giriş - Abdullah
+* Mekansal Veri (Spatial Data) - Abdullah
+* ggplot2 ile Haritalandırma  - Abdullah
 * Özelleştirilmiş Baloncuk Haritası (Bubble Map)
 * ggplot2 ile Renk Tonlu Harita (Choropleth)
 * Shape Formatında Mekansal Veri
