@@ -128,3 +128,111 @@ ggplot()+
 ```
 
 <img src=".images/lesson5/mekansal3.JPG" width=400>
+
+Şimdi 10 büyük şehri farklı renklerde belirleyelim. Şehirlerin isimlerini yazdırmak için **ggrepel** kütüphanesini kullanacağız. Onu indirelim ve çağıralım.
+```R
+install.packages("ggrepel")
+library(ggrepel)
+```
+
+Sadece 10 tane şehirlerin isimlerini yazdırmak istediğimiz için farklı bir değişkende (fonksiyonun kullanacağı veri kaynağı) tutalım.
+```R
+data1 <- data %>% 
+  top_n(10, pop)
+
+data1
+>         name country.etc     pop   lat  long capital
+1  Birmingham          UK  986969 52.48 -1.91       0
+2     Bristol          UK  432967 51.46 -2.60       0
+3   Edinburgh          UK  438501 55.95 -3.22       0
+4     Glasgow          UK  607192 55.87 -4.27       0
+5       Leeds          UK  457875 53.81 -1.55       0
+6   Leicester          UK  341201 52.64 -1.13       0
+7   Liverpool          UK  468584 53.42 -2.99       0
+8      London          UK 7489022 51.52 -0.10       1
+9  Manchester          UK  395514 53.48 -2.25       0
+10  Sheffield          UK  448596 53.39 -1.48       0
+```
+Şimdi komutumuzu yazalım
+
+```R
+#Daha önce yaptığımız gibi polygonları ve şehirlerin noktaları çizdirelim
+ggplot() + 
+  geom_polygon(data= UK, aes(x=long, y=lat, group= group), fill="grey",alpha=0.3)+
+  geom_point(data= data, aes(x=long, y=lat, alpha=pop))+
+  #şeihrlerin isimleri için ggrepel kütüphanesinden geom_repel_text fonskiyonununu kullanacağız. yine verimizi (data1), estetiklerimizi, ve bu fonksiyonun özel argümanı olan label'ı (isimleri hangi kolondan alsın?) belirliyoruz
+  geom_text_repel(data=data1, aes(x=long,y=lat, label=name), size=5)+
+  # üstüne 10 büyük şehirleri kırmızı noktalarla çizdirelim
+  geom_point(data= data1, aes(x=long,y=lat), color="red")
+```
+
+<img src=".images/lesson5/mekansal4.JPG" width=400>
+
+*data1* i ayrı tanımlamadan bu şekilde de yazabilirdik.
+```R
+ggplot() +
+  geom_polygon(data=UK, aes(x=long, y=lat, group = group), fill="grey", alpha=0.5) +
+  geom_point(data=data, aes(x=long, y=lat, alpha=pop)) +
+  geom_text_repel(data = data %>% top_n(10,pop), aes(x=long, y=lat, label=name), size=5) +
+  geom_point(data=data %>% top_n(10,pop), aes(x=long, lat), color="red")
+```
+
+Haritamızla daha çok şey açıklamak istiyoruz. Nüfus yoğunluğuna göre noktaların rengini ve büyüklüğünü ayarlayalım. 
+```R
+ggplot() +
+  geom_polygon(data = UK, aes(x=long, y=lat, group=group), fill="grey", alpha=0.5)+
+  geom_point(data=data, aes(x=long, y=lat, size=pop, color=pop))
+```
+<img src=".images/lesson5/mekansal5.JPG" width=400>
+
+Bu resim için ne diyebiliyoruz ? şehirlerin arasındaki nufüs aryımı yapabiliyor muyuz ? 
+
+gördüğünüz gibi çok açıklayıcı bir resim değildir. Noktaların boyutları arasındaki farkı ayrıt etmek zordur. Bu problem, default olarak kullanılan ölçekten kaynaklıdır. *?scale_size_continuous()* 'ın dokümantasyonuna bakarsak, *range* argümanın 1 ile 6 arasında bir ölçek aldığını görebiliyoruz. Yani noktaların boyutları, 1 ile 6 arasındadır. Bunu 1 ile 12 olarak değiştirelim. 
+
+Üstelik mavi yerine güzel bir renklendirme elde etmek için *viridis* kütüphanesini kullanalım.
+
+```R
+ggplot() +
+  geom_polygon(data = UK, aes(x=long, y=lat, group=group), fill="grey", alpha=0.5)+
+  geom_point(data=data, aes(x=long, y=lat, size=pop, color=pop))+
+  scale_size_continuous(range=c(1,12))+
+  scale_color_viridis()
+```
+<img src=".images/lesson5/mekansal6.JPG" width=400>
+
+Biraz daha iyi ama yine çok açıklayıcı değildir. Gördüğümüz gibi noktaların çoğu aynı renkmiş gibi geliyor.
+
+Bu karşınıza çıkacak yaygın bir problemdir.
+
+ Değişkenin aralığı çok büyük ise(burada nufüs değişkeni gibi milyon mertebesinden) küçük ölçekteki farkları görmek zor olurdur. Değişkeniniz 0-100 arasında ise 0.001 ile 0.0001 arasındaki farkı görmek çok zordur. Bunun nedeni renk skalamız çok büyük olmasıdır. 
+ 
+ Bunu çözebilmek için algoritmik transforamsiyon uygulayabiliriz. Bu ölçekliğimizi değiştiryoruz demektir. Örneğin 1 milyon 6 sayısına karşılık gelirken 1 bin 3 sayısına karşılık gelirdir. 1 milyonluk skala ile çalışmak yerine 6 lık skala ile çalışıyoruz gibi oldu. 
+
+
+```R
+ggplot() +
+  geom_polygon(data = UK, aes(x=long, y=lat, group=group), fill="grey", alpha=0.5)+
+  geom_point(data=data, aes(x=long, y=lat, size=pop, color=pop))+
+  scale_size_continuous(range=c(1,12))+
+  scale_color_viridis(trans="log")
+```
+<img src=".images/lesson5/mekansal7.JPG" width=400>
+
+
+Bunu pratikte çok kullanacağız. Yalnız eksenlerde ve legendlerde logaritmik skalayı kulandığınızı yazmayı unutmayın!
+
+Resimde gördüğümüz gibi büyük noktalar arkada kaldı. Bunu önde görünmesini istiyorsak. Yani eğer nüfusu yoğun olan şehirleri ön plana çıkarmak istiyorsak veri setimizi nüfusa göre sıralamamız yeterli olacaktır.
+
+```R
+data %>% 
+  arrange(pop) %>% 
+  mutate(name=factor(name, levels=unique(name))) %>% 
+  ggplot(.) +
+  geom_polygon(data = UK, aes(x=long, y=lat, group=group), fill="grey", alpha=0.5)+
+  geom_point( aes(x=long, y=lat, size=pop, color=pop))+
+  scale_size_continuous(range=c(1,12)) +
+  scale_color_viridis(trans="log")
+```
+<img src=".images/lesson5/mekansal8.JPG" width=400>
+
+## Özelleştirilmiş Baloncuk Haritası (Bubble Map)
