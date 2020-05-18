@@ -8,7 +8,7 @@
 * [Kontrol İfadeleri](#kontrol-ifadeleri)
 * [for döngüsü](#for-döngüsü)
 * [paste() fonksiyonu](#paste-fonksiyonu)
-* [while döngüsü - yunus](#while-döngüsü)
+* [while döngüsü](#while-döngüsü)
 * [Fonksiyonlar - yunus](#fonksiyonlar)
 * [Apply Fonksiyonları](#apply-fonksiyonları)
 
@@ -767,6 +767,8 @@ Kodu incelemeden önce hemen **konsola tıklayıp ESC tuşuna basınız.** Böyl
 Koda dikkatli baktığınızda i değerini değiştirmediğimizi farkedebiliyoruz. i değeri güncellenmediği için de döngümüz sona ermiyor yani sonsuz döngüye giriyor. :scream: :scream:
 
 While döngüsü başlığı altında da yazdığımız gibi while döngüsüne verdiğimiz koşulları döngü içinde güncellememiz gerekiyor. Yoksa siz gerisini biliyorusunuz. :bowtie: :bowtie:
+
+
 <img src=".images/funny.jpg" width="400">
 
 Bu döngü ile en çok kullanılan komutlardan biri ise **break** komutudur. Döngümüzü istediğimiz durumda sonlandırmamızı sağlar. Hemen örneğini inceleyelim.
