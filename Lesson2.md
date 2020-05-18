@@ -729,6 +729,65 @@ paste(c("x","y"), 1:10, sep=",")
 ```
 
 ## while döngüsü
+While döngüleri istenilen koşul bozulana kadar tekrar eden döngülerdir. Koşul bozulana kadar while döngüsü içindeki istenilenler tekrar edilir ve koşul değişkeni güncellenir. Örnekler ile rahat bir şekilde anlaşılacaktır. Hadi örneklere geçelim. :sunglasses: :sunglasses:
+
+__Örnek:__ Şehir içinde trafikteyiz. Hızımız da 64 kmh fakat şehir içinde hız sınırı 30 kmh. Aracımız hızımız 30 kmh altına düşene kadar bize "Yavaş Gidin!" uyarısı versin ve her uyarız için hızımızı 7 kmh düşürelim.
+
+```R
+hız<-64
+while(hız>30){
+  print("yavaş gidin")
+  hız<-hız-7
+}
+
+>
+[1] "yavaş gidin"
+[1] "yavaş gidin"
+[1] "yavaş gidin"
+[1] "yavaş gidin"
+[1] "yavaş gidin"
+```
+While parantezleri içine gerçekleşmesini istediğimiz koşulu yazdık. Süslü parantezler içine de bu döngü içinde gerçekleşmesini istediğimiz kodları yazıyoruz. Bize 5 kere yavaş gidin uyarısı verdi. Toplamda hızımız 35 kmh azaldı. Son durumda hızımız 29 kmh oldu. O da 30 kmh'den büyük olmadığı için döngümüz sonlandı.
+
+__Örnek:__ 1' den ona kalan olan sayıların toplamını bulan bir for döngüsü yazalım.
+```R
+toplam<-0
+i<-1
+while(i<=10){
+  toplam<-toplam+i
+}
+print(toplam)
+
+>
+#Burada bir çıktı göremiyorsunuz değil mi :)
+```
+Yukarıdaki kodu çalıştırdığınızda konsolda bir çıktı göremiyorsunuz değil mi? :dizzy_face: :dizzy_face:
+Kodu incelemeden önce hemen **konsola tıklayıp ESC tuşuna basınız.** Böylelikle programı durdurmuş olursunuz.
+
+Koda dikkatli baktığınızda i değerini değiştirmediğimizi farkedebiliyoruz. i değeri güncellenmediği için de döngümüz sona ermiyor yani sonsuz döngüye giriyor. :scream: :scream:
+
+While döngüsü başlığı altında da yazdığımız gibi while döngüsüne verdiğimiz koşulları döngü içinde güncellememiz gerekiyor. Yoksa siz gerisini biliyorusunuz. :bowtie: :bowtie:
+**coffin resmi**
+
+Bu döngü ile en çok kullanılan komutlardan biri ise **break** komutudur. Döngümüzü istediğimiz durumda sonlandırmamızı sağlar. Hemen örneğini inceleyelim.
+__Örnek:__ 1'den 6'ya kadar olan sayıların karelerini ekrana yazdırcak while döngüsünü yazalım. 4. sayıya geldiğinde ise döngümüzden ayrılalım.
+
+```R
+kare <- 1
+while (kare <= 6){
+  print (kare^2)
+  kare <- kare + 1 
+  if (kare==4){
+    break
+  }
+}
+
+>
+[1] 1
+[1] 4
+[1] 9
+```
+Döngümüz her adımda sayıların karelerini aldı. sayımız 4 olduğunda if koşulu sağlandı ve if koşulu içindeki break komutu çalıştı. Böylelikle döngümüz sona erdi.
 
 
 ## Fonksiyonlar
