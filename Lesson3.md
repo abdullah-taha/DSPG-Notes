@@ -1082,9 +1082,9 @@ Bu sütunları tek bir gün (day) değişkeni oluşturacak şekilde toplamamız 
 ```R
 ?gather
 ```
-
-<img src=".images/gather.PNG" width=630>
-
+<p align="center">
+   <img src=".images/gather.PNG" width=630>
+</p>
 
 İlk argümanımız *data* yani üzerinde çalışacağımız veri setimiz.
 *key* ve *value* argümanlarına bakarsak *key* değişkenlerimizin yeni kaydedileceği sütunu *value* bu değişkenlere karşılık gelen değerlerin kaydedileceği sütunu göstermekte. Buraya isimleri string olarak girmeliyiz.
