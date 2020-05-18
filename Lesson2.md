@@ -769,7 +769,7 @@ Koda dikkatli baktığınızda i değerini değiştirmediğimizi farkedebiliyoru
 While döngüsü başlığı altında da yazdığımız gibi while döngüsüne verdiğimiz koşulları döngü içinde güncellememiz gerekiyor. Yoksa siz gerisini biliyorusunuz. :bowtie: :bowtie:
 
 
-<img src=".images/funny.jpg" width="400">
+<img align="center" src=".images/funny.jpg" width="400">
 
 Bu döngü ile en çok kullanılan komutlardan biri ise **break** komutudur. Döngümüzü istediğimiz durumda sonlandırmamızı sağlar. Hemen örneğini inceleyelim.
 
