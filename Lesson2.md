@@ -761,15 +761,16 @@ print(toplam)
 >
 #Burada bir çıktı göremiyorsunuz değil mi :)
 ```
-Yukarıdaki kodu çalıştırdığınızda konsolda bir çıktı göremiyorsunuz değil mi? :dizzy_face: :dizzy_face:
+Yukarıdaki kodu çalıştırdığınızda konsolda bir çıktı göremiyorsunuz değil mi? :dizzy_face: :dizzy_face: 
 Kodu incelemeden önce hemen **konsola tıklayıp ESC tuşuna basınız.** Böylelikle programı durdurmuş olursunuz.
 
 Koda dikkatli baktığınızda i değerini değiştirmediğimizi farkedebiliyoruz. i değeri güncellenmediği için de döngümüz sona ermiyor yani sonsuz döngüye giriyor. :scream: :scream:
 
 While döngüsü başlığı altında da yazdığımız gibi while döngüsüne verdiğimiz koşulları döngü içinde güncellememiz gerekiyor. Yoksa siz gerisini biliyorusunuz. :bowtie: :bowtie:
-**coffin resmi**
+<img src=".images/funny.jpg" width="400">
 
 Bu döngü ile en çok kullanılan komutlardan biri ise **break** komutudur. Döngümüzü istediğimiz durumda sonlandırmamızı sağlar. Hemen örneğini inceleyelim.
+
 __Örnek:__ 1'den 6'ya kadar olan sayıların karelerini ekrana yazdırcak while döngüsünü yazalım. 4. sayıya geldiğinde ise döngümüzden ayrılalım.
 
 ```R
