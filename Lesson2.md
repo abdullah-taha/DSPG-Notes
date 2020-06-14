@@ -9,7 +9,7 @@
 * [for döngüsü](#for-döngüsü)
 * [paste() fonksiyonu](#paste-fonksiyonu)
 * [while döngüsü](#while-döngüsü)
-* [Fonksiyonlar - yunus](#fonksiyonlar)
+* [Fonksiyonlar](#fonksiyonlar)
 * [Apply Fonksiyonları](#apply-fonksiyonları)
 
 ## Vektör Modifikasyonu
@@ -795,6 +795,78 @@ Döngümüz her adımda sayıların karelerini aldı. sayımız 4 olduğunda if 
 
 
 ## Fonksiyonlar
+Fonksiyonlara genel olarak  verilen girdiyi kod bloğu içindeki işlemlerde işleyerek çıktı oluşturan yapılar diyebiliriz.
+R'da fonksiyon yazabilmek için **function()** fonksiyonunu kullanıyoruz. Yazdığımız fonksiyonu ise onu kullanacağımız isme atıyoruz.
+Hemen birkaç örneğe bakalım. :rocket: :rocket:
+
+```R
+#Kullanıcı tarafından girilen sayısının,kullanıcı tarafından girilen diğer sayı kuvvetini
+#alan fonksiyonumuzu yazalım.
+
+kuvvet <- function(x,y){
+	return(x^y)
+}
+kuvvet(x=2, y=2)
+>
+[1] 4
+```
+function() içine kullanıcadan gelecek veya dışarıdan gelecek değerleri temsil eden değişkenleri yazıyoruz. Daha sonra süslü parantezler
+içine kod bloğumuzu yazıyoruz. Bize verilmesini istenen sonucu ise return ile dönderiyoruz. :scroll: :scroll:
+Peki ya parametrelerimizden birine default değer vermek istersek? Yani biz o parametreye bir değer vermeyince önceden tanımlanmış
+değeri kullansın. Hemen bakalım!!
+
+```R
+#fonksiyonumuz kuvvet değeri verilmediği sürece girilen sayının karesini bize döndersin. Eğer bir kuvvet değeri verilir
+#ise bize o kuvvet sonucunu versin
+
+kuvvet <- function(x,y=2){
+	return(x^y)
+}
+kuvvet(x=3)
+>
+[1] 9
+
+kuvvet(x=3,y = 3)
+>
+[1] 27
+
+```
+Parametreleri yazdığımız function() içine eşitlik halinde istediğimiz değeri yazarak default değer oluşturabiliriz. Temel olarak
+fonksiyonlar bahsedilen yapıda çalışır. İçini ise istenilen şekilde değiştiririz. Şimdi bol bol egzersiz zamanı. :computer: :crystal_ball:
+
+__Örnek :__ Kullanıcı tarafından a, b, c sayıları şeklinde girilen ve a ve b'nin toplamını c ile çarpan islem fonksiyonunu yazalım.
+```R
+islem <- function(a, b, c){
+  sonuc <- (a + b)*c
+  return(sonuc)
+}
+
+islem(a=1, b=2, c=3)
+>
+[1] 9
+```
+Burada return() içine istenilen (a+b)xc işlemini de yazabiliriz.
+
+__Örnek :__ Kullanıcı tarafından belirlenen bir vektörün ortalamasını hesaplayan my_mean isimli fonksiyonu yazalım. Hazır fonksiyon
+kullanmadan yazalım. length() fonksiyonunu kullanabilirsiniz.
+
+```R
+my_mean <- function(vec){
+  toplam <- 0
+  for(sayı in vec){
+    toplam <- toplam + sayı
+  }
+  ortalama <- toplam/length(vec)
+  return(ortalama)
+}
+
+my_mean(c(1,2,3,4,5,6))
+>
+[1] 3.5
+```
+Girdi olarak vectör vermemiz lazım. O yüzden function içinde vec isimli bir parametre kullandık. Okunabilirlik açısından da rahat 
+olur hem. for döngüsü içinde de toplama işlemini yaptık. Son olarak ortalamamızı dönderdik.
+
 ## Apply Fonksiyonları
 R dilinde for, while gibi döngüler kullanılsada veri analizi gibi alanlarda daha çok apply fonksiyonları kullanılır. Apply fonksiyonları bir vektörün her bir elemanı için belirlenen fonksiyonu uygular.Bunlardan en çok kullanılanları:
 * apply
