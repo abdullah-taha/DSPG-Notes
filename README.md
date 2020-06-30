@@ -24,8 +24,8 @@ Sosyal Fayda İçin Veri bilim programı notları / Data Science for the public 
   * [Kontrol İfadeleri](https://github.com/abdullah-taha/DSPG-Notes/blob/master/Lesson2.md/#kontrol-ifadeleri)
   * [for döngüsü](https://github.com/abdullah-taha/DSPG-Notes/blob/master/Lesson2.md/#for-döngüsü)
   * [paste() fonksiyonu](https://github.com/abdullah-taha/DSPG-Notes/blob/master/Lesson2.md/#paste-fonksiyonu)
-  * [while döngüsü - yunus](https://github.com/abdullah-taha/DSPG-Notes/blob/master/Lesson2.md/#while-döngüsü)
-  * [Fonksiyonlar - yunus](https://github.com/abdullah-taha/DSPG-Notes/blob/master/Lesson2.md/#fonksiyonlar)
+  * [while döngüsü](https://github.com/abdullah-taha/DSPG-Notes/blob/master/Lesson2.md/#while-döngüsü)
+  * [Fonksiyonlar](https://github.com/abdullah-taha/DSPG-Notes/blob/master/Lesson2.md/#fonksiyonlar)
   * [Apply Fonksiyonları](https://github.com/abdullah-taha/DSPG-Notes/blob/master/Lesson2.md/#apply-fonksiyonları)
 
 [**Ders 3: Veri Manipülasiyonu**](https://github.com/abdullah-taha/DSPG-Notes/blob/master/Lesson3.md)
