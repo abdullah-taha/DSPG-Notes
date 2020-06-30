@@ -867,6 +867,24 @@ my_mean(c(1,2,3,4,5,6))
 Girdi olarak vectör vermemiz lazım. O yüzden function içinde vec isimli bir parametre kullandık. Okunabilirlik açısından da rahat 
 olur hem. for döngüsü içinde de toplama işlemini yaptık. Son olarak ortalamamızı dönderdik.
 
+__Örnek :__  Kullanıcı tarafından girilen data frame ve kolon ismine göre ortalama (mean()), ortanca (median()) ve standart sapma (sd()) hesaplatan “istatistikler” isimli fonksiyonu yazalım. Önceden oluşturduğumuz öğrenci kilolarının ve boylarının bulunduğu “ogrenciler” data frame’i üzerinden ise hem kilo hem de boyların istatistiksel merkezi eğilimlerini bulalım.
+
+```R
+istatistikler <- function(dataframe, kolon){
+  print(paste("Ortalama", mean(as.numeric(dataframe[,kolon]))))
+  print(paste("Ortanca", median(as.numeric(dataframe[,kolon]))))
+  print(paste("Standart sapma:", sd(as.numeric(dataframe[,kolon]))))
+}
+
+istatistikler(dataframe=ogrenciler, kolon="Boy")
+
+>
+[1] "Ortalama 180"
+[1] "Ortanca 180"
+[1] "Standart sapma: 13.6930639376292"
+```
+ogrenciler dataframe structure bakıldığı zaman değerlerin chr olduğu görülmektedir. Bu sebepten girilen değerleri numeric yaparak NA değer dönmesini engelleyebiliriz.
+
 ## Apply Fonksiyonları
 R dilinde for, while gibi döngüler kullanılsada veri analizi gibi alanlarda daha çok apply fonksiyonları kullanılır. Apply fonksiyonları bir vektörün her bir elemanı için belirlenen fonksiyonu uygular.Bunlardan en çok kullanılanları:
 * apply
